@@ -40,4 +40,5 @@ form {
 
 .form-control:focus {
   background-color: rgba(0, 200, 255, .3);
+  transform: scale(1.1);
 }
