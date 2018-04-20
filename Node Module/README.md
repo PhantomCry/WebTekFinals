@@ -1,4 +1,3 @@
 # Node useful links
-<ul>
-  <li><a href="https://www.youtube.com/watch?v=U8XF6AFGqlc">Basic Node</a></li>
-</ul>
+* [Basics](https://www.youtube.com/watch?v=U8XF6AFGqlc)
+* [MySQL](https://www.youtube.com/watch?v=EN6Dx22cPRI)
