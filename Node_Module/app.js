@@ -5,12 +5,14 @@ const mysql = require('mysql');
 const host = 'localhost';
 const port = 3000;
 
-// Create database connection
+const db = 'webtekfinals';
+
+// Create database connection variable
 const con = mysql.createConnection({
     host        : 'localhost',
     user        : 'root',
     password    : '',
-    database    : 'webtekfinals'
+    database    : db
 });
 
 // Connect to database
@@ -18,7 +20,7 @@ con.connect(err => {
     if (err) {
         throw err;
     }
-    console.log('Connected to DB');
+    console.log('Connected to ' + db);
     var sql = 'SELECT * FROM webtekfinalstable';
     // var sql = 'INSERT INTO webtekfinalstable (name) VALUES ("test")';
 
@@ -27,18 +29,29 @@ con.connect(err => {
         if (err) {
             throw err;
         }
-        console.log(result); // this results as a n object (which means it can be manipulated vie normal js)
+        result.forEach(row => {
+            console.log(row.id + ' ' + row.name); // Database data (Similar to JSON)
+        });
     });
 });
 
 // Create server connection
 const server = http.createServer((req, res) => {
-    res.statusCode = 200;
-    res.setHeader('Content-type', 'text/plain');
-    res.end('This is a text');
+    if (req.url == '/') {
+        fs.readFile('./public/index.html', (err, content) => {
+            res.writeHead(200, {'Content-type':'text/html'});
+            res.end(content);
+        });
+    }
+    if (req.url === '/styles/style.css') {
+        fs.readFile('./public/styles/style.css', (err, content) => {
+            res.writeHead(200, {'Content-type':'text/css'});
+            res.end(content);
+        });
+    }
 });
 
-// Connect to server
+// Listen to port
 server.listen(port, host, () => {
-    console.log('Connected to ' + host + ' on port ' + port);
+    console.log('Listening to ' + host + ' on port ' + port);
 });
