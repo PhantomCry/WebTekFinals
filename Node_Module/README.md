@@ -1,5 +1,6 @@
 # Node useful links
 * [Basics](https://www.youtube.com/watch?v=U8XF6AFGqlc)
+* [Node js routing](https://www.youtube.com/watch?v=tiMLxUKrB-g)
 * [MySQL](https://www.youtube.com/watch?v=EN6Dx22cPRI)
 * [Node MySQL query](https://www.w3schools.com/nodejs/nodejs_mysql_select.asp)
 * [Serve multiple files](https://stackoverflow.com/questions/49967578/how-do-i-serve-multiple-files-without-express)
