@@ -39,18 +39,26 @@ con.query(sql, (err, result) => {
 
 // Server Connection
 http.createServer((req, res) => {
-  if (req.url == '/') {
-      fs.readFile('./public/index.html', (err, content) => {
-          res.writeHead(200, {'Content-type':'text/html'});
-          res.end(content);
-      });
-  }
-  if (req.url === '/styles/style.css') {
-      fs.readFile('./public/styles/style.css', (err, content) => {
-          res.writeHead(200, {'Content-type':'text/css'});
-          res.end(content);
-      });
+  switch (req.url) {
+    case '/':
+      renderer(res, './public/index.html', 'text/html');
+      break;
+    case '/styles/style.css':
+      renderer(res, './public/styles/style.css', 'text/css');
+      break;
+    default:
+      res.writeHead(404, {'Content-type': 'text-plain'});
+      res.end('404 Noe found!');
+      break;
   }
 }).listen(port, host, () => { // Listen to port
   console.log('Listening to ' + host + ' on port ' + port);
 });
+
+var renderer = (res, path, mime) => {
+  fs.readFile(path, (err, content) => {
+    res.writeHead(200, {'Content-type': mime});
+    res.write(content);
+    res.end();
+  });
+}
