@@ -33,7 +33,7 @@ con.query(sql, (err, result) => {
   }
   console.log('Raw data from db:', result);
   result.forEach(row => {
-    console.log(row.id, row.username, row.password); // Database data (Similar to JSON)
+    console.log('Filtered data from db:', row.id, row.username, row.password); // Database data (Similar to JSON)
   });
 });
 
