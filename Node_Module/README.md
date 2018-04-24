@@ -7,4 +7,5 @@
 * [Node MySQL valuable information](https://www.youtube.com/watch?v=XuLRKMqozwA)
 
 ## Node packages that needs to be installed
-* npm install --save mysql
+* npm install mysql
+* npm install sha256
