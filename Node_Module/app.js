@@ -2,12 +2,14 @@ const http = require('http');
 const fs = require('fs');
 const mysql = require('mysql');
 const sha256 = require('sha256');
+const qs = require('querystring');
 
 const host = 'localhost';
 const port = 3000;
 
 const db = 'webtekfinals';
 const sql = 'SELECT * FROM webtekfinalstable';
+let tableRow;
 
 // Create database connection variable
 const con = mysql.createConnection({
@@ -30,17 +32,34 @@ con.query(sql, (err, result) => {
   if (err) {
     throw err;
   }
-  console.log('Raw data from db:', result);
-  result.forEach(row => {
-    console.log('Filtered data from db:', row.id, row.username, row.password); // Database data (Similar to JSON)
-  });
+  tableRow = result;
+  // console.log('Raw data from db:', result);
+  // result.forEach(row => {
+  //   console.log('Filtered data from db:', row.id, row.username, row.password); // Database data (Similar to JSON)
+  // });
 });
 
 // Server Connection
 http.createServer((req, res) => {
   if (req.method === 'POST') {
-    console.log('test post');
+    req.on('data', chunk => {
+      let username = qs.parse(chunk.toString()).username;
+      let password = sha256(qs.parse(chunk.toString()).password);
+      tableRow.forEach(row => {
+        if (username == row.username) {
+          console.log(username, 'and', row.username, 'matched!');
+          if (password === row.password) {
+            console.log(password, 'and', row.password, 'matched!');
+          } else {
+            console.log('wrong password');
+          }
+        } else {
+          console.log('no such username!');
+        }
+      });
+    });
   }
+
 
   switch (req.url) {
     case '/':
