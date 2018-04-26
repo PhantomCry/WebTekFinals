@@ -8,6 +8,7 @@
 * [Node handling post request](https://itnext.io/how-to-handle-the-post-request-body-in-node-js-without-using-a-framework-cd2038b93190)
 * [Node js get form input](https://www.w3schools.com/nodejs/ref_querystring.asp)
 
-## Node packages that needs to be installed
-* npm install mysql
-* npm install sha256
+## Required modules
+* `npm install --save-dev nodemon` or `npm install -g nodemon` (optional - automatic server restart)
+* `npm install mysql`
+* `npm install sha256`

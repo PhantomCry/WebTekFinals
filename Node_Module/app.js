@@ -6,14 +6,13 @@ const qs = require('querystring');
 
 const host = 'localhost';
 const port = 3000;
-
 const db = 'webtekfinals';
 const sql = 'SELECT * FROM webtekfinalstable';
 let tableRow;
 
 // Create database connection variable
 const con = mysql.createConnection({
-  host: 'localhost',
+  host: host,
   user: 'root',
   password: '',
   database: db
@@ -24,7 +23,7 @@ con.connect(err => {
   if (err) {
     throw err;
   }
-  console.log('Connected to ' + db);
+  console.log('Connected to', db, 'database');
 });
 
 // Query to the database
@@ -33,10 +32,6 @@ con.query(sql, (err, result) => {
     throw err;
   }
   tableRow = result;
-  // console.log('Raw data from db:', result);
-  // result.forEach(row => {
-  //   console.log('Filtered data from db:', row.id, row.username, row.password); // Database data (Similar to JSON)
-  // });
 });
 
 // Server Connection
@@ -46,40 +41,40 @@ http.createServer((req, res) => {
       let username = qs.parse(chunk.toString()).username;
       let password = sha256(qs.parse(chunk.toString()).password);
       tableRow.forEach(row => {
-        if (username == row.username) {
+        if (username.toLowerCase() == row.username.toLowerCase()) { // To avoid case sensitivity
           console.log(username, 'and', row.username, 'matched!');
           if (password === row.password) {
             console.log(password, 'and', row.password, 'matched!');
           } else {
-            console.log('wrong password');
+            console.log("\x1b[31m", 'wrong password');
           }
         } else {
-          console.log('no such username!');
+          console.log("\x1b[31m", 'no such username!');
         }
       });
     });
-  }
-
-
-  switch (req.url) {
-    case '/':
-      renderer(res, './public/index.html', 'text/html');
-      break;
-    case '/styles/style.css':
-      renderer(res, './public/styles/style.css', 'text/css');
-      break;
-    default:
-      res.writeHead(404, {
-        'Content-type': 'text-plain'
-      });
-      res.end('404 Not found!');
-      break;
+  } else {
+    switch (req.url) {
+      case '/':
+        renderHTML(res, './public/index.html', 'text/html');
+        break;
+      case '/styles/style.css':
+        renderHTML(res, './public/styles/style.css', 'text/css');
+        break;
+      default:
+        res.writeHead(404, {
+          'Content-type': 'text/plain'
+        });
+        res.end('404 Not found!');
+        break;
+    }
   }
 }).listen(port, host, () => { // Listen to port
-  console.log('Listening to ' + host + ' on port ' + port);
+  console.log('Listening to', host, 'on port', port);
 });
 
-let renderer = (res, path, mime) => {
+// Render html code
+let renderHTML = (res, path, mime) => {
   fs.readFile(path, (err, content) => {
     res.writeHead(200, {
       'Content-type': mime
