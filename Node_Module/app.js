@@ -46,12 +46,8 @@ http.createServer((req, res) => {
           if (password === row.password) {
             console.log(password, 'and', row.password, 'matched!');
             console.log(req.url);
-            
-            // if (req.url === 'dashboard.html') {
-            //   renderHTML(res, './public/dashboard.html', 'text/html');
-            // } else if (req.url === '/styles/loggedIn.css') {
-            //   renderHTML(res, './styles/loggedIn.css', 'text/css');
-            // }
+            renderHTML(res, './public/dashboard.html', 'text/html');
+            // renderHTML(res, './styles/loggedIn.css', 'text/css');
           } else {
             console.log("\x1b[31m", 'wrong password');
           }
@@ -65,8 +61,8 @@ http.createServer((req, res) => {
       case '/':
         renderHTML(res, './public/index.html', 'text/html');
         break;
-      case '/styles/login.css':
-        renderHTML(res, './public/styles/login.css', 'text/css');
+      case '/styles/style.css':
+        renderHTML(res, './public/styles/style.css', 'text/css');
         break;
       default:
         res.writeHead(404, {
