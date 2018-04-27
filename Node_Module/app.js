@@ -3,6 +3,7 @@ const fs = require('fs');
 const mysql = require('mysql');
 const sha256 = require('sha256');
 const qs = require('querystring');
+const tc = require('./text-color');
 
 const host = 'localhost';
 const port = 3000;
@@ -23,7 +24,7 @@ con.connect(err => {
   if (err) {
     throw err;
   }
-  console.log('Connected to', db, 'database');
+  console.log(tc.success(`Connected to ${db} database!`));
 });
 
 // Query to the database
@@ -57,17 +58,15 @@ http.createServer((req, res) => {
       let password = sha256(qs.parse(chunk.toString()).password);
       tableRow.forEach(row => {
         if (username.toLowerCase() == row.username.toLowerCase()) { // To avoid case sensitivity
-          console.log(username, 'and', row.username, 'matched!');
+          console.log(tc.success('Username matched!'));
           if (password === row.password) {
-            console.log(password, 'and', row.password, 'matched!');
-            console.log(req.url);
+            console.log(tc.success('Password matched!'));
             renderHTML(res, './public/dashboard.html', 'text/html');
-            // renderHTML(res, './styles/loggedIn.css', 'text/css');
           } else {
-            console.log("\x1b[31m", 'wrong password');
+            console.log(tc.error('wrong password'));
           }
         } else {
-          console.log("\x1b[31m", 'no such username!');
+          console.log(tc.error('no such username!'));
         }
       });
     });
@@ -80,7 +79,7 @@ http.createServer((req, res) => {
     });
   }
 }).listen(port, host, () => { // Listen to port
-  console.log('Listening to', host, 'on port', port);
+  console.log(tc.info(`\nListening to ${host} on port ${port}`));
 });
 
 // Render html code
