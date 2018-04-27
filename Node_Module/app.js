@@ -36,7 +36,22 @@ con.query(sql, (err, result) => {
 
 // Server Connection
 http.createServer((req, res) => {
-  if (req.method === 'POST') {
+  if (req.method === 'GET') {
+    switch (req.url) {
+      case '/':
+        renderHTML(res, './public/index.html', 'text/html');
+        break;
+      case '/styles/style.css':
+        renderHTML(res, './public/styles/style.css', 'text/css');
+        break;
+      default:
+        res.writeHead(404, {
+          'Content-type': 'text/plain'
+        });
+        res.end('404 Not found!');
+        break;
+    }
+  } else if (req.method === 'POST') {
     req.on('data', chunk => {
       let username = qs.parse(chunk.toString()).username;
       let password = sha256(qs.parse(chunk.toString()).password);
@@ -57,20 +72,12 @@ http.createServer((req, res) => {
       });
     });
   } else {
-    switch (req.url) {
-      case '/':
-        renderHTML(res, './public/index.html', 'text/html');
-        break;
-      case '/styles/style.css':
-        renderHTML(res, './public/styles/style.css', 'text/css');
-        break;
-      default:
-        res.writeHead(404, {
-          'Content-type': 'text/plain'
-        });
-        res.end('404 Not found!');
-        break;
-    }
+    fs.readFile(path, (err, content) => {
+      res.writeHead(200, {
+        'Content-type': 'text/html'
+      });
+      res.end('Request error');
+    });
   }
 }).listen(port, host, () => { // Listen to port
   console.log('Listening to', host, 'on port', port);
