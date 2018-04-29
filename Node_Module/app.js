@@ -61,7 +61,21 @@ http.createServer((req, res) => {
           console.log(tc.success('Username matched!'));
           if (password === row.password) {
             console.log(tc.success('Password matched!'));
-            renderHTML(res, './public/dashboard.html', 'text/html');
+            fs.readFile('./public/dashboard.html', (err, content) => {
+              res.writeHead(200, {
+                'Content-type': 'text/html'
+              });
+              res.write(content);
+              res.write(`
+                <script>
+                  var user = document.getElementById('user');
+                  user.innerHTML = '${row.username}';
+                </script>
+                </body>
+                </html>
+              `);
+              res.end();
+            });
           } else {
             console.log(tc.error('wrong password'));
           }
