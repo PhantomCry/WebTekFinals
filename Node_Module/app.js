@@ -67,10 +67,11 @@ http.createServer((req, res) => {
               });
               res.write(content);
               res.write(`
-                <script>
-                  var user = document.getElementById('user');
-                  user.innerHTML = '${row.username}';
-                </script>
+                  <script>
+                    $(function() {
+                      $('.user').append('${row.username}');
+                    });
+                  </script>
                 </body>
                 </html>
               `);
