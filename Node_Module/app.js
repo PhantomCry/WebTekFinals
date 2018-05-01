@@ -79,9 +79,41 @@ http.createServer((req, res) => {
             });
           } else {
             console.log(tc.error('wrong password'));
+            fs.readFile('./public/index.html', (err, content) => {
+              res.writeHead(200, {
+                'Content-type': 'text/html'
+              });
+              res.write(content);
+              res.write(`
+                  <script>
+                    $(function() {
+                      $('small').append('Wrong password');
+                    });
+                  </script>
+                </body>
+                </html>
+              `);
+              res.end();
+            });
           }
         } else {
           console.log(tc.error('no such username!'));
+          fs.readFile('./public/index.html', (err, content) => {
+            res.writeHead(200, {
+              'Content-type': 'text/html'
+            });
+            res.write(content);
+            res.write(`
+                <script>
+                  $(function() {
+                    $('small').append('Username not found');
+                  });
+                </script>
+              </body>
+              </html>
+            `);
+            res.end();
+          });
         }
       });
     });
@@ -104,6 +136,12 @@ let renderHTML = (res, path, mime) => {
       'Content-type': mime
     });
     res.write(content);
+    if (mime !== 'text/css') {
+      res.write(`
+        </body>
+        </html>
+      `);
+    }
     res.end();
   });
 }
