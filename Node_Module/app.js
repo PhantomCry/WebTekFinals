@@ -58,62 +58,17 @@ http.createServer((req, res) => {
       let password = sha256(qs.parse(chunk.toString()).password);
       tableRow.forEach(row => {
         if (username.toLowerCase() == row.username.toLowerCase()) { // To avoid case sensitivity
-          console.log(tc.success('Username matched!'));
           if (password === row.password) {
-            console.log(tc.success('Password matched!'));
-            fs.readFile('./public/dashboard.html', (err, content) => {
-              res.writeHead(200, {
-                'Content-type': 'text/html'
-              });
-              res.write(content);
-              res.write(`
-                  <script>
-                    $(function() {
-                      $('.user').append('${row.username}');
-                    });
-                  </script>
-                </body>
-                </html>
-              `);
-              res.end();
-            });
+            console.log(tc.info(row.username), tc.success('logged in!'));
+            let csjs = `<script>$(function() {$('.user').append('${row.username}');});</script>`;
+            renderHTML(res, './public/dashboard.html', 'text/html', csjs);
           } else {
-            console.log(tc.error('wrong password'));
-            fs.readFile('./public/index.html', (err, content) => {
-              res.writeHead(200, {
-                'Content-type': 'text/html'
-              });
-              res.write(content);
-              res.write(`
-                  <script>
-                    $(function() {
-                      $('small').append('Wrong password');
-                    });
-                  </script>
-                </body>
-                </html>
-              `);
-              res.end();
-            });
+            let csjs = "<script>$(function() {$('small').append('Wrong password');});</script>";
+            renderHTML(res, './public/index.html', 'text/html', csjs);
           }
         } else {
-          console.log(tc.error('no such username!'));
-          fs.readFile('./public/index.html', (err, content) => {
-            res.writeHead(200, {
-              'Content-type': 'text/html'
-            });
-            res.write(content);
-            res.write(`
-                <script>
-                  $(function() {
-                    $('small').append('Username not found');
-                  });
-                </script>
-              </body>
-              </html>
-            `);
-            res.end();
-          });
+          let csjs = "<script>$(function() {$('small').append('Username not found');});</script>";
+          renderHTML(res, './public/index.html', 'text/html', csjs);
         }
       });
     });
@@ -130,12 +85,16 @@ http.createServer((req, res) => {
 });
 
 // Render html code
-let renderHTML = (res, path, mime) => {
+let renderHTML = (res, path, mime, csjs) => {
   fs.readFile(path, (err, content) => {
     res.writeHead(200, {
       'Content-type': mime
     });
-    res.write(content);
+    if (csjs == null) {
+      res.write(content);
+    } else {
+      res.write(`${content}\n${csjs}`);
+    }
     if (mime !== 'text/css') {
       res.write(`
         </body>
