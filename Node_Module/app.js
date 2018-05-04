@@ -18,12 +18,21 @@ const con = mysql.createConnection({
   password: '',
   database: db
 });
-con.connect();
+con.connect(err => {
+	if (err) {
+    console.log('database connection error!');
+		throw err;
+	} else {
+    console.log(`Connected to ${db} database!`);
+  }
+});
 con.query(sql, (err, rows, fields) => {
   if (err) {
+    console.log('database query error!');
     throw err;
+  } else {
+    dbData = rows;
   }
-  dbData = rows;
 });
 // con.end();
 
@@ -44,6 +53,7 @@ app.post('/dashboard', (req, res) => {
     if (row.username.toLowerCase() == username.toLowerCase()) {
       if (row.password === password) {
         res.render('dashboard', {user: row.username});
+        console.log(`${row.username} logged in!`);
       } else {
         res.end('wrong password');
       }
