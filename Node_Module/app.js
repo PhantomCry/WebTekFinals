@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
 const sha256 = require('sha256');
+const tc = require('./text-color');
 
 const app = express();
 
@@ -20,15 +21,15 @@ const con = mysql.createConnection({
 });
 con.connect(err => {
 	if (err) {
-    console.log('database connection error!');
+    console.log(tc.text('error', 'database connection error!'));
 		throw err;
 	} else {
-    console.log(`Connected to ${db} database!`);
+    console.log(tc.text('suc', `Connected to ${db} database!`));
   }
 });
 con.query(sql, (err, rows) => {
   if (err) {
-    console.log('database query error!');
+    console.log(tc.text('error', 'database query error!'));
     throw err;
   } else {
     dbData = rows;
@@ -46,14 +47,14 @@ app.get('/', (req, res) => {
   res.render('index', {callback: ''});
 });
 
-app.post('/', (req, res) => {
+app.post('/dashboard', (req, res) => {
   let username = req.body.username;
   let password = sha256(req.body.password);
   dbData.forEach(row => {
     if (row.username.toLowerCase() == username.toLowerCase()) {
       if (row.password === password) {
         res.render('dashboard', {user: row.username});
-        console.log(`${row.username} logged in!`);
+        console.log(tc.text('info' `${row.username} logged in!`));
       } else {
         res.render('index', {callback: 'Wrong password!'});
       }
@@ -64,5 +65,5 @@ app.post('/', (req, res) => {
 });
 
 app.listen(port, host, () => {
-  console.log(`Connected to ${host} on port ${port}!`);
+  console.log(tc.text('suc', `\nConnected to ${host} on port ${port}!`));
 });
