@@ -54,7 +54,7 @@ app.post('/dashboard', (req, res) => {
     if (row.username.toLowerCase() == username.toLowerCase()) {
       if (row.password === password) {
         res.render('dashboard', {user: row.username});
-        console.log(tc.text('info' `${row.username} logged in!`));
+        console.log(tc.text('info', `${row.username} logged in!`));
       } else {
         res.render('index', {callback: 'Wrong password!'});
       }
