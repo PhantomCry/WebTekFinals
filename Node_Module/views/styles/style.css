@@ -72,3 +72,10 @@ form {
 .transparent {
     background-color: transparent;
 }
+
+#profileDD {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: #f8f9fa
+}
