@@ -43,39 +43,6 @@ form {
     transform: scale(1.1);
 }
 
-.search-group>* {
-    border-radius: 0;
-    background-color: transparent;
-    border: none;
-}
-
-.search-group {
-    border-radius: .25rem;
-}
-
-.nav-link {
-    transition: .3s ease-in-out
-}
-
-.nav-item:hover,
-.active {
-    background-color: #1b1e21;
-}
-
-.profile-img {
-    height: 40px;
-    width: 40px;
-    border: 1px solid;
-    border-radius: 50%;
-}
-
 .transparent {
     background-color: transparent;
-}
-
-#profileDD {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    color: #f8f9fa
 }

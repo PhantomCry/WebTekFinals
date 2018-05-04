@@ -46,7 +46,7 @@ app.get('/', (req, res) => {
   res.render('index', {callback: ''});
 });
 
-app.post('/dashboard', (req, res) => {
+app.post('/', (req, res) => {
   let username = req.body.username;
   let password = sha256(req.body.password);
   dbData.forEach(row => {
