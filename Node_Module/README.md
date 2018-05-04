@@ -12,3 +12,19 @@
 * `npm install --save-dev nodemon` or `npm install -g nodemon` (optional - automatic server restart)
 * `npm install mysql`
 * `npm install sha256`
+
+### How to change domain name of server
+
+Step 1: Open WAMP server. Then left-click on the Wamp Icon
+Step 2: Under Apache, select httpd.conf
+Step 3: Change the port number to 3000 (or any number except 80) of the following lines to desired port:
+
+Listen 0.0.0.0:3000
+Listen [::0]:3000
+
+ServerName localhost:3000
+
+Step 4: Change the hosts file to 127.0.0.1 transientvania.com
+Step 5: Inside the Node app change the port number of the server to port 80
+Step 6: Restart Wamp Server.
+Step 7: Run Node app and test on the browser.
