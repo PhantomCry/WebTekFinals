@@ -26,7 +26,7 @@ con.connect(err => {
     console.log(`Connected to ${db} database!`);
   }
 });
-con.query(sql, (err, rows, fields) => {
+con.query(sql, (err, rows) => {
   if (err) {
     console.log('database query error!');
     throw err;
@@ -34,7 +34,7 @@ con.query(sql, (err, rows, fields) => {
     dbData = rows;
   }
 });
-// con.end();
+con.end();
 
 app.set('view engine', 'ejs');
 
@@ -43,7 +43,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
-  res.render('index');
+  res.render('index', {callback: ''});
 });
 
 app.post('/dashboard', (req, res) => {
@@ -55,10 +55,10 @@ app.post('/dashboard', (req, res) => {
         res.render('dashboard', {user: row.username});
         console.log(`${row.username} logged in!`);
       } else {
-        res.end('wrong password');
+        res.render('index', {callback: 'Wrong password!'});
       }
     } else {
-      res.end('wrong username');
+      res.render('index', {callback: 'Username not found!'});
     }
   });
 });
