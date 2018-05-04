@@ -37,6 +37,7 @@ con.query(sql, (err, result) => {
 
 // Server Connection
 http.createServer((req, res) => {
+  console.log(req.method, req.url);
   if (req.method === 'GET') {
     switch (req.url) {
       case '/':
