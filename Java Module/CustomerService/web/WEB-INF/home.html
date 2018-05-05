@@ -1,17 +1,96 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
+<html lang="en">
+
     <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Paggiyanan</title>
+
+        <!-- CSS  -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="materialize/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+        <link href="materialize/css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
     </head>
+
     <body>
-        <div>Hi</div>
-        <a href ="Logout">Logout</a>
+        <div id="index-banner" class="parallax-container">
+            <div class="section no-pad-bot">
+                <div class="container">
+                    <div class="row">
+                        <div class="col s12 m8">
+                            <div class="card">
+                                <div class="card-content teal-text text-darken-4">
+                                    <h3 class="header teal-text text-darken-4">Find homes on Paggiyanan</h3>
+                                    <p class="pcontent">Find your convenience around the stressful streets of Manila.</p>
+                                </div>
+                                <div class="card-action">
+                                    <a href="#">This is a link</a>
+                                    <a href="#">This is a link</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="parallax"><img style="filter: brightness(40%);" src="images/background1.jpg" alt="Unsplashed background"></div>
+        </div>
+
+        <div class="container">
+            <div class="section">
+
+                <!--   Icon Section   -->
+                <div class="row">
+                    <div class="col s12 m5 offset-m1">
+                        <form action = "VerifyUser" method = "Post">
+                            <input type ="text" name ="username">
+                            <br>
+                            <input type ="password" name ="password">
+                            <button type ="submit">submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <footer class="page-footer teal">
+            <div class="container">
+                <div class="section">
+
+                    <!--   Icon Section   -->
+                    <div class="row">
+                        <div class="col s12 m4">
+                            <div class="icon-block">
+                                <h5 class="center">Work hours</h5>
+
+                                <p class="light">We are open 24 hours<br>Emails and text messages can be answered within a day</p>
+                            </div>
+                        </div>
+
+                        <div class="col s12 m4 offset-m4">
+                            <div class="icon-block">
+                                <h5 class="center">Suggestions?</h5>
+
+                                <p class="light">Help us improve Innovative Solutions by emailing us at <a href="mailto:innovativesolutions@gmail.com">@innovativesolutions@gmail.com</a></p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="footer-copyright">
+                <div class="container">
+                    <a class="brown-text text-lighten-3">Innovative Solutions</a>
+                </div>
+            </div>
+        </footer>
+
+        <!--  Scripts-->
+        <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="materialize/js/materialize.js"></script>
+        <script src="materialize/js/init.js"></script>
+
     </body>
+
 </html>
