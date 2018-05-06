@@ -64,6 +64,10 @@ app.post('/dashboard', (req, res) => {
   });
 });
 
+app.get('/logout', (req, res) => {
+  res.redirect('/', {callback: ''}, 200);
+});
+
 app.listen(port, host, () => {
   console.log(tc.text('suc', `\nConnected to ${host} on port ${port}!`));
 });
