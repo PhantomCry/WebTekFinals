@@ -1,0 +1,129 @@
+#login-form{
+    text-align: center;
+    width: 100%;
+    background: gray;
+    height: 100%;
+    margin: 0px;
+    float: left;
+    border: 2px orange solid;
+}
+
+.top{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    text-transform: uppercase;
+    border-bottom: 2px orange solid;
+    color: white;
+    text-align: center;
+    width: 100%;
+}
+
+#login-form form{
+    width: 175px;
+    margin-left: 43%;
+    margin-top: 15%;
+}
+.container{
+    margin: 0px;
+}
+
+#register-form{
+/*    text-align: center;*/
+    width: 49%;
+    background: gray;
+    height: 100%;
+    margin: 0px;
+    float: right;
+    border: 2px orange solid;
+}
+
+#register-form form{
+    width: 200px;
+    margin-left: 35%;
+    margin-top: 25%;
+}
+
+label{
+    font-size: 20px;
+    margin: 5px;
+}
+#admin-register{
+    width: 25%;
+    background: gray;
+    height: 400px;
+    margin: 0px;
+    float: left;
+    border: 2px orange solid;
+    background: gray;
+}
+
+#admin-register form{
+    background: gray;
+    width: 25%;
+    min-width: 200px;
+    margin: 0px;
+    float: left;
+    background: gray;
+}
+
+
+
+#rooms{
+    width: 74%;
+    background: gray;
+    height: 400px;
+    margin-left: 5px;
+    float: left;
+    border: 2px orange solid;
+    background: gray;
+}
+
+
+#left{
+    width: 48%;
+    margin: 5px;
+    border: 2px orange solid;
+    float:left;
+    height: 300px;
+    overflow-y: auto;
+    display: block;
+}
+
+#right{
+    width: 48%;
+    margin: 5px;
+    border: 2px orange solid;
+    float: right;
+    display: block;
+    height: 300px;
+}
+
+#alter{
+    width: 98.6%;
+    height: 65px;
+    margin: 5px;
+    border: 2px orange solid;
+    display: block;
+    float: left;
+    text-align: center;
+}
+
+.rooms{
+    background: white;
+    margin: 5px;
+    
+}
+
+.DormName{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    text-transform: uppercase;
+}
+
+.Capacity{
+    float: left;
+}
+
+.Rent{
+    float: right;  
+}
