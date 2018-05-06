@@ -87,6 +87,7 @@ app.get('/logout', (req, res) => {
       res.negotiate(err);
     }
     res.redirect('/', {callback: ''}, 200);
+    console.log(tc.text('warning', `${username} logged out!`));
   });
 });
 
