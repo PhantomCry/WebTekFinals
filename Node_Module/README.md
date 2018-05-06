@@ -9,12 +9,13 @@
 
 ## Modules
 * `npm install express` - the root of everything
+* `npm install express-session` - for session handling
 * `npm install body-parser` - for handling post request
 * `npm install ejs` - for templating engine
 * `npm install mysql` - database access
 * `npm install sha256` - password encryption
 * `npm install --save-dev nodemon` or `npm install -g nodemon` (optional - automatic server restart)
-* `npm install express body-parser ejs mysql sha256` - one line installation
+* `npm install express express-session body-parser ejs mysql sha256` - one line installation
 
 ## How to change domain name of server
 
