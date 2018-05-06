@@ -58,7 +58,7 @@ app.get('/dashboard', (req, res) => {
   if (req.session.username) {
     res.render('dashboard', {user: username});
   } else {
-    res.redirect('/', {callback: ''}, 302);
+    res.render('index', {callback: 'You are not logged in!'});
   }
 });
 
