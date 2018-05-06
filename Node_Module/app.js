@@ -1,4 +1,5 @@
 const express = require('express');
+const session = require('express-session');
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
 const sha256 = require('sha256');
@@ -12,6 +13,7 @@ const db = 'webtekfinals';
 const sql = 'SELECT * FROM webtekfinalstable';
 
 let dbData;
+let username;
 
 const con = mysql.createConnection({
   host: host,
@@ -42,17 +44,32 @@ app.set('view engine', 'ejs');
 app.use('/styles', express.static(__dirname + '/views/styles'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+app.use(session({secret: 'webtek'}));
 
 app.get('/', (req, res) => {
-  res.render('index', {callback: ''});
+  if (req.session.username) {
+    res.render('dashboard', {user: username});
+  } else {
+    res.render('index', {callback: ''});
+  }
+});
+
+app.get('/dashboard', (req, res) => {
+  if (req.session.username) {
+    res.render('dashboard', {user: username});
+  } else {
+    res.redirect('/', {callback: ''}, 302);
+  }
 });
 
 app.post('/dashboard', (req, res) => {
-  let username = req.body.username;
+  username = req.body.username;
   let password = sha256(req.body.password);
   dbData.forEach(row => {
     if (row.username.toLowerCase() == username.toLowerCase()) {
       if (row.password === password) {
+        req.session.username = username;
+        req.session.username = password;
         res.render('dashboard', {user: row.username});
         console.log(tc.text('info', `${row.username} logged in!`));
       } else {
@@ -65,7 +82,12 @@ app.post('/dashboard', (req, res) => {
 });
 
 app.get('/logout', (req, res) => {
-  res.redirect('/', {callback: ''}, 200);
+  req.session.destroy(err => {
+    if (err) {
+      res.negotiate(err);
+    }
+    res.redirect('/', {callback: ''}, 200);
+  });
 });
 
 app.listen(port, host, () => {

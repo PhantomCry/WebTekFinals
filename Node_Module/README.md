@@ -5,6 +5,7 @@
 * [Node js get form input](https://www.w3schools.com/nodejs/ref_querystring.asp)
 * [Templating Engine EJS](https://www.youtube.com/watch?v=RgAseumFyg8)
 * [Serve static files (CSS)](https://expressjs.com/en/starter/static-files.html)
+* [Session pt 1](https://www.youtube.com/watch?v=aT98NMdAXyk) [Session pt 2](https://www.youtube.com/watch?v=Xpcx8sjteTo)
 
 ## Modules
 * `npm install express` - the root of everything
