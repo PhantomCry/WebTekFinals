@@ -48,7 +48,7 @@ app.use(session({secret: 'webtek'}));
 
 app.get('/', (req, res) => {
   if (req.session.username) {
-    res.render('dashboard', {user: username});
+    res.redirect('/dashboard', {user: username}, 302);
   } else {
     res.render('index', {callback: ''});
   }
@@ -85,9 +85,10 @@ app.get('/logout', (req, res) => {
   req.session.destroy(err => {
     if (err) {
       res.negotiate(err);
+    } else {
+      res.redirect('/', {callback: 'test'}, 302);
+      console.log(tc.text('warning', `${username} logged out!`));
     }
-    res.redirect('/', {callback: ''}, 200);
-    console.log(tc.text('warning', `${username} logged out!`));
   });
 });
 
