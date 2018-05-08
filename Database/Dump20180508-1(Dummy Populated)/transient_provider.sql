@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `transient` /*!40100 DEFAULT CHARACTER SET latin1 */;
-USE `transient`;
 -- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
 -- Host: localhost    Database: transient
@@ -34,10 +32,10 @@ CREATE TABLE `provider` (
   `rep_lname` varchar(45) NOT NULL,
   `rep_phoneno` varchar(45) NOT NULL,
   `rep_email` varchar(45) NOT NULL,
-  `rep_status` varchar(45) NOT NULL,
+  `rep_status` varchar(45) NOT NULL DEFAULT 'Active',
   PRIMARY KEY (`prov_id`),
   UNIQUE KEY `prov_username_UNIQUE` (`prov_username`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -46,6 +44,7 @@ CREATE TABLE `provider` (
 
 LOCK TABLES `provider` WRITE;
 /*!40000 ALTER TABLE `provider` DISABLE KEYS */;
+INSERT INTO `provider` VALUES (1,'null','Black','lotus','Wizards Transient','Nissa','Revane','09225030580','nissaR@yahoo.com','Active'),(2,'null','Zentikar','elrazi','Ally Houses','Gideon','Jura','09246412132','Gideon_','Active'),(3,'null','MasterPiece','swordsff','Kaladesh Artifacts','Sahilee','Ray','09752353412','SahileeRy@yahoo.com','Banned');
 /*!40000 ALTER TABLE `provider` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -58,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-05-09  1:08:54
+-- Dump completed on 2018-05-09  0:56:05
