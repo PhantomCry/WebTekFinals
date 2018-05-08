@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `transient` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `transient`;
 -- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
 -- Host: localhost    Database: transient
@@ -44,7 +46,7 @@ CREATE TABLE `reservation` (
 
 LOCK TABLES `reservation` WRITE;
 /*!40000 ALTER TABLE `reservation` DISABLE KEYS */;
-INSERT INTO `reservation` VALUES (1,'05-08-18','05-12-18','5','Accepted',2,1),(2,'05-09-18','05-13-18','4','Declined',1,1),(3,'05-09-18','05-14-18','4','Accepted',1,4),(4,'05-18-18','05-25-18','3','Under Review',4,5),(5,'05-13-18','05-18-18','4','Under Review',1,5);
+INSERT INTO `reservation` VALUES (1,'05-08-18','05-12-18','5','Accepted',2,11),(2,'05-09-18','05-13-18','4','Declined',1,11),(3,'05-09-18','05-14-18','4','Accepted',1,14),(4,'05-18-18','05-25-18','3','Under Review',4,15),(5,'05-13-18','05-18-18','4','Under Review',1,15);
 /*!40000 ALTER TABLE `reservation` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -57,4 +59,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-05-09  0:56:05
+-- Dump completed on 2018-05-09  3:14:26

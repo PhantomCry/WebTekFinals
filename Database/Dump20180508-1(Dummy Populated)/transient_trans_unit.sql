@@ -41,7 +41,7 @@ CREATE TABLE `trans_unit` (
   KEY `provider_idx` (`prov_id`),
   KEY `occupant_idx` (`occupied_client`),
   KEY `checker_idx` (`admin_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -50,6 +50,7 @@ CREATE TABLE `trans_unit` (
 
 LOCK TABLES `trans_unit` WRITE;
 /*!40000 ALTER TABLE `trans_unit` DISABLE KEYS */;
+INSERT INTO `trans_unit` VALUES (11,'null','Lorem ipsum dolor sit amet, an duo quas everti torquatos. Eu purto iisque invenire vim, ea putent maiorum eos. Ex mandamus dissentias qui, quas admodum ea pri. Mel fabellas facilisis definiebas cu, eruditi nominavi posidonium nam an. Meliore officiis gubergren eos te, mei et harum docendi. Vis verear minimum ad.','5','09 Camp 7 Baguio City','Apartment','850','Occupied','Approved',2,1,1),(12,'null','Lorem ipsum dolor sit amet, an duo quas everti torquatos. Eu purto iisque invenire vim, ea putent maiorum eos. Ex mandamus dissentias qui, quas admodum ea pri. Mel fabellas facilisis definiebas cu, eruditi nominavi posidonium nam an. Meliore officiis gubergren eos te, mei et harum docendi. Vis verear minimum ad.','12','02 Legarda Rd. Baguio City','House','1500','vacant','Declined',NULL,2,2),(13,'null','Lorem ipsum dolor sit amet, an duo quas everti torquatos. Eu purto iisque invenire vim, ea putent maiorum eos. Ex mandamus dissentias qui, quas admodum ea pri. Mel fabellas facilisis definiebas cu, eruditi nominavi posidonium nam an. Meliore officiis gubergren eos te, mei et harum docendi. Vis verear minimum ad.','6','08 Navy Base Baguio City','Apartment','850','vacant','Waiting for approvement from admin',NULL,1,NULL),(14,'null','Lorem ipsum dolor sit amet, an duo quas everti torquatos. Eu purto iisque invenire vim, ea putent maiorum eos. Ex mandamus dissentias qui, quas admodum ea pri. Mel fabellas facilisis definiebas cu, eruditi nominavi posidonium nam an. Meliore officiis gubergren eos te, mei et harum docendi. Vis verear minimum ad.','5','08 Bonifacio St. Baguio City','Apartment','750','Occupied','Approved',1,2,1),(15,'null','Lorem ipsum dolor sit amet, an duo quas everti torquatos. Eu purto iisque invenire vim, ea putent maiorum eos. Ex mandamus dissentias qui, quas admodum ea pri. Mel fabellas facilisis definiebas cu, eruditi nominavi posidonium nam an. Meliore officiis gubergren eos te, mei et harum docendi. Vis verear minimum ad.','10','04 Camp 8 Baguio City','House','1250','vacant','Approved',NULL,4,NULL);
 /*!40000 ALTER TABLE `trans_unit` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -62,4 +63,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-05-09  3:18:07
+-- Dump completed on 2018-05-09  3:14:26

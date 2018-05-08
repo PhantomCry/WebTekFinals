@@ -34,7 +34,7 @@ CREATE TABLE `provider` (
   `rep_lname` varchar(45) NOT NULL,
   `rep_phoneno` varchar(45) NOT NULL,
   `rep_email` varchar(45) NOT NULL,
-  `rep_status` varchar(45) NOT NULL,
+  `rep_status` varchar(45) NOT NULL DEFAULT 'Active',
   PRIMARY KEY (`prov_id`),
   UNIQUE KEY `prov_username_UNIQUE` (`prov_username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -58,4 +58,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-05-09  1:08:54
+-- Dump completed on 2018-05-09  3:18:07
