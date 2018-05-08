@@ -30,17 +30,17 @@ CREATE TABLE `tans_unit` (
   `unit_address` varchar(45) NOT NULL,
   `unit_type` varchar(45) NOT NULL,
   `price_per_night` varchar(45) NOT NULL,
-  `vacancy` varchar(45) DEFAULT 'vacant',
-  `status` varchar(45) DEFAULT 'Waiting for approvement from admin',
-  `occupies_client` int(11) DEFAULT NULL,
+  `vacancy` varchar(45) NOT NULL DEFAULT 'vacant',
+  `status` varchar(45) NOT NULL DEFAULT 'Waiting for approvement from admin',
+  `occupied_client` int(11) DEFAULT NULL,
   `prov_id` int(11) NOT NULL,
   `admin_id` int(11) NOT NULL,
   PRIMARY KEY (`trans_id`),
   KEY `provider_idx` (`prov_id`),
-  KEY `occupant_idx` (`occupies_client`),
+  KEY `occupant_idx` (`occupied_client`),
   KEY `checker_idx` (`admin_id`),
-  CONSTRAINT `checker` FOREIGN KEY (`admin_id`) REFERENCES `admin` (`admin_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `occupant` FOREIGN KEY (`occupies_client`) REFERENCES `client` (`client_id`) ON UPDATE SET NULL,
+  CONSTRAINT `checker` FOREIGN KEY (`admin_id`) REFERENCES `admin` (`admin_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `occupant` FOREIGN KEY (`occupied_client`) REFERENCES `client` (`client_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `provider` FOREIGN KEY (`prov_id`) REFERENCES `provider` (`prov_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -63,4 +63,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-05-08 22:08:57
+-- Dump completed on 2018-05-08 23:27:35

@@ -16,34 +16,35 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `client`
+-- Table structure for table `provider`
 --
 
-DROP TABLE IF EXISTS `client`;
+DROP TABLE IF EXISTS `provider`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `client` (
-  `client_id` int(11) NOT NULL,
-  `client_username` varchar(45) NOT NULL,
-  `client_pswd` varchar(45) NOT NULL,
-  `client_pic` varchar(45) NOT NULL DEFAULT 'null',
-  `client_fname` varchar(45) NOT NULL,
-  `client_lname` varchar(45) NOT NULL,
-  `client_email` varchar(45) NOT NULL,
-  `client_phoneno` varchar(45) NOT NULL,
-  `client_status` varchar(45) NOT NULL DEFAULT 'Active',
-  PRIMARY KEY (`client_id`),
-  UNIQUE KEY `client_username_UNIQUE` (`client_username`)
+CREATE TABLE `provider` (
+  `prov_id` int(11) NOT NULL AUTO_INCREMENT,
+  `prov_pic` varchar(45) NOT NULL DEFAULT 'null',
+  `prov_username` varchar(45) NOT NULL,
+  `prov_pswd` varchar(45) NOT NULL,
+  `business_name` varchar(45) NOT NULL,
+  `rep_fname` varchar(45) NOT NULL,
+  `rep_lname` varchar(45) NOT NULL,
+  `rep_phoneno` varchar(45) NOT NULL,
+  `rep_email` varchar(45) NOT NULL,
+  `rep_status` varchar(45) NOT NULL,
+  PRIMARY KEY (`prov_id`),
+  UNIQUE KEY `prov_username_UNIQUE` (`prov_username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `client`
+-- Dumping data for table `provider`
 --
 
-LOCK TABLES `client` WRITE;
-/*!40000 ALTER TABLE `client` DISABLE KEYS */;
-/*!40000 ALTER TABLE `client` ENABLE KEYS */;
+LOCK TABLES `provider` WRITE;
+/*!40000 ALTER TABLE `provider` DISABLE KEYS */;
+/*!40000 ALTER TABLE `provider` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -55,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-05-08 22:08:57
+-- Dump completed on 2018-05-08 23:27:35
