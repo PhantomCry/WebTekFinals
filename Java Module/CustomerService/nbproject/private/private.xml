@@ -5,8 +5,11 @@
         <group>
             <file>file:/C:/Users/Earl/Desktop/FINALS%20WEBTEKLAB/WebTekFinals/Java%20Module/CustomerService/web/WEB-INF/header.html</file>
             <file>file:/C:/Users/Earl/Desktop/FINALS%20WEBTEKLAB/WebTekFinals/Java%20Module/CustomerService/web/WEB-INF/js/script.js</file>
+            <file>file:/C:/Users/Earl/Desktop/FINALS%20WEBTEKLAB/WebTekFinals/Java%20Module/CustomerService/web/resources/js/init.js</file>
+            <file>file:/C:/Users/Earl/Desktop/FINALS%20WEBTEKLAB/WebTekFinals/Java%20Module/CustomerService/src/java/web/listeners/StartupListener.java</file>
+            <file>file:/C:/Users/Earl/Desktop/FINALS%20WEBTEKLAB/WebTekFinals/Java%20Module/CustomerService/src/java/web/servlets/Homes.java</file>
+            <file>file:/C:/Users/Earl/Desktop/FINALS%20WEBTEKLAB/WebTekFinals/Java%20Module/CustomerService/web/WEB-INF/footer.html</file>
             <file>file:/C:/Users/Earl/Desktop/FINALS%20WEBTEKLAB/WebTekFinals/Java%20Module/CustomerService/web/index.html</file>
-            <file>file:/C:/Users/Earl/Desktop/FINALS%20WEBTEKLAB/WebTekFinals/Java%20Module/CustomerService/src/java/web/servlets/GetHomes.java</file>
         </group>
     </open-files>
 </project-private>
