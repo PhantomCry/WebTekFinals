@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+    <link href="css/style2.css" type="text/css" rel="stylesheet" />
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="parallax-container">
+        <div class="parallax">
+            <img src="/images/background3.jpg" style="width:100%; height:650px">
+        </div>
+    </div>
+    <div class="section white">
+        <div class="row">
+            <div class="col s12 m10 offset-m2">
+                <h4 class="header" style="margin-top:2%">Maniti Residence</h4>
+                <p>135 Lower Dagsian,Baguio City</p>
+                <p style="font-size: 8"></p>
+                <i class="material-icons">group</i> 8 people
+                <i class="material-icons">done</i> Available</p>
+                <div class="row">
+                    <div class="col s12 m6">
+                        <div class="card">
+                            <div class="card-content">
+                                <span class="card-title">Home Highlights</span>
+                                <p>
+                                    <b>Good Rooms</b> - This home is very convinient.It has special rooms such as sex dungeons.
+                                    <b>-very essential when uttog
+                                    </b>
+                                    <br>
+                                    <br>
+                                    <b>100% Money back</b> - Just send me your figure and Maniti residence guarantees you a
+                                    100% moneyback with free SPECIAL SERVICES
+                                    <Br> Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam quaerat iure ipsum
+                                    alias quibusdam itaque ea amet, earum eligendi, voluptatem maxime, totam incidunt a tempora
+                                    aliquam voluptates numquam ut odio.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col m6">
+                        <div class="card">
+                            <div class="card-content">
+                                <span class="card-title">Reservation</span>
+                                <p>
+                                    Price:
+                                    <br>
+                                    <p>$5000.00/night</p>
+                                </p>
+                                <br>
+                                <p>Day(s) of stay:</p>
+
+                                <form action="#">
+                                    <p class="range-field">
+                                        <input type="range" id="test5" min="0" max="10" />
+                                    </p>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <div class="parallax-container">
+        <div class="parallax">
+            <div class="slider">
+                <ul class="slides" style="height: auto">
+                    <li>
+                        <img src="/images/background2.png" style="filter: brightness(40%)">
+                        <!-- random image -->
+                        <div class="caption center-align">
+                            <h3>WOW MAGIC!</h3>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="/images/background2.png" style="filter: brightness(40%)">
+                        <!-- random image -->
+                        <div class="caption left-align">
+                            <h3>WOW MAGIC</h3>
+                            <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="/images/hom1.jpg" style="filter: brightness(40%)">
+                        <!-- random image -->
+                        <div class="caption right-align">
+                            <h3>Wow m4gic</h3>
+                            <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="/images/yeah.jpg">
+                        <!-- random image -->
+                        <div class="caption center-align">
+                            <h3>This is our big Tagline!</h3>
+                            <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <a class="brown-text text-lighten-3">Paggiyanan</a>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="/js/materialize.js"></script>
+    <script type="text/javascript" src="/js/materialize.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.parallax').parallax();
+        });
+        $(document).ready(function () {
+            $('.materialboxed').materialbox();
+        });
+        $(document).ready(function () {
+            $('.carousel').carousel();
+        });
+        $(document).ready(function () {
+            $('.slider').slider();
+        });
+        noUiSlider.create(slider, {
+            start: [20, 80],
+            connect: true,
+            step: 1,
+            orientation: 'horizontal', // 'horizontal' or 'vertical'
+            range: {
+                'min': 0,
+                'max': 8,
+            },
+            format: wNumb({
+                decimals: 0
+            })
+        });
+    </script>
+
+
+</body>
+
+</html>
