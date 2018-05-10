@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Paggiyanan</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="static/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection">
+  <link href="static/css/components.css" type="text/css" rel="stylesheet" media="screen,projection">
+</head>
+
+<body>
+  <nav>
+    <div class="nav-wrapper">
+      <div class="row">
+        <div class="col s3 input-field">
+          <input type="text" id="search">
+          <label for="search">Search...</label>
+        </div>
+        <div class="col s3 center">
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li>
+              <a href="/">Home</a>
+            </li>
+            <li>
+              <a href="/listings">Listings</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col s3 right">
+          <div class="profile">
+            <div class="dropdown-trigger flex" data-target="dropdown">
+              <span>
+                <%= user%>
+              </span>
+              <img src="https://orig00.deviantart.net/6a12/f/2014/195/4/4/kurisu_makise_by_animeprofileavatars-d7qqa8s.jpg" class="profile-pic">
+            </div>
+          </div>
+          <ul id="dropdown" class="dropdown-content">
+            <li>
+              <a href="/logout">Logout</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="row">
+    <div class="card col s12 m8 offset-m2">
+      <div class="row">
+        <div class="row">
+          <div class="center">
+            <div class="col s12 m12">
+              <h2>Listings</h2>
+              <hr>
+            </div>
+            <div class="col s4 m4 offset-m9">
+              <a class="btn-floating btn-large waves-effect waves-light red" href="/new-entry">
+                <i class="material-icons">add</i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col s6 m6">
+          <div class="card">
+            <div class="card-image">
+              <img src="static/images/client.jpg">
+            </div>
+            <div class="card-content">
+              <p>Unit Address:
+                <u>Legarda Rd. Baguio City</u>
+              </p>
+              <br>
+              <p>Price Per Night :
+                <u>1500</u>
+              </p>
+              <br>
+              <p>Status:
+                <u>Waiting for approvement from admin</u>
+              </p>
+              <br>
+              <p>Vacancy:
+                <u>vacant</u>
+              </p>
+              <br>
+              <p>Unit Capacity:
+                <u>5</u>
+              </p>
+              <br>
+              <p>Description:</p>
+              <br>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+                magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                consequat
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col s6 m6">
+          <div class="card">
+            <div class="card-image">
+              <img src="static/images/client.jpg">
+            </div>
+            <div class="card-content">
+              <p>Unit Address:
+                <u>Legarda Rd. Baguio City</u>
+              </p>
+              <br>
+              <p>Price Per Night :
+                <u>1500</u>
+              </p>
+              <br>
+              <p>Status:
+                <u>Waiting for approvement from admin</u>
+              </p>
+              <br>
+              <p>Vacancy:
+                <u>vacant</u>
+              </p>
+              <br>
+              <p>Unit Capacity:
+                <u>5</u>
+              </p>
+              <br>
+              <p>Description:</p>
+              <br>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+                magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                consequat
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="static/js/materialize.min.js"></script>
+  <script src="static/js/init.js"></script>
+</body>
+
+</html>

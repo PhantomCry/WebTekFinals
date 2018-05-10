@@ -1,0 +1,32 @@
+.profile {
+  display: flex;
+  float: right;
+}
+
+.profile > * {
+  align-items: center;
+}
+
+.profile > * > * {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.profile-pic {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.dropdown-content {
+  height: unset !important
+}
+
+.dropdown-content > li {
+  margin: 0;
+  padding: 0;
+}
+
+.flex {
+  display: flex
+}

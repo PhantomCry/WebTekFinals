@@ -41,7 +41,7 @@ con.end();
 
 app.set('view engine', 'ejs');
 
-app.use('/styles', express.static(__dirname + '/views/styles'));
+app.use('/static', express.static(__dirname + '/views/static'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(session({secret: 'webtek'}));
@@ -90,6 +90,22 @@ app.get('/logout', (req, res) => {
       console.log(tc.text('warning', `${username} logged out!`));
     }
   });
+});
+
+app.get('/listings', (req,res) => {
+  if (req.session.username) {
+    res.render('listings', {user: username});
+  } else {
+    res.render('index', {callback: 'You are not logged in!'});
+  }
+});
+
+app.get('/new-entry', (req, res) => {
+  if (req.session.username) {
+    res.render('newEntry', {user: username});
+  } else {
+    res.render('index', {callback: 'You are not logged in!'});
+  }
 });
 
 app.listen(port, host, () => {
