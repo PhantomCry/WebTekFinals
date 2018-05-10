@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Paggiyanan</title>
+
+        <!-- CSS  -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+        <link href="WEB-INF/resources/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+        <link href="WEB-INF/resources/css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+    </head>
+
+    <body>
+        <div id="index-banner" class="parallax-container home_parallax">
+            <div class="section no-pad-bot">
+                <div class="container">
+                    <div class="row" style="margin-top: 20vh;">
+                        <div class="col s12 m6">
+                            <h2 class="header white-text">Find homes on Paggiyanan</h2>
+                            <p class="pcontent">Find your convenience around the stressful streets of Manila.</p>
+                        </div>
+                        <div class="col s12 m6">
+                            <div class="card">
+                                <div class="card-content teal-text text-darken-4">
+                                    <h4 class="header">Login Now!</h4>
+
+                                    <form action = "VerifyUser" method = "Post">
+                                        <div class="input-field">
+                                            <input placeholder="Username" name="username" type="text" class="validate">
+                                        </div>
+                                        <div class="input-field">
+                                            <input placeholder="Password" name="password" type="password" class="validate">
+                                        </div>
+                                        <button type="submit">Login</button>
+
+                                    </form>
+
+                                    <hr>
+                                </div>
+                                <div class="card-action">
+                                    <a href="/CustomerService/Homes">Temporary Login</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="parallax"><img style="filter: brightness(40%);" src="resources/img/background1.jpg" alt="Unsplashed background"></div>
+        </div>
+
+        <div class="container">
+            <div id="productlist" style='font-family: sans-serif'></div>
+        </div>
+
+
+
+        <footer class="page-footer teal">
+            <div class="container">
+                <div class="section">
+
+                    <!--   Icon Section   -->
+                    <div class="row">
+                        <div class="col s12 m4">
+                            <div class="icon-block">
+                                <h5 class="center">Work hours</h5>
+
+                                <p class="light">We are open 24 hours<br>Emails and text messages can be answered within a day</p>
+                            </div>
+                        </div>
+
+                        <div class="col s12 m4 offset-m4">
+                            <div class="icon-block">
+                                <h5 class="center">Suggestions?</h5>
+
+                                <p class="light">Help us improve Innovative Solutions by emailing us at <a href="mailto:innovativesolutions@gmail.com">@innovativesolutions@gmail.com</a></p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="footer-copyright">
+                <div class="container">
+                    <a class="brown-text text-lighten-3">Innovative Solutions</a>
+                </div>
+            </div>
+        </footer>
+
+        <!--  Scripts-->
+        <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="resources/js/materialize.js"></script>
+        <script src="resources/js/init.js"></script>
+    </body>
+
+</html>
