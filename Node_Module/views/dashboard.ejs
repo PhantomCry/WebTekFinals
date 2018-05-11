@@ -78,22 +78,43 @@
         <tbody>
           <% for(var i = 0; i < pendingReq.length; i++) { %>
             <tr>
-              <td><%= pendingReq[i].unit_address%></td>
-              <td><%= pendingReq[i].client_id%></td>
-              <td><%= pendingReq[i].client_fname%> <%= pendingReq[i].client_lname%></td>
-              <td><%= pendingReq[i].no_of_tenents%></td>
-              <td><%= pendingReq[i].client_phoneno%></td>
-              <td><%= pendingReq[i].client_email%></td>
-              <td><%= pendingReq[i].res_date%></td>
-              <td><%= pendingReq[i].checkout_date%></td>
               <td>
-                <div class="btn-group">
-                  <button class="btn">Accept</button>
-                  <button class="btn red">Deny</button>
+                <%= pendingReq[i].unit_address%>
+              </td>
+              <td>
+                <%= pendingReq[i].client_id%>
+              </td>
+              <td>
+                <%= pendingReq[i].client_fname%>
+                  <%= pendingReq[i].client_lname%>
+              </td>
+              <td>
+                <%= pendingReq[i].no_of_tenents%>
+              </td>
+              <td>
+                <%= pendingReq[i].client_phoneno%>
+              </td>
+              <td>
+                <%= pendingReq[i].client_email%>
+              </td>
+              <td>
+                <%= pendingReq[i].res_date%>
+              </td>
+              <td>
+                <%= pendingReq[i].checkout_date%>
+              </td>
+              <td>
+                <div>
+                  <form method="post" action="accept" class="btn-group">
+                    <button type="submit" class="btn" name="resId" value="<%= pendingReq[i].res_id%>">Accept</button>
+                  </form>
+                  <form method="post" action="decline" class="btn-group">
+                    <button type="submit" class="btn red" name="resId" value="<%= pendingReq[i].res_id%>">Deny</button>
+                  </form>
                 </div>
               </td>
             </tr>
-          <% } %>
+            <% } %>
         </tbody>
       </table>
       <div class="row">
@@ -121,22 +142,40 @@
         <tbody>
           <% for(var i = 0; i < accepted.length; i++) { %>
             <tr>
-              <td><%= accepted[i].unit_address%></td>
-              <td><%= accepted[i].client_id%></td>
-              <td><%= accepted[i].client_fname%> <%= accepted[i].client_lname%></td>
-              <td><%= accepted[i].no_of_tenents%></td>
-              <td><%= accepted[i].client_phoneno%></td>
-              <td><%= accepted[i].client_email%></td>
-              <td><%= accepted[i].res_date%></td>
-              <td><%= accepted[i].checkout_date%></td>
               <td>
-                <div class="btn-group">
-                  <button class="btn">Accept</button>
-                  <button class="btn red">Deny</button>
+                <%= accepted[i].unit_address%>
+              </td>
+              <td>
+                <%= accepted[i].client_id%>
+              </td>
+              <td>
+                <%= accepted[i].client_fname%>
+                  <%= accepted[i].client_lname%>
+              </td>
+              <td>
+                <%= accepted[i].no_of_tenents%>
+              </td>
+              <td>
+                <%= accepted[i].client_phoneno%>
+              </td>
+              <td>
+                <%= accepted[i].client_email%>
+              </td>
+              <td>
+                <%= accepted[i].res_date%>
+              </td>
+              <td>
+                <%= accepted[i].checkout_date%>
+              </td>
+              <td>
+                <div>
+                  <form method="post" action="cancel" class="btn-group">
+                    <button type="submit" class="btn" name="resId" value="<%= accepted[i].res_id%>">Cancel</button>
+                  </form>
                 </div>
               </td>
             </tr>
-          <% } %>
+            <% } %>
         </tbody>
       </table>
       <div class="row">
@@ -164,14 +203,31 @@
         <tbody>
           <% for(var i = 0; i < decline.length; i++) { %>
             <tr>
-              <td><%= decline[i].unit_address%></td>
-              <td><%= decline[i].client_id%></td>
-              <td><%= decline[i].client_fname%> <%= decline[i].client_lname%></td>
-              <td><%= decline[i].no_of_tenents%></td>
-              <td><%= decline[i].client_phoneno%></td>
-              <td><%= decline[i].client_email%></td>
-              <td><%= decline[i].res_date%></td>
-              <td><%= decline[i].checkout_date%></td>
+              <td>
+                <%= decline[i].unit_address%>
+              </td>
+              <td>
+                <%= decline[i].client_id%>
+              </td>
+              <td>
+                <%= decline[i].client_fname%>
+                  <%= decline[i].client_lname%>
+              </td>
+              <td>
+                <%= decline[i].no_of_tenents%>
+              </td>
+              <td>
+                <%= decline[i].client_phoneno%>
+              </td>
+              <td>
+                <%= decline[i].client_email%>
+              </td>
+              <td>
+                <%= decline[i].res_date%>
+              </td>
+              <td>
+                <%= decline[i].checkout_date%>
+              </td>
               <td>
                 <div class="btn-group">
                   <button class="btn">Accept</button>
@@ -179,7 +235,7 @@
                 </div>
               </td>
             </tr>
-          <% } %>
+            <% } %>
         </tbody>
       </table>
       <div class="right">

@@ -74,7 +74,6 @@ app.post('/dashboard', (req, res) => {
   username = req.body.username;
   password = req.body.password;
   let provId;
-  
 
   con.query(`SELECT * FROM provider WHERE prov_username='${username}' AND prov_pswd='${password}'`, (err, results) => {
     if (results.length) {
@@ -83,24 +82,22 @@ app.post('/dashboard', (req, res) => {
       provId = results[0].prov_id;
       console.log(tc.text('info', `${results[0].prov_username} logged in!`));
       
-      con.query(`SELECT unit_address, client_id, client_fname, client_lname, no_of_tenents, client_phoneno, client_email, res_date, checkout_date FROM trans_unit Natural JOIN reservation Natural Join client where prov_id=${provId} and res_status="Under Review"`, (err, row) => {
+      con.query(`SELECT unit_address, client_id, client_fname, client_lname, no_of_tenents, client_phoneno, client_email, res_date, checkout_date, res_id FROM trans_unit Natural JOIN reservation Natural Join client where prov_id=${provId} and res_status="Under Review"`, (err, row) => {
         pendingReq = row;
       });
-      con.query(`SELECT unit_address, client_id, client_fname, client_lname, no_of_tenents, client_phoneno, client_email, res_date, checkout_date FROM trans_unit Natural JOIN reservation Natural Join client where prov_id=${provId} and res_status="Accepted"`, (err, row) => {
+      con.query(`SELECT unit_address, client_id, client_fname, client_lname, no_of_tenents, client_phoneno, client_email, res_date, checkout_date, res_id FROM trans_unit Natural JOIN reservation Natural Join client where prov_id=${provId} and res_status="Accepted"`, (err, row) => {
         accepted = row;
       });
-      con.query(`SELECT unit_address, client_id, client_fname, client_lname, no_of_tenents, client_phoneno, client_email, res_date, checkout_date FROM trans_unit Natural JOIN reservation Natural Join client where prov_id=${provId} and res_status="Declined"`, (err, row) => {
+      con.query(`SELECT unit_address, client_id, client_fname, client_lname, no_of_tenents, client_phoneno, client_email, res_date, checkout_date, res_id FROM trans_unit Natural JOIN reservation Natural Join client where prov_id=${provId} and res_status="Declined"`, (err, row) => {
         decline = row;
       });
-      res.redirect('/dashboard', 302);
+      res.redirect(302, '/dashboard');
     } else {
       res.render('index', {
         message: 'Wrong username or password!'
       });
     }
   });
-
-
 });
 
 app.get('/logout', (req, res) => {
@@ -138,6 +135,31 @@ app.get('/new-entry', (req, res) => {
       message: 'You are not logged in!'
     });
   }
+});
+
+app.post('/accept', (req, res) => {
+  console.log(req.body.resId);
+  con.query(`UPDATE reservation SET res_status="Accepted" WHERE res_id=${req.body.resId}`, (err, row) => {
+    if (err) {
+      console.log(err);
+    }
+  });
+  res.redirect(302, '/');
+});
+
+app.post('/decline', (req, res) => {
+  console.log(req.body.resId);
+  res.redirect(302, '/dashboard');
+});
+
+app.post('/cancel', (req, res) => {
+  console.log(req.body.resId);
+  con.query(`UPDATE reservation SET res_status="Under Review" WHERE res_id=${req.body.resId}`, (err, row) => {
+    if (err) {
+      console.log(err);
+    }
+  });
+  res.redirect(302, '/');
 });
 
 app.listen(port, host, () => {
