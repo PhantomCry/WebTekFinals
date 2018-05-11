@@ -169,7 +169,7 @@ app.post('/new-unit', (req, res) => {
   upload(req, res, err => {
     if (err) {
       res.render('new-entry', {
-        profPic: `uploads/${req.file.filename}`
+        profPic: `uploads/${req.file.filename}` // not working! should replace the profile pic
       });
     } else {
       res.redirect(302, '/new-entry');
