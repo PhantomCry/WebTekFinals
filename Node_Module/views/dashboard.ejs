@@ -1,117 +1,236 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Innovative Solutions &#11044; Logged in as
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Logged in as
     <%= user%>
   </title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css">
-  <link rel="stylesheet" href="./styles/dashboard.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="static/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection">
+  <link href="static/css/components.css" type="text/css" rel="stylesheet" media="screen,projection">
 </head>
 
 <body>
-  <nav class="navbar bg-dark text-white py-0">
-    <form class="form-inline">
-      <span class="search-group bg-light pl-2 d-flex align-items-center">
-        <i class="fas fa-search text-dark"></i>
-        <input type="text" class="form-control ml-2" autocomplete="off" placeholder="Search...">
-      </span>
-      <button class="btn transparent">
-        <i class="far fa-bell text-light"></i>
-      </button>
-    </form>
-    <ul class="navbar nav p-0">
-      <li class="p-3 nav-item nav-link active">Home</li>
-      <li class="p-3 nav-item nav-link">Listings</li>
-      <li class="p-3 nav-item nav-link">Transaction History</li>
-    </ul>
-    <div class="navbar-brand dropdown">
-      <button class="dropdown-toggle transparent" data-toggle="dropdown" id="profileDD">
-        <span class="lead">
-          <%= user%>
-        </span>
-        <img src="https://orig00.deviantart.net/6a12/f/2014/195/4/4/kurisu_makise_by_animeprofileavatars-d7qqa8s.jpg" class="profile-img">
-      </button>
-      <div class="dropdown-menu">
-        <a class="dropdown-item" href="/logout">Logout</a>
+  <nav>
+    <div class="nav-wrapper">
+      <div class="row">
+        <div class="col s3 input-field">
+          <input type="text" id="search">
+          <label for="search">Search...</label>
+        </div>
+        <div class="col s3 center">
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li>
+              <a href="/">Home</a>
+            </li>
+            <li>
+              <a href="/listings">Listings</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col s3 right">
+          <div class="profile">
+            <div class="dropdown-trigger flex" data-target="dropdown">
+              <span>
+                <%= user%>
+              </span>
+              <img src="https://orig00.deviantart.net/6a12/f/2014/195/4/4/kurisu_makise_by_animeprofileavatars-d7qqa8s.jpg" class="profile-pic">
+            </div>
+          </div>
+          <ul id="dropdown" class="dropdown-content">
+            <li>
+              <a href="/logout">Logout</a>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </nav>
-  <div class="container">
-    <h1 class="display-4 my-4">Reservation Requests</h1>
-    <table class="table text-center">
-      <tr>
-        <th>Room No.</th>
-        <th>ClientID</th>
-        <th>Name</th>
-        <th>Accomodation</th>
-        <th>Contact</th>
-        <th>Date Requested</th>
-        <th>Duration of Stay</th>
-        <th>Action</th>
-      </tr>
-      <tr>
-        <td>001</td>
-        <td>000321</td>
-        <td>Okabe, Rintarou</td>
-        <td>
-          <ul class="list-unstyled">
-            <li>1 male</li>
-            <li>1 female</li>
-          </ul>
-        </td>
-        <td>0946-165-4651</td>
-        <td>04/15/2018</td>
-        <td>4 days</td>
-        <td>
-          <div class="btn-group-vertical">
-            <button class="btn btn-success">Accept</button>
-            <button class="btn btn-danger">Deny</button>
-          </div>
-        </td>
-      </tr>
-    </table>
-  </div>
-  <div class="container">
-    <div class="row">
-      <div class="col-6">
-        <div class="list-group text-dark">
-          <div class="list-group-item">
-            <div class="d-flex align-items-center">
-              <img src="http://senpai-knows.com/wp-content/uploads/2015/09/Okabe-RIntarou-Charecter-01-01.png" alt="Okabe, Rintarou" class="profile-img">
-              <div class="profile-details ml-2">
-                <div>Okabe, Rintarou</div>
-                <div>on Room 001</div>
-              </div>
-              <small class="ml-auto align-self-start">April 01, 2018</small>
-            </div>
-            <p class="mt-3">I'm Hououin, Kyouma! HAHAHAHAHA! Otsukaresama Kuristina!</p>
-          </div>
+  <div class="row">
+    <div class="card col s10 m10 offset-m1">
+      <h2 class="center">Home</h2>
+      <div class="divider"></div>
+      <table class="centered striped responsive">
+        <div class="row">
+          <pr></pr>
         </div>
+        <h5>Pending Requests</h5>
+        <hr>
+        <thead>
+          <tr>
+            <th>Unit Address</th>
+            <th>Client ID</th>
+            <th>Name</th>
+            <th>Accomodation</th>
+            <th>Contact</th>
+            <th>Email</th>
+            <th>Date Requested</th>
+            <th>Duration of Stay</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>001 Bakakeng Norte</td>
+            <td>00321</td>
+            <td>Client 1</td>
+            <td>2 male
+              <br>1 female</td>
+            <td>09461654651</td>
+            <td>client1@mail.com</td>
+            <td>04/15/2018</td>
+            <td>4 days</td>
+            <td>
+              <a class="waves-effect waves-light btn">Accept</a>
+              <br>
+              <br>
+              <a class="waves-effect waves-light btn">Deny</a>
+            </td>
+          </tr>
+          <tr>
+            <td>004 Bakakeng Norte</td>
+            <td>00423</td>
+            <td>Client 2</td>
+            <td>3 male
+              <br>2 female</td>
+            <td>09565317113</td>
+            <td>client2@mail.com</td>
+            <td>03/10/2018</td>
+            <td>18 days</td>
+            <td>
+              <a class="waves-effect waves-light btn">Accept</a>
+              <br>
+              <br>
+              <a class="waves-effect waves-light btn">Deny</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="row">
+        <pr>
+          <br>
+        </pr>
       </div>
-      <div class="col-6">
-        <div class="bg-light rounded py-3 text-dark">
-          <div class="d-flex justify-content-center">
-            <button class="btn btn-primary">Create Listing</button>
-          </div>
-          <h4 class="text-center my-3">Earnings for April</h4>
-          <div class="container text-center border border-dark rounded w-50 mb-3">
-            <h5>PHP</h5>
-            <h5>30, 000</h5>
-          </div>
-          <div class="d-flex justify-content-center">
-            <button class="btn btn-primary">See Transaction History</button>
-          </div>
-        </div>
+      <table class="centered striped responsive">
+        <h5>Accepted Requests</h5>
+        <hr>
+        <thead>
+          <tr>
+            <th>Unit Address</th>
+            <th>Client ID</th>
+            <th>Name</th>
+            <th>Accomodation</th>
+            <th>Contact</th>
+            <th>Email</th>
+            <th>Date Requested</th>
+            <th>Duration of Stay</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>002 Bakakeng Norte</td>
+            <td>00980</td>
+            <td>Client 3</td>
+            <td>1 male
+              <br>1 female</td>
+            <td>09255081892</td>
+            <td>client3@mail.com</td>
+            <td>03/29/2018</td>
+            <td>6 days</td>
+            <td>
+              <a class="waves-effect waves-light btn">Cancel</a>
+            </td>
+          </tr>
+          <tr>
+            <td>004 Bakakeng Norte</td>
+            <td>00413</td>
+            <td>Client 4</td>
+            <td>5 male
+              <br>2 female</td>
+            <td>09565425672</td>
+            <td>client4@mail.com</td>
+            <td>06/10/2018</td>
+            <td>11 days</td>
+            <td>
+              <a class="waves-effect waves-light btn">Cancel</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="row">
+        <pr>
+          <br>
+        </pr>
+      </div>
+      <table class="centered striped responsive">
+        <h5>Denied Requests</h5>
+        <hr>
+        <thead>
+          <tr>
+            <th>Unit Address</th>
+            <th>Client ID</th>
+            <th>Name</th>
+            <th>Accomodation</th>
+            <th>Contact</th>
+            <th>Email</th>
+            <th>Date Requested</th>
+            <th>Duration of Stay</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>005 Bakakeng Norte</td>
+            <td>00100</td>
+            <td>Client 5</td>
+            <td>3 male
+              <br>2 female</td>
+            <td>09255084321</td>
+            <td>client5@mail.com</td>
+            <td>02/22/2018</td>
+            <td>12 days</td>
+            <td>
+              <a class="waves-effect waves-light btn">Re-Admit</a>
+            </td>
+          </tr>
+          <tr>
+            <td>004 Bakakeng Norte</td>
+            <td>00413</td>
+            <td>Client 6</td>
+            <td>5 male
+              <br>2 female</td>
+            <td>09564435672</td>
+            <td>client6@mail.com</td>
+            <td>06/03/2018</td>
+            <td>9 days</td>
+            <td>
+              <a class="waves-effect waves-light btn">Re-Admit</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="right">
+        <a class="waves-effect waves-light btn" href="newEntry.html">
+          <i class="material-icons left">add</i>Add new Room</a>
+      </div>
+      <div>
+        <p>
+          <br>
+        </p>
       </div>
     </div>
   </div>
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="static/js/materialize.min.js"></script>
+  <script src="static/js/init.js"></script>
 </body>
 
 </html>

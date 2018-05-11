@@ -6,7 +6,7 @@
     </context-param>
     <context-param>
         <param-name>connstr</param-name>
-        <param-value>jdbc:mysql://localhost:3306/products?user=root&amp;pwd=</param-value>
+        <param-value>jdbc:mysql://localhost:3306/transient?user=root&amp;pwd=</param-value>
     </context-param>
     <listener>
         <description>ServletContextListener</description>

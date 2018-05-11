@@ -53,10 +53,6 @@ footer.page-footer {
     background-color: aliceblue;
 }
 
-p{
-    text-align: justify;
-}
-
 .pcontent {
     font-size: 1.5em;
 }
@@ -67,4 +63,8 @@ p{
 
 .mt-3 {
     margin-top: 30px;
+}
+
+.extendable {
+    height: auto !important;
 }

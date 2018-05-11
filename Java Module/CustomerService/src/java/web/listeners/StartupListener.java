@@ -16,7 +16,7 @@ public class StartupListener implements ServletContextListener {
         ServletContext context = sce.getServletContext();
         
         String dbDriver = "com.mysql.jdbc.Driver";
-        String connStr = "jdbc:mysql://localhost:3306/products?user=root&pwd=";
+        String connStr = "jdbc:mysql://localhost:3306/transient?user=root&pwd=";
         
         // alternatively, the database connection information can be
         //   retrieved from the 'standard deployment descriptor' file..

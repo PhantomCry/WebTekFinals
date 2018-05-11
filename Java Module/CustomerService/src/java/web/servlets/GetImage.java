@@ -25,19 +25,19 @@ public class GetImage extends HttpServlet {
 
         Connection dbConn = (Connection) context.getAttribute("dbconn");
 
-        String prodId = request.getPathInfo().substring(1);
+        String transId = request.getPathInfo().substring(1);
         
-        String query = "SELECT image " +
-                       "FROM products " +
-                       "WHERE prodid = ?";
+        String query = "SELECT unit_pic " +
+                       "FROM units " +
+                       "WHERE trans_id = ?";
         
         try {
             PreparedStatement ps = dbConn.prepareStatement(query);
-            ps.setString(1, prodId);
+            ps.setString(1, transId);
             
             ResultSet rs = ps.executeQuery();
             rs.first();
-            byte[] imageData = rs.getBytes("image");
+            byte[] imageData = rs.getBytes("unit_pic");
             
             rs.close();
             ps.close();

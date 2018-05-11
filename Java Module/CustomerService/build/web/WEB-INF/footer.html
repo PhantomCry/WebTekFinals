@@ -39,40 +39,47 @@
         $('select').formSelect();
     });
 
+    $(document).ready(function () {
+        M.updateTextFields();
+    });
+</script>
+<script>
     function getProducts() {
         var xhr = new XMLHttpRequest();
-        var cat = document.querySelector('#cat').value;
-        var url = `GetProducts?view=json&cat=${cat}`;
+        var cap = document.querySelector('#cap').value;
+        var url = `GetHomes?view=json&cap=${cap}`;
         xhr.open('GET', url);
         xhr.onreadystatechange = function () {
             if (xhr.readyState == 4 && xhr.status == 200) {
-                showProducts(cat, xhr.responseText);
+                showProducts(cap, xhr.responseText);
             }
         }
         xhr.send();
     }
 
-    function showProducts(cat, json) {
-        var products = JSON.parse(json);
+    function showProducts(cap, json) {
+        var units = JSON.parse(json);
         var div = document.querySelector('#showHomesArea');
-        var content = '<h1>Available homes</h1>';
-        if (products.length == 0) {
-            content += '<h2>No available homes.</h2>';
+        var content = '<h3>Available homes</h3>';
+                content += `<h5>Capacity: ${cap}</h5>`;
+        if (units.length == 0) {
+            content += '<h4>No available homes.</h4>';
         } else {
-            products.forEach(product => {
+            units.forEach(unit => {
                 content += `
                         <div class="col s12 m4 l4"">
                             <div class="card">
                                 <div class="card-image waves-effect waves-block waves-light">
-                                    <img class="activator" alt='${product.description}' src='dbimages/${product.prodid}'>
+                                    <img alt='${unit.unit_description}' src='dbimages/${unit.trans_id}'>
                                 </div>
                                 <div class="card-content">
-                                <span class="card-title activator grey-text text-darken-4">${product.prodid}<i class="material-icons right">more_vert</i></span>
-                                <p><a href="#">This is a link</a></p>
+                                <span class="card-title grey-text text-darken-4">${unit.condo_name}</span>
+                                <p><b>Rate/night:</b> Php ${unit.price_per_night}</p>
+                                <p><a href="#">More info</a></p>
                                  </div>
                                 <div class="card-reveal">
-                                    <span class="card-title grey-text text-darken-4">${product.prodid}<i class="material-icons right">close</i></span>
-                                    <p>${product.description}</p>
+                                    <span class="card-title grey-text text-darken-4">${unit.condo_name}<i class="material-icons right">close</i></span>
+                                    <p>${unit.price_per_night}</p>
                                 </div>
                             </div>
                         </div>`;

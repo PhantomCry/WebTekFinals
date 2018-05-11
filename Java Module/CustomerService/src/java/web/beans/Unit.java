@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package web.beans;
+import java.math.BigDecimal;
 
 /**
  *
@@ -11,53 +12,37 @@ package web.beans;
  */
 public class Unit {
 
-    public String homeId;
-    public String name;
-    public String category;
+    public String unitId;
+    public String condoName;
+    public String desc;
     public String address;
-    public short homeNo;
     public int capacity;
-    public int noOfRooms;
     public int noOfBeds;
-    public int ratePerNight;
-    public String amenities;
+    public BigDecimal ratePerNight;
+    public String vacancy;
 
-    public Unit(String homeId, String name, String category, String address, short homeNo,
-            int capacity, int noOfRooms, int noOfBeds, int ratePerNight, String amenities) {
-        this.homeId = name;
-        this.name = name;
-        this.category = category;
-        this.address = address;
-        this.homeNo = homeNo;
-        this.capacity = capacity;
-        this.noOfRooms = noOfRooms;
-        this.noOfBeds = noOfBeds;
-        this.ratePerNight = ratePerNight;
-        this.amenities = amenities;
-    }
-    
-    public String getHomeId() {
-        return homeId;
-    }
-    
-    public String setHomeId(String homeId){
-        return homeId;
-    }
-    
-    public String getName() {
-        return name;
+    public String getUnitId() {
+        return unitId;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUnitId(String unitId) {
+        this.unitId = unitId;
     }
 
-    public String getCategory() {
-        return category;
+    public String getCondoName() {
+        return condoName;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setCondoName(String condoName) {
+        this.condoName = condoName;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 
     public String getAddress() {
@@ -68,28 +53,12 @@ public class Unit {
         this.address = address;
     }
 
-    public short getHomeNo() {
-        return homeNo;
-    }
-
-    public void setHomeNo(short homeNo) {
-        this.homeNo = homeNo;
-    }
-
     public int getCapacity() {
         return capacity;
     }
 
     public void setCapacity(int capacity) {
         this.capacity = capacity;
-    }
-
-    public int getNoOfRooms() {
-        return noOfRooms;
-    }
-
-    public void setNoOfRooms(int noOfRooms) {
-        this.noOfRooms = noOfRooms;
     }
 
     public int getNoOfBeds() {
@@ -100,20 +69,30 @@ public class Unit {
         this.noOfBeds = noOfBeds;
     }
 
-    public int getRatePerNight() {
+    public BigDecimal getRatePerNight() {
         return ratePerNight;
     }
 
-    public void setRatePerNight(int ratePerNight) {
+    public void setRatePerNight(BigDecimal ratePerNight) {
         this.ratePerNight = ratePerNight;
     }
 
-    public String getAmenities() {
-        return amenities;
+    public String getVacancy() {
+        return vacancy;
     }
 
-    public void setAmenities(String amenities) {
-        this.amenities = amenities;
+    public void setVacancy(String vacancy) {
+        this.vacancy = vacancy;
     }
 
+    public Unit(String unitId, String condoName, String desc, String address, int capacity, int noOfBeds, BigDecimal ratePerNight, String vacancy) {
+        this.unitId = unitId;
+        this.condoName = condoName;
+        this.desc = desc;
+        this.address = address;
+        this.capacity = capacity;
+        this.noOfBeds = noOfBeds;
+        this.ratePerNight = ratePerNight;
+        this.vacancy = vacancy;
+    }
 }
