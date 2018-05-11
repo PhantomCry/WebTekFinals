@@ -140,7 +140,7 @@ app.get('/logout', (req, res) => {
 
 app.get('/listings', (req, res) => {
   if (req.session.username) {
-    con.query(`SELECT * FROM trans_unit`, (err, results) => {
+    con.query(`SELECT * FROM trans_unit WHERE prov_id=${provId}`, (err, results) => {
       res.render('listings', {
         user: username,
         card: results
@@ -181,7 +181,6 @@ app.post('/new-unit', (req, res) => {
 });
 
 app.post('/accept', (req, res) => {
-  console.log(req.body.resId);
   con.query(`UPDATE reservation SET res_status="Accepted" WHERE res_id=${req.body.resId}`, (err, row) => {
     if (err) {
       console.log(err);
