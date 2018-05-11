@@ -13,6 +13,9 @@ const db = 'transient';
 
 let username;
 let password;
+let pendingReq;
+let accepted;
+let decline;
 
 const con = mysql.createConnection({
   host: host,
@@ -55,7 +58,10 @@ app.get('/', (req, res) => {
 app.get('/dashboard', (req, res) => {
   if (req.session.username) {
     res.render('dashboard', {
-      user: username
+      user: username,
+      pendingReq: pendingReq,
+      accepted: accepted,
+      decline: decline
     });
   } else {
     res.render('index', {
@@ -67,21 +73,34 @@ app.get('/dashboard', (req, res) => {
 app.post('/dashboard', (req, res) => {
   username = req.body.username;
   password = req.body.password;
+  let provId;
+  
 
   con.query(`SELECT * FROM provider WHERE prov_username='${username}' AND prov_pswd='${password}'`, (err, results) => {
     if (results.length) {
       req.session.username = username;
       req.session.username = password;
-      res.redirect('/dashboard', {
-        user: results[0].prov_username
-      }, 302);
+      provId = results[0].prov_id;
       console.log(tc.text('info', `${results[0].prov_username} logged in!`));
+      
+      con.query(`SELECT unit_address, client_id, client_fname, client_lname, no_of_tenents, client_phoneno, client_email, res_date, checkout_date FROM trans_unit Natural JOIN reservation Natural Join client where prov_id=${provId} and res_status="Under Review"`, (err, row) => {
+        pendingReq = row;
+      });
+      con.query(`SELECT unit_address, client_id, client_fname, client_lname, no_of_tenents, client_phoneno, client_email, res_date, checkout_date FROM trans_unit Natural JOIN reservation Natural Join client where prov_id=${provId} and res_status="Accepted"`, (err, row) => {
+        accepted = row;
+      });
+      con.query(`SELECT unit_address, client_id, client_fname, client_lname, no_of_tenents, client_phoneno, client_email, res_date, checkout_date FROM trans_unit Natural JOIN reservation Natural Join client where prov_id=${provId} and res_status="Declined"`, (err, row) => {
+        decline = row;
+      });
+      res.redirect('/dashboard', 302);
     } else {
       res.render('index', {
         message: 'Wrong username or password!'
       });
     }
   });
+
+
 });
 
 app.get('/logout', (req, res) => {

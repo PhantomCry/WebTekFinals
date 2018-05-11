@@ -30,3 +30,8 @@
 .flex {
   display: flex
 }
+
+.btn-group {
+  display: flex;
+  flex-direction: column;
+}
