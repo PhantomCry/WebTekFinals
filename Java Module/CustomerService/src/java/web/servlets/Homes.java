@@ -42,13 +42,11 @@ public class Homes extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/header.html");
-            rd.include(request, response);
-            rd = request.getRequestDispatcher("/WEB-INF/footer.html");
-            rd.include(request, response);
-        }
+        
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/header.html");
+        rd.include(request, response);
+        rd = request.getRequestDispatcher("/WEB-INF/footer.html");
+        rd.include(request, response);
 
     }
 
@@ -67,56 +65,56 @@ public class Homes extends HttpServlet {
         processRequest(request, response);
         String category = request.getParameter("cat");
         String view = request.getParameter("view");
-        
+
         ServletContext context = this.getServletContext();
         Connection dbConn = (Connection) context.getAttribute("dbconn");
-        
-        String query = "SELECT prodid, description, price " +
-                       "FROM products " +
-                       "WHERE category = ? " +
-                       "ORDER BY description";
-        
+
+        String query = "SELECT prodid, description, price "
+                + "FROM products "
+                + "WHERE category = ? "
+                + "ORDER BY description";
+
         try {
             PreparedStatement ps = dbConn.prepareStatement(query);
             ps.setString(1, category);
-            
+
             ResultSet rs = ps.executeQuery();
-            
+
             ArrayList<Product> products = new ArrayList<>();
-            
+
             if (rs.first()) {
                 do {
                     String prodid = rs.getString("prodid");
                     String description = rs.getString("description");
                     BigDecimal price = rs.getBigDecimal("price");
-                    
+
                     Product product = new Product(prodid, category, description, price);
                     products.add(product);
                 } while (rs.next());
             }
-            
+
             rs.close();
             ps.close();
-            
+
             request.setAttribute("products", products);
-            
+
             RequestDispatcher rd = null;
-            
+
             if (view.equalsIgnoreCase("html")) {
                 rd = request.getRequestDispatcher("ShowHTML");
             } else if (view.equalsIgnoreCase("json")) {
                 rd = request.getRequestDispatcher("ShowJSON");
             }
-            
+
             if (rd == null) {
                 response.sendError(400);
             } else {
                 rd.forward(request, response);
             }
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(Homes.class.getName()).log(Level.SEVERE, null, ex);
-            
+
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
     }
