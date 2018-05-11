@@ -39,52 +39,51 @@
         $('select').formSelect();
     });
 
+    $(document).ready(function () {
+        M.updateTextFields();
+    });
+</script>
+<script>
     function getProducts() {
         var xhr = new XMLHttpRequest();
-        var cat = document.querySelector('#cat').value;
-        var url = `GetProducts?view=json&cat=${cat}`;
+        var cap = document.querySelector('#cap').value;
+        var url = `GetHomes?view=json&cap=${cap}`;
         xhr.open('GET', url);
         xhr.onreadystatechange = function () {
             if (xhr.readyState == 4 && xhr.status == 200) {
-                showProducts(cat, xhr.responseText);
+                showProducts(cap, xhr.responseText);
             }
         }
         xhr.send();
     }
 
-    function showProducts(cat, json) {
-        var products = JSON.parse(json);
+    function showProducts(cap, json) {
+        var units = JSON.parse(json);
         var div = document.querySelector('#showHomesArea');
-        var content = '<h1>Product List</h1>';
-        content += `<h2>Category: ${cat}</h2>`;
-        if (products.length == 0) {
-            content += '<h2>No available products.</h2>';
+        var content = '<h3>Available homes</h3>';
+                content += `<h5>Capacity: ${cap}</h5>`;
+        if (units.length == 0) {
+            content += '<h4>No available homes.</h4>';
         } else {
-            content += `
-                        <table style='border-collapse: collapse; border: 1px solid black'>
-                            <thead style='color: yellow; background-color: black'>
-                                <tr>
-                                    <th>ProdID</th>
-                                    <th>Description</th>
-                                    <th>Price</th>
-                                    <th>Image</th>
-                                </tr>
-                            </thead>
-                            <tbody style='border: inherit'>`;
-            let style = "style = 'border: inherit; padding: 5px 10px'";
-            products.forEach(product => {
+            units.forEach(unit => {
                 content += `
-                            <tr style='border: inherit'>
-                                <td ${style}>${product.prodid}</td>
-                                <td ${style}>${product.description}</td>
-                                <td ${style}>${Number(product.price).toFixed(2)}</td>
-                                <td ${style}><img style='width: 50px' alt='${product.description}' src='dbimages/${product.prodid}'></td>
-                            </tr>`;
+                        <div class="col s12 m4 l4"">
+                            <div class="card">
+                                <div class="card-image waves-effect waves-block waves-light">
+                                    <img alt='${unit.unit_description}' src='dbimages/${unit.trans_id}'>
+                                </div>
+                                <div class="card-content">
+                                <span class="card-title grey-text text-darken-4">${unit.condo_name}</span>
+                                <p><b>Rate/night:</b> Php ${unit.price_per_night}</p>
+                                <p><a href="#">More info</a></p>
+                                 </div>
+                                <div class="card-reveal">
+                                    <span class="card-title grey-text text-darken-4">${unit.condo_name}<i class="material-icons right">close</i></span>
+                                    <p>${unit.price_per_night}</p>
+                                </div>
+                            </div>
+                        </div>`;
             });
-
-            content += `
-                            </tbody>
-                            </table>`;
         }
 
         div.innerHTML = content;

@@ -1,6 +1,4 @@
-CREATE DATABASE  IF NOT EXISTS `transient` /*!40100 DEFAULT CHARACTER SET latin1 */;
-USE `transient`;
--- MySQL dump 10.13  Distrib 5.7.12, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
 -- Host: localhost    Database: transient
 -- ------------------------------------------------------
@@ -63,7 +61,7 @@ CREATE TABLE `client` (
   `client_lname` varchar(45) NOT NULL,
   `client_email` varchar(45) NOT NULL,
   `client_phoneno` varchar(45) NOT NULL,
-  `client_status` varchar(45) NOT NULL DEFAULT 'Active',
+  `client_status` varchar(45) NOT NULL DEFAULT 'Under Review',
   PRIMARY KEY (`client_id`),
   UNIQUE KEY `client_username_UNIQUE` (`client_username`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
@@ -128,7 +126,7 @@ CREATE TABLE `provider` (
   `rep_lname` varchar(45) NOT NULL,
   `rep_phoneno` varchar(45) NOT NULL,
   `rep_email` varchar(45) NOT NULL,
-  `rep_status` varchar(45) NOT NULL DEFAULT 'Active',
+  `rep_status` varchar(45) NOT NULL DEFAULT 'under review',
   PRIMARY KEY (`prov_id`),
   UNIQUE KEY `prov_username_UNIQUE` (`prov_username`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
@@ -163,7 +161,7 @@ CREATE TABLE `reservation` (
   KEY `unit_idx` (`trans_id`),
   KEY `client_idx` (`client_id`),
   CONSTRAINT `client` FOREIGN KEY (`client_id`) REFERENCES `client` (`client_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `unit` FOREIGN KEY (`trans_id`) REFERENCES `trans_unit` (`trans_id`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `unit` FOREIGN KEY (`trans_id`) REFERENCES `units` (`trans_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -173,44 +171,66 @@ CREATE TABLE `reservation` (
 
 LOCK TABLES `reservation` WRITE;
 /*!40000 ALTER TABLE `reservation` DISABLE KEYS */;
-INSERT INTO `reservation` VALUES (1,'05-08-18','05-12-18','5','Accepted',2,11),(2,'05-09-18','05-13-18','4','Declined',1,11),(3,'05-09-18','05-14-18','4','Accepted',1,14),(4,'05-18-18','05-25-18','3','Under Review',4,15),(5,'05-13-18','05-18-18','4','Under Review',1,15);
 /*!40000 ALTER TABLE `reservation` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `trans_unit`
+-- Table structure for table `unit_pics`
 --
 
-DROP TABLE IF EXISTS `trans_unit`;
+DROP TABLE IF EXISTS `unit_pics`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `trans_unit` (
+CREATE TABLE `unit_pics` (
+  `upic_id` int(11) NOT NULL AUTO_INCREMENT,
+  `trans_id` int(11) NOT NULL,
+  `picture` varchar(75) NOT NULL,
+  PRIMARY KEY (`upic_id`),
+  KEY `picture_of_idx` (`trans_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `unit_pics`
+--
+
+LOCK TABLES `unit_pics` WRITE;
+/*!40000 ALTER TABLE `unit_pics` DISABLE KEYS */;
+/*!40000 ALTER TABLE `unit_pics` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `units`
+--
+
+DROP TABLE IF EXISTS `units`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `units` (
   `trans_id` int(11) NOT NULL AUTO_INCREMENT,
-  `unit_pic` varchar(45) NOT NULL DEFAULT 'null',
-  `unit_desccription` varchar(1500) NOT NULL,
-  `unit_capacity` varchar(45) NOT NULL,
-  `unit_address` varchar(45) NOT NULL,
-  `price_per_night` varchar(45) NOT NULL,
-  `vacancy` varchar(45) NOT NULL DEFAULT 'vacant',
-  `status` varchar(45) NOT NULL DEFAULT 'Waiting for approvement from admin',
-  `occupied_client` int(11) DEFAULT NULL,
   `prov_id` int(11) NOT NULL,
-  `admin_id` int(11) DEFAULT NULL,
+  `condo_name` varchar(75) NOT NULL,
+  `unit_description` varchar(1500) NOT NULL,
+  `unit_capacity` int(11) NOT NULL,
+  `unit_address` varchar(300) NOT NULL,
+  `no_of_beds` int(11) NOT NULL,
+  `price_per_night` decimal(10,0) NOT NULL,
+  `vacancy` varchar(45) NOT NULL DEFAULT 'vacant',
+  `post_status` varchar(45) NOT NULL DEFAULT 'under review',
   PRIMARY KEY (`trans_id`),
-  KEY `provider_idx` (`prov_id`),
-  KEY `occupant_idx` (`occupied_client`),
-  KEY `checker_idx` (`admin_id`)
+  KEY `prov_id_idx` (`prov_id`),
+  CONSTRAINT `prov_id` FOREIGN KEY (`prov_id`) REFERENCES `provider` (`prov_id`) ON DELETE NO ACTION ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `trans_unit`
+-- Dumping data for table `units`
 --
 
-LOCK TABLES `trans_unit` WRITE;
-/*!40000 ALTER TABLE `trans_unit` DISABLE KEYS */;
-INSERT INTO `trans_unit` VALUES (11,'null','Lorem ipsum dolor sit amet, an duo quas everti torquatos. Eu purto iisque invenire vim, ea putent maiorum eos. Ex mandamus dissentias qui, quas admodum ea pri. Mel fabellas facilisis definiebas cu, eruditi nominavi posidonium nam an. Meliore officiis gubergren eos te, mei et harum docendi. Vis verear minimum ad.','5','09 Camp 7 Baguio City','850','Occupied','Approved',2,1,1),(12,'null','Lorem ipsum dolor sit amet, an duo quas everti torquatos. Eu purto iisque invenire vim, ea putent maiorum eos. Ex mandamus dissentias qui, quas admodum ea pri. Mel fabellas facilisis definiebas cu, eruditi nominavi posidonium nam an. Meliore officiis gubergren eos te, mei et harum docendi. Vis verear minimum ad.','12','02 Legarda Rd. Baguio City','1500','vacant','Declined',NULL,2,2),(13,'null','Lorem ipsum dolor sit amet, an duo quas everti torquatos. Eu purto iisque invenire vim, ea putent maiorum eos. Ex mandamus dissentias qui, quas admodum ea pri. Mel fabellas facilisis definiebas cu, eruditi nominavi posidonium nam an. Meliore officiis gubergren eos te, mei et harum docendi. Vis verear minimum ad.','6','08 Navy Base Baguio City','850','vacant','Waiting for approvement from admin',NULL,1,NULL),(14,'null','Lorem ipsum dolor sit amet, an duo quas everti torquatos. Eu purto iisque invenire vim, ea putent maiorum eos. Ex mandamus dissentias qui, quas admodum ea pri. Mel fabellas facilisis definiebas cu, eruditi nominavi posidonium nam an. Meliore officiis gubergren eos te, mei et harum docendi. Vis verear minimum ad.','5','08 Bonifacio St. Baguio City','750','Occupied','Approved',1,2,1),(15,'null','Lorem ipsum dolor sit amet, an duo quas everti torquatos. Eu purto iisque invenire vim, ea putent maiorum eos. Ex mandamus dissentias qui, quas admodum ea pri. Mel fabellas facilisis definiebas cu, eruditi nominavi posidonium nam an. Meliore officiis gubergren eos te, mei et harum docendi. Vis verear minimum ad.','10','04 Camp 8 Baguio City','1250','vacant','Approved',NULL,4,NULL);
-/*!40000 ALTER TABLE `trans_unit` ENABLE KEYS */;
+LOCK TABLES `units` WRITE;
+/*!40000 ALTER TABLE `units` DISABLE KEYS */;
+INSERT INTO `units` VALUES (1,1,'Vega Residences','Open 24/7',5,'#34 Caguioa BAgio',4,2000,'vacant','under review'),(2,2,'North Cambridge','Asdad',3,'#43 Asdfa',3,1000,'vacant','under review');
+/*!40000 ALTER TABLE `units` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -222,4 +242,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-05-10 23:32:46
+-- Dump completed on 2018-05-11 20:51:56
