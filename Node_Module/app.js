@@ -77,24 +77,30 @@ app.get('/dashboard', (req, res) => {
 app.post('/dashboard', (req, res) => {
   username = req.body.username;
   let password = req.body.password;
+  let falser = [];
   dbData.forEach(row => {
-    if (row.prov_username.toLowerCase() === username.toLowerCase()) {
+    if (row.prov_username.toLowerCase() == username.toLowerCase()) {
       if (row.prov_pswd === password) {
         req.session.username = username;
         req.session.username = password;
         res.render('dashboard', {
           user: row.prov_username
         });
+        falser.push(true);
         console.log(tc.text('info', `${row.prov_username} logged in!`));
       } else if (row.prov_pswd !== password) {
         res.render('index', {
           callback: 'Wrong password!'
         });
+        falser.push(true);
       }
-    } else if (row.prov_username.toLowerCase() !== username.toLowerCase() && row.prov_pswd !== password) {
-      res.render('index', {
-        callback: 'Username not found!'
-      });
+    } else {
+      falser.push(false);
+    }
+  });
+  falser.every((element, index) => {
+    if (element == false) {
+      res.render('index', {callback: 'Username not found!'});
     }
   });
 });
