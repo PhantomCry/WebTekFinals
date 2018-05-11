@@ -140,8 +140,11 @@ app.get('/logout', (req, res) => {
 
 app.get('/listings', (req, res) => {
   if (req.session.username) {
-    res.render('listings', {
-      user: username
+    con.query(`SELECT * FROM trans_unit`, (err, results) => {
+      res.render('listings', {
+        user: username,
+        card: results
+      });
     });
   } else {
     res.render('index', {
@@ -171,7 +174,6 @@ app.post('/new-unit', (req, res) => {
     } else {
       res.redirect(302, '/new-entry');
     }
-    console.log(req.body.unitAdd);
     con.query(`INSERT INTO trans_unit (unit_pic, unit_desccription, unit_capacity, unit_address, price_per_night, prov_id) VALUES ('${req.file.filename}', '${req.body.desc}', '${req.body.unitCap}', '${req.body.unitAdd}', '${req.body.price}', '${provId}')`, (err, results) => {
       console.log('Insert Success');
     });

@@ -63,76 +63,40 @@
             </div>
           </div>
         </div>
-        <div class="col s6 m6">
-          <div class="card">
-            <div class="card-image">
-              <img src="static/images/client.jpg">
-            </div>
-            <div class="card-content">
-              <p>Unit Address:
-                <u>Legarda Rd. Baguio City</u>
-              </p>
-              <br>
-              <p>Price Per Night :
-                <u>1500</u>
-              </p>
-              <br>
-              <p>Status:
-                <u>Waiting for approvement from admin</u>
-              </p>
-              <br>
-              <p>Vacancy:
-                <u>vacant</u>
-              </p>
-              <br>
-              <p>Unit Capacity:
-                <u>5</u>
-              </p>
-              <br>
-              <p>Description:</p>
-              <br>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                consequat
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col s6 m6">
-          <div class="card">
-            <div class="card-image">
-              <img src="static/images/client.jpg">
-            </div>
-            <div class="card-content">
-              <p>Unit Address:
-                <u>Legarda Rd. Baguio City</u>
-              </p>
-              <br>
-              <p>Price Per Night :
-                <u>1500</u>
-              </p>
-              <br>
-              <p>Status:
-                <u>Waiting for approvement from admin</u>
-              </p>
-              <br>
-              <p>Vacancy:
-                <u>vacant</u>
-              </p>
-              <br>
-              <p>Unit Capacity:
-                <u>5</u>
-              </p>
-              <br>
-              <p>Description:</p>
-              <br>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                consequat
-              </p>
+        <% for(var i = 0; i < card.length; i++) {%>
+          <div class="col s6 m6">
+            <div class="card">
+              <div class="card-image">
+                <img src="static/uploads/<%= card[i].unit_pic%>" alt="<%= card[i].unit_pic%>">
+              </div>
+              <div class="card-content">
+                <p>Unit Address:
+                  <u><%= card[i].unit_address%></u>
+                </p>
+                <br>
+                <p>Price Per Night :
+                  <u><%= card[i].price_per_night%></u>
+                </p>
+                <br>
+                <p>Status:
+                  <u><%= card[i].status%></u>
+                </p>
+                <br>
+                <p>Vacancy:
+                  <u><%= card[i].vacancy%></u>
+                </p>
+                <br>
+                <p>Unit Capacity:
+                  <u><%= card[i].unit_capacity%></u>
+                </p>
+                <br>
+                <p>Description:</p>
+                <br>
+                <p><%= card[i].unit_desccription%></p>
+              </div>
             </div>
           </div>
-        </div>
+        <% } %>
       </div>
     </div>
   </div>
