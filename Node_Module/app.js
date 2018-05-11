@@ -3,7 +3,30 @@ const session = require('express-session');
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
 const sha256 = require('sha256');
+const multer = require('multer');
+const path = require('path');
 const tc = require('./text-color');
+
+const storage = multer.diskStorage({
+  destination: './views/uploads/',
+  filename: (req, file, cb) => {
+    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+  }
+});
+
+const upload = multer({
+  storage: storage,
+  fileFilter: (req, file, cb) => {
+    const fileTypes = /jpeg|jpg|png/;
+    const extname = fileTypes.test(path.extname(file.originalname).toLowerCase());
+    const mimetype = fileTypes.test(file.mimetype);
+    if (mimetype && extname) {
+      return cb(null, true);
+    } else {
+      cb('error');
+    }
+  }
+}).single('dormImg');
 
 const app = express();
 
@@ -135,6 +158,16 @@ app.get('/new-entry', (req, res) => {
       message: 'You are not logged in!'
     });
   }
+});
+
+app.post('/new-unit', (req, res) => {
+  upload(req, res, err => {
+    if (err) {
+      res.redirect(302, '/new-entry');
+    } else {
+      res.redirect(302, '/new-entry');
+    }
+  });
 });
 
 app.post('/accept', (req, res) => {
