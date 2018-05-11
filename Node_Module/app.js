@@ -39,6 +39,7 @@ let password;
 let pendingReq;
 let accepted;
 let book;
+let provId;
 
 const con = mysql.createConnection({
   host: host,
@@ -78,7 +79,38 @@ app.get('/', (req, res) => {
   }
 });
 
+app.post('/dashboard', (req, res) => {
+  username = req.body.username;
+  password = req.body.password;
+
+  con.query(`SELECT * FROM provider WHERE prov_username='${username}' AND prov_pswd='${password}'`, (err, results) => {
+    if (results.length) {
+      req.session.username = username;
+      req.session.username = password;
+      provId = results[0].prov_id;
+      console.log(tc.text('info', `${results[0].prov_username} logged in!`));
+      
+      res.redirect(302, '/dashboard');
+    } else {
+      res.render('index', {
+        message: 'Wrong username or password!'
+      });
+    }
+  });
+});
+
 app.get('/dashboard', (req, res) => {
+  
+  con.query(`SELECT unit_address, client_id, client_fname, client_lname, no_of_tenents, client_phoneno, client_email, res_date, checkout_date, res_id FROM trans_unit Natural JOIN reservation Natural Join client where prov_id=${provId} and res_status="Under Review"`, (err, row) => {
+    pendingReq = row;
+  });
+  con.query(`SELECT unit_address, client_id, client_fname, client_lname, no_of_tenents, client_phoneno, client_email, res_date, checkout_date, res_id FROM trans_unit Natural JOIN reservation Natural Join client where prov_id=${provId} and res_status="Accepted"`, (err, row) => {
+    accepted = row;
+  });
+  con.query(`SELECT unit_address, client_id, client_fname, client_lname, no_of_tenents, client_phoneno, client_email, res_date, checkout_date, res_id FROM trans_unit Natural JOIN reservation Natural Join client where prov_id=${provId} and res_status="Booked"`, (err, row) => {
+    book = row;
+  });
+
   if (req.session.username) {
     res.render('dashboard', {
       user: username,
@@ -91,36 +123,6 @@ app.get('/dashboard', (req, res) => {
       message: 'You are not logged in!'
     });
   }
-});
-
-app.post('/dashboard', (req, res) => {
-  username = req.body.username;
-  password = req.body.password;
-  let provId;
-
-  con.query(`SELECT * FROM provider WHERE prov_username='${username}' AND prov_pswd='${password}'`, (err, results) => {
-    if (results.length) {
-      req.session.username = username;
-      req.session.username = password;
-      provId = results[0].prov_id;
-      console.log(tc.text('info', `${results[0].prov_username} logged in!`));
-      
-      con.query(`SELECT unit_address, client_id, client_fname, client_lname, no_of_tenents, client_phoneno, client_email, res_date, checkout_date, res_id FROM trans_unit Natural JOIN reservation Natural Join client where prov_id=${provId} and res_status="Under Review"`, (err, row) => {
-        pendingReq = row;
-      });
-      con.query(`SELECT unit_address, client_id, client_fname, client_lname, no_of_tenents, client_phoneno, client_email, res_date, checkout_date, res_id FROM trans_unit Natural JOIN reservation Natural Join client where prov_id=${provId} and res_status="Accepted"`, (err, row) => {
-        accepted = row;
-      });
-      con.query(`SELECT unit_address, client_id, client_fname, client_lname, no_of_tenents, client_phoneno, client_email, res_date, checkout_date, res_id FROM trans_unit Natural JOIN reservation Natural Join client where prov_id=${provId} and res_status="Booked"`, (err, row) => {
-        book = row;
-      });
-      res.redirect(302, '/dashboard');
-    } else {
-      res.render('index', {
-        message: 'Wrong username or password!'
-      });
-    }
-  });
 });
 
 app.get('/logout', (req, res) => {
@@ -163,10 +165,16 @@ app.get('/new-entry', (req, res) => {
 app.post('/new-unit', (req, res) => {
   upload(req, res, err => {
     if (err) {
-      res.redirect(302, '/new-entry');
+      res.render('new-entry', {
+        profPic: `uploads/${req.file.filename}`
+      });
     } else {
       res.redirect(302, '/new-entry');
     }
+    console.log(req.body.unitAdd);
+    con.query(`INSERT INTO trans_unit (unit_pic, unit_desccription, unit_capacity, unit_address, price_per_night, prov_id) VALUES ('${req.file.filename}', '${req.body.desc}', '${req.body.unitCap}', '${req.body.unitAdd}', '${req.body.price}', '${provId}')`, (err, results) => {
+      console.log('Insert Success');
+    });
   });
 });
 
