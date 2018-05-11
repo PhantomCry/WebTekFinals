@@ -11,8 +11,6 @@ const host = 'localhost';
 const port = 3000;
 const db = 'transient';
 
-let sql = 'SELECT * FROM provider';
-let dbData;
 let username;
 let password;
 
@@ -28,14 +26,6 @@ con.connect(err => {
     throw err;
   } else {
     console.log(tc.text('suc', `Connected to ${db} database!`));
-  }
-});
-con.query(sql, (err, rows) => {
-  if (err) {
-    console.log(tc.text('error', 'database query error!'));
-    throw err;
-  } else {
-    dbData = rows;
   }
 });
 
@@ -82,9 +72,9 @@ app.post('/dashboard', (req, res) => {
     if (results.length) {
       req.session.username = username;
       req.session.username = password;
-      res.render('dashboard', {
+      res.redirect('/dashboard', {
         user: results[0].prov_username
-      });
+      }, 302);
       console.log(tc.text('info', `${results[0].prov_username} logged in!`));
     } else {
       res.render('index', {
