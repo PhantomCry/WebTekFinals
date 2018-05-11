@@ -108,7 +108,7 @@
                   <form method="post" action="accept" class="btn-group">
                     <button type="submit" class="btn" name="resId" value="<%= pendingReq[i].res_id%>">Accept</button>
                   </form>
-                  <form method="post" action="decline" class="btn-group">
+                  <form method="post" action="book" class="btn-group">
                     <button type="submit" class="btn red" name="resId" value="<%= pendingReq[i].res_id%>">Deny</button>
                   </form>
                 </div>
@@ -172,6 +172,9 @@
                   <form method="post" action="cancel" class="btn-group">
                     <button type="submit" class="btn" name="resId" value="<%= accepted[i].res_id%>">Cancel</button>
                   </form>
+                  <form method="post" action="book" class="btn-group">
+                    <button type="submit" class="btn purple" name="resId" value="<%= accepted[i].res_id%>">Book</button>
+                  </form>
                 </div>
               </td>
             </tr>
@@ -184,7 +187,7 @@
         </pr>
       </div>
       <table class="centered striped responsive">
-        <h5>Denied Requests</h5>
+        <h5>Booked Requests</h5>
         <hr>
         <thead>
           <tr>
@@ -201,32 +204,32 @@
         </thead>
 
         <tbody>
-          <% for(var i = 0; i < decline.length; i++) { %>
+          <% for(var i = 0; i < book.length; i++) { %>
             <tr>
               <td>
-                <%= decline[i].unit_address%>
+                <%= book[i].unit_address%>
               </td>
               <td>
-                <%= decline[i].client_id%>
+                <%= book[i].client_id%>
               </td>
               <td>
-                <%= decline[i].client_fname%>
-                  <%= decline[i].client_lname%>
+                <%= book[i].client_fname%>
+                  <%= book[i].client_lname%>
               </td>
               <td>
-                <%= decline[i].no_of_tenents%>
+                <%= book[i].no_of_tenents%>
               </td>
               <td>
-                <%= decline[i].client_phoneno%>
+                <%= book[i].client_phoneno%>
               </td>
               <td>
-                <%= decline[i].client_email%>
+                <%= book[i].client_email%>
               </td>
               <td>
-                <%= decline[i].res_date%>
+                <%= book[i].res_date%>
               </td>
               <td>
-                <%= decline[i].checkout_date%>
+                <%= book[i].checkout_date%>
               </td>
               <td>
                 <div class="btn-group">

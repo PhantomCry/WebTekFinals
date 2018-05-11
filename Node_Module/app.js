@@ -15,7 +15,7 @@ let username;
 let password;
 let pendingReq;
 let accepted;
-let decline;
+let book;
 
 const con = mysql.createConnection({
   host: host,
@@ -61,7 +61,7 @@ app.get('/dashboard', (req, res) => {
       user: username,
       pendingReq: pendingReq,
       accepted: accepted,
-      decline: decline
+      book: book
     });
   } else {
     res.render('index', {
@@ -88,8 +88,8 @@ app.post('/dashboard', (req, res) => {
       con.query(`SELECT unit_address, client_id, client_fname, client_lname, no_of_tenents, client_phoneno, client_email, res_date, checkout_date, res_id FROM trans_unit Natural JOIN reservation Natural Join client where prov_id=${provId} and res_status="Accepted"`, (err, row) => {
         accepted = row;
       });
-      con.query(`SELECT unit_address, client_id, client_fname, client_lname, no_of_tenents, client_phoneno, client_email, res_date, checkout_date, res_id FROM trans_unit Natural JOIN reservation Natural Join client where prov_id=${provId} and res_status="Declined"`, (err, row) => {
-        decline = row;
+      con.query(`SELECT unit_address, client_id, client_fname, client_lname, no_of_tenents, client_phoneno, client_email, res_date, checkout_date, res_id FROM trans_unit Natural JOIN reservation Natural Join client where prov_id=${provId} and res_status="Booked"`, (err, row) => {
+        book = row;
       });
       res.redirect(302, '/dashboard');
     } else {
@@ -147,14 +147,17 @@ app.post('/accept', (req, res) => {
   res.redirect(302, '/');
 });
 
-app.post('/decline', (req, res) => {
-  console.log(req.body.resId);
-  res.redirect(302, '/dashboard');
+app.post('/cancel', (req, res) => {
+  con.query(`UPDATE reservation SET res_status="Under Review" WHERE res_id=${req.body.resId}`, (err, row) => {
+    if (err) {
+      console.log(err);
+    }
+  });
+  res.redirect(302, '/');
 });
 
-app.post('/cancel', (req, res) => {
-  console.log(req.body.resId);
-  con.query(`UPDATE reservation SET res_status="Under Review" WHERE res_id=${req.body.resId}`, (err, row) => {
+app.post('/book', (req, res) => {
+  con.query(`UPDATE reservation SET res_status="Booked" WHERE res_id=${req.body.resId}`, (err, row) => {
     if (err) {
       console.log(err);
     }
