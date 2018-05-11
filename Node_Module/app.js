@@ -14,6 +14,7 @@ const db = 'transient';
 let sql = 'SELECT * FROM provider';
 let dbData;
 let username;
+let password;
 
 const con = mysql.createConnection({
   host: host,
@@ -37,7 +38,6 @@ con.query(sql, (err, rows) => {
     dbData = rows;
   }
 });
-con.end();
 
 app.set('view engine', 'ejs');
 
@@ -57,7 +57,7 @@ app.get('/', (req, res) => {
     }, 302);
   } else {
     res.render('index', {
-      callback: ''
+      message: ''
     });
   }
 });
@@ -69,38 +69,27 @@ app.get('/dashboard', (req, res) => {
     });
   } else {
     res.render('index', {
-      callback: 'You are not logged in!'
+      message: 'You are not logged in!'
     });
   }
 });
 
 app.post('/dashboard', (req, res) => {
   username = req.body.username;
-  let password = req.body.password;
-  let falser = [];
-  dbData.forEach(row => {
-    if (row.prov_username.toLowerCase() == username.toLowerCase()) {
-      if (row.prov_pswd === password) {
-        req.session.username = username;
-        req.session.username = password;
-        res.render('dashboard', {
-          user: row.prov_username
-        });
-        falser.push(true);
-        console.log(tc.text('info', `${row.prov_username} logged in!`));
-      } else if (row.prov_pswd !== password) {
-        res.render('index', {
-          callback: 'Wrong password!'
-        });
-        falser.push(true);
-      }
+  password = req.body.password;
+
+  con.query(`SELECT * FROM provider WHERE prov_username='${username}' AND prov_pswd='${password}'`, (err, results) => {
+    if (results.length) {
+      req.session.username = username;
+      req.session.username = password;
+      res.render('dashboard', {
+        user: results[0].prov_username
+      });
+      console.log(tc.text('info', `${results[0].prov_username} logged in!`));
     } else {
-      falser.push(false);
-    }
-  });
-  falser.every((element, index) => {
-    if (element == false) {
-      res.render('index', {callback: 'Username not found!'});
+      res.render('index', {
+        message: 'Wrong username or password!'
+      });
     }
   });
 });
@@ -111,7 +100,7 @@ app.get('/logout', (req, res) => {
       res.negotiate(err);
     } else {
       res.redirect('/', {
-        callback: 'test'
+        message: 'test'
       }, 302);
       console.log(tc.text('warning', `${username} logged out!`));
     }
@@ -125,7 +114,7 @@ app.get('/listings', (req, res) => {
     });
   } else {
     res.render('index', {
-      callback: 'You are not logged in!'
+      message: 'You are not logged in!'
     });
   }
 });
@@ -137,7 +126,7 @@ app.get('/new-entry', (req, res) => {
     });
   } else {
     res.render('index', {
-      callback: 'You are not logged in!'
+      message: 'You are not logged in!'
     });
   }
 });
