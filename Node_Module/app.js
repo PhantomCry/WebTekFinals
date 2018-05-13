@@ -109,20 +109,20 @@ app.get('/dashboard', (req, res) => {
   });
   con.query(`SELECT unit_address, client_id, client_fname, client_lname, no_of_tenents, client_phoneno, client_email, res_date, checkout_date, res_id FROM trans_unit Natural JOIN reservation Natural Join client where prov_id=${provId} and res_status="Booked"`, (err, row) => {
     book = row;
-  });
 
-  if (req.session.username) {
-    res.render('dashboard', {
-      user: username,
-      pendingReq: pendingReq,
-      accepted: accepted,
-      book: book
-    });
-  } else {
-    res.render('index', {
-      message: 'You are not logged in!'
-    });
-  }
+    if (req.session.username) {
+      res.render('dashboard', {
+        user: username,
+        pendingReq: pendingReq,
+        accepted: accepted,
+        book: book
+      });
+    } else {
+      res.render('index', {
+        message: 'You are not logged in!'
+      });
+    }
+  });
 });
 
 app.get('/logout', (req, res) => {
