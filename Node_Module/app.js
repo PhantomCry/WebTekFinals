@@ -8,7 +8,7 @@ const path = require('path');
 const tc = require('./text-color');
 
 const storage = multer.diskStorage({
-  destination: './views/uploads/',
+  destination: 'views/static/uploads/',
   filename: (req, file, cb) => {
     cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
   }
@@ -83,7 +83,7 @@ app.post('/dashboard', (req, res) => {
   username = req.body.username;
   password = req.body.password;
 
-  con.query(`SELECT * FROM provider WHERE prov_username='${username}' AND prov_pswd='${password}'`, (err, results) => {
+  con.query(`SELECT * FROM provider WHERE prov_username=? AND prov_pswd=?`, [username, password], (err, results) => {
     if (results.length) {
       req.session.username = username;
       req.session.username = password;
@@ -140,7 +140,7 @@ app.get('/logout', (req, res) => {
 
 app.get('/listings', (req, res) => {
   if (req.session.username) {
-    con.query(`SELECT * FROM units WHERE prov_id=${provId}`, (err, results) => {
+    con.query(`select units.trans_id, prov_id, condo_name, unit_description, unit_capacity, unit_address, no_of_beds, price_per_night, vacancy, post_status, upic_id, picture from units left join unit_pics on units.trans_id = unit_pics.trans_id group by trans_id having prov_id = ?`, [provId], (err, results) => {
       res.render('listings', {
         user: username,
         card: results
@@ -166,17 +166,28 @@ app.get('/new-entry', (req, res) => {
 });
 
 app.post('/new-unit', (req, res) => {
+  con.query(`INSERT INTO units (prov_id, condo_name, unit_description, unit_capacity, unit_address, no_of_beds, price_per_night) VALUES (${provId}, '${req.body.unitName}', '${req.body.desc}', ${req.body.unitCap}, '${req.body.unitAdd}', ${req.body.bedNo}, ${req.body.price})`, (err, results) => {
+    console.log('Insert Success');
+    res.redirect(302, '/unit-image');
+  });
+});
+
+app.get('/unit-image', (req, res) => {
+  res.render('addUnitPic', {user: username});
+});
+
+app.post('/add-unit-image', (req, res) => {
   upload(req, res, err => {
     if (err) {
-      res.render('new-entry', {
-        profPic: `uploads/${req.file.filename}` // not working! should replace the profile pic
-      });
-    } else {
       res.redirect(302, '/new-entry');
+    } else {
+      res.render('addUnitPic', {
+        user: username
+      });
+      con.query('INSERT INTO unit_pics (trans_id, picture) VALUES (?, ?)', [req.body.uId, req.file.filename], (err, results) => {
+        console.log('insert success!');
+      });
     }
-    con.query(`INSERT INTO units (unit_pic, unit_desccription, unit_capacity, unit_address, price_per_night, prov_id) VALUES ('${req.file.filename}', '${req.body.desc}', '${req.body.unitCap}', '${req.body.unitAdd}', '${req.body.price}', '${provId}')`, (err, results) => {
-      console.log('Insert Success');
-    });
   });
 });
 

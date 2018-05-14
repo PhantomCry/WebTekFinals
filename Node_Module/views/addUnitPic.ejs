@@ -5,7 +5,9 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Paggiyanan</title>
+  <title>Logged in as
+    <%= user%>
+  </title>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="static/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection">
   <link href="static/css/components.css" type="text/css" rel="stylesheet" media="screen,projection">
@@ -47,61 +49,53 @@
       </div>
     </div>
   </nav>
-  <div class="row">
-    <div class="card col s12 m8 offset-m2">
-      <div class="row">
-        <div class="row">
-          <div class="center">
-            <div class="col s12 m12">
-              <h2>Listings</h2>
-              <hr>
-            </div>
-            <div class="col s4 m4 offset-m9">
-              <a class="btn-floating btn-large waves-effect waves-light red" href="/new-entry">
-                <i class="material-icons">add</i>
-              </a>
-            </div>
-          </div>
-        </div>
-        <% var c; %>
-        <% for(var i = 0; i < card.length; i++) {%>
-          <div class="col s6 m6">
-            <div class="card">
-              <div class="card-image">
-                <img src="static/uploads/<%= card[i].picture%>" alt="<%= card[i].picture%>">
-              </div>
-              <div class="card-content">
-                <p>Unit ID:
-                  <strong><%= card[i].trans_id%></strong>
-                </p>
-                <p>Unit Address:
-                  <u><%= card[i].unit_address%></u>
-                </p>
-                <p>Price Per Night :
-                  <u><%= card[i].price_per_night%></u>
-                </p>
-                <p>Status:
-                  <u><%= card[i].post_status%></u>
-                </p>
-                <p>Vacancy:
-                  <u><%= card[i].vacancy%></u>
-                </p>
-                <p>Unit Capacity:
-                  <u><%= card[i].unit_capacity%></u>
-                </p>
-                <p>Description:</p>
-                <p><%= card[i].unit_description%></p>
-              </div>
-            </div>
-          </div>
-        <% } %>
-      </div>
+
+  <div class="container">
+    <h1>Apply a Unit Image</h1>
+    <div class="flex justify-contents-center">
+      <img src="#" alt="" id="imgD">
     </div>
+    <form action="add-unit-image" method="post" enctype="multipart/form-data">
+      <div class="file-field input-field">
+        <div class="btn waves-effect">
+          <span>Upload Unit IMG</span>
+          <input type="file" name="dormImg" onchange="displayImg(this);">
+        </div>
+        <div class="file-path-wrapper">
+          <input class="file-path" type="text" readonly>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s1">
+          <input type="number" name="uId" id="uId">
+          <label for="uId">Unit ID</label>
+        </div>
+      </div>
+      <button type="submit" class="btn blue waves-effect">Submit</button>
+    </form>
   </div>
 
-  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="static/js/materialize.min.js"></script>
   <script src="static/js/init.js"></script>
+  <script>
+    $(function() {
+      function displayImg(input) {
+        if (input.files && input.files[0]) {
+          var reader = new FileReader();
+          $(reader).on('load', function(e) {
+            $('#imgD').attr('src', e.target.result).animate({
+              height: '300px',
+              width: 'auto'
+            }, 300);
+          });
+          reader.readAsDataURL(input.files[0]);
+        }
+      }
+
+      window.displayImg = displayImg;
+    });
+  </script>
 </body>
 
 </html>

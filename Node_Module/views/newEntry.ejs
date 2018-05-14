@@ -50,57 +50,41 @@
   <div class="row">
     <div class="card col s10 m10 offset-m1">
       <div class="row">
-        <form action="new-unit" method="post" enctype="multipart/form-data" autocomplete="off" class="col s12">
+        <form action="new-unit" method="post" autocomplete="off" class="col s12">
           <div class=row>
-            <div class="col s3">
-              <div class="row">
-                <div class="col s12 m12">
-                  <div class="card">
-                    <div class="card-image">
-                      <img src="<%= typeof file != 'undefined' ? file : '/static/images/userIcon.png'%>">
-                    </div>
-                    <div class="card-action">
-                      <p>Upload profile image</p>
-                      <div class="row section">
-                        <div class="col s12 m8 l9">
-                          <input type="file" id="input-file-now" class="dropify" name="dormImg" required>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <div class="input-field col s6">
+              <i class="material-icons prefix">home</i>
+              <input type="text" name="unitName" id="unitName" required>
+              <label for="unitName">Unit Name</label>
             </div>
-            <div class="col s9">
-              <div class="input-field col s4">
-                <i class="material-icons prefix">home</i>
-                <input type="text" name="unitAdd" id="unitAdd" required>
-                <label for="unitAdd">Unit Address</label>
-              </div>
-              <div class="input-field col s4">
-                <i class="material-icons prefix">accessibility</i>
-                <input type="number" name="unitCap" id="unitCap" required>
-                <label for="unitCap">Unit Capacity</label>
-              </div>
-              <div class="input-field col s4">
-                <i class="material-icons prefix">money</i>
-                <input type="number" name="price" id="price" required>
-                <label for="price">Unit Price</label>
-              </div>
-              <div class="input-field col s12">
-                <textarea id="desc" class="materialize-textarea" name="desc" required></textarea>
-                <label for="desc">Description</label>
-              </div>
-              <div class="col s12">
-                <p>
-                  <br>
-                  <br>
-                </p>
-              </div>
-              <div class="right">
-                <button type="submit" class="waves-effect waves-light btn">save</button>
-                <a href="new-entry" class="waves-effect waves-light btn">cancel</a>
-              </div>
+            <div class="input-field col s6">
+              <i class="material-icons prefix">home</i>
+              <input type="text" name="unitAdd" id="unitAdd" required>
+              <label for="unitAdd">Unit Address</label>
+            </div>
+            <div class="input-field col s6">
+              <i class="material-icons prefix">accessibility</i>
+              <input type="number" name="unitCap" id="unitCap" required>
+              <label for="unitCap">Unit Capacity</label>
+            </div>
+            <div class="input-field col s6">
+              <i class="material-icons prefix">money</i>
+              <input type="number" name="price" id="price" required>
+              <label for="price">Unit Price</label>
+            </div>
+            <div class="input-field col s6">
+              <i class="material-icons prefix">airline_seat_flat</i>
+              <input type="number" name="bedNo" id="bedNo" required>
+              <label for="bedNo">Bed Number</label>
+            </div>
+            <div class="input-field col s6">
+              <textarea id="desc" class="materialize-textarea" name="desc" required></textarea>
+              <label for="desc">Unit Description</label>
+            </div>
+            <div class="col s12 divider"></div>
+            <div class="right mt-2 mr-2">
+              <button type="submit" class="waves-effect waves-light btn">save</button>
+              <a href="unit-image" class="waves-effect waves-light btn">Add unit image</a>
             </div>
           </div>
         </form>
