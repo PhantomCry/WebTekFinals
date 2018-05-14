@@ -1,4 +1,6 @@
--- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
+CREATE DATABASE  IF NOT EXISTS `transient` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `transient`;
+-- MySQL dump 10.13  Distrib 5.7.12, for Win64 (x86_64)
 --
 -- Host: localhost    Database: transient
 -- ------------------------------------------------------
@@ -162,7 +164,7 @@ CREATE TABLE `reservation` (
   KEY `client_idx` (`client_id`),
   CONSTRAINT `client` FOREIGN KEY (`client_id`) REFERENCES `client` (`client_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `unit` FOREIGN KEY (`trans_id`) REFERENCES `units` (`trans_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -171,6 +173,7 @@ CREATE TABLE `reservation` (
 
 LOCK TABLES `reservation` WRITE;
 /*!40000 ALTER TABLE `reservation` DISABLE KEYS */;
+INSERT INTO `reservation` VALUES (11,'05-08-18','05-12-18','5','Under Review',1,1),(12,'05-09-18','05-13-18','4','Under Review',2,1),(13,'05-09-18','05-14-18','4','Under Review',3,1),(14,'05-18-18','05-25-18','3','Under Review',4,1),(15,'05-13-18','05-18-18','4','Under Review',1,2),(16,'05-13-18','05-19-18','4','Under Review',2,2);
 /*!40000 ALTER TABLE `reservation` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -242,4 +245,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-05-11 20:51:56
+-- Dump completed on 2018-05-15  2:06:32
