@@ -101,13 +101,13 @@ app.post('/dashboard', (req, res) => {
 
 app.get('/dashboard', (req, res) => {
   
-  con.query(`SELECT unit_address, client_id, client_fname, client_lname, no_of_tenents, client_phoneno, client_email, res_date, checkout_date, res_id FROM trans_unit Natural JOIN reservation Natural Join client where prov_id=${provId} and res_status="Under Review"`, (err, row) => {
+  con.query(`SELECT unit_address, client_id, client_fname, client_lname, no_of_tenents, client_phoneno, client_email, res_date, checkout_date, res_id FROM units Natural JOIN reservation Natural Join client where prov_id=${provId} and res_status="Under Review"`, (err, row) => {
     pendingReq = row;
   });
-  con.query(`SELECT unit_address, client_id, client_fname, client_lname, no_of_tenents, client_phoneno, client_email, res_date, checkout_date, res_id FROM trans_unit Natural JOIN reservation Natural Join client where prov_id=${provId} and res_status="Accepted"`, (err, row) => {
+  con.query(`SELECT unit_address, client_id, client_fname, client_lname, no_of_tenents, client_phoneno, client_email, res_date, checkout_date, res_id FROM units Natural JOIN reservation Natural Join client where prov_id=${provId} and res_status="Accepted"`, (err, row) => {
     accepted = row;
   });
-  con.query(`SELECT unit_address, client_id, client_fname, client_lname, no_of_tenents, client_phoneno, client_email, res_date, checkout_date, res_id FROM trans_unit Natural JOIN reservation Natural Join client where prov_id=${provId} and res_status="Booked"`, (err, row) => {
+  con.query(`SELECT unit_address, client_id, client_fname, client_lname, no_of_tenents, client_phoneno, client_email, res_date, checkout_date, res_id FROM units Natural JOIN reservation Natural Join client where prov_id=${provId} and res_status="Booked"`, (err, row) => {
     book = row;
 
     if (req.session.username) {
@@ -140,7 +140,7 @@ app.get('/logout', (req, res) => {
 
 app.get('/listings', (req, res) => {
   if (req.session.username) {
-    con.query(`SELECT * FROM trans_unit WHERE prov_id=${provId}`, (err, results) => {
+    con.query(`SELECT * FROM units WHERE prov_id=${provId}`, (err, results) => {
       res.render('listings', {
         user: username,
         card: results
@@ -174,7 +174,7 @@ app.post('/new-unit', (req, res) => {
     } else {
       res.redirect(302, '/new-entry');
     }
-    con.query(`INSERT INTO trans_unit (unit_pic, unit_desccription, unit_capacity, unit_address, price_per_night, prov_id) VALUES ('${req.file.filename}', '${req.body.desc}', '${req.body.unitCap}', '${req.body.unitAdd}', '${req.body.price}', '${provId}')`, (err, results) => {
+    con.query(`INSERT INTO units (unit_pic, unit_desccription, unit_capacity, unit_address, price_per_night, prov_id) VALUES ('${req.file.filename}', '${req.body.desc}', '${req.body.unitCap}', '${req.body.unitAdd}', '${req.body.price}', '${provId}')`, (err, results) => {
       console.log('Insert Success');
     });
   });
