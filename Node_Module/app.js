@@ -35,6 +35,7 @@ const port = 3000;
 const db = 'transient';
 
 let username;
+let prov_pic;
 let password;
 let pendingReq;
 let accepted;
@@ -70,7 +71,8 @@ app.use(session({
 app.get('/', (req, res) => {
   if (req.session.username) {
     res.redirect('/dashboard', {
-      user: username
+      user: username,
+      profilePic: provPic
     }, 302);
   } else {
     res.render('index', {
@@ -88,8 +90,9 @@ app.post('/dashboard', (req, res) => {
       req.session.username = username;
       req.session.username = password;
       provId = results[0].prov_id;
+      provPic = results[0].prov_pic;
       console.log(tc.text('info', `${results[0].prov_username} logged in!`));
-      
+
       res.redirect(302, '/dashboard');
     } else {
       res.render('index', {
@@ -100,7 +103,7 @@ app.post('/dashboard', (req, res) => {
 });
 
 app.get('/dashboard', (req, res) => {
-  
+
   con.query(`SELECT unit_address, client_id, client_fname, client_lname, no_of_tenents, client_phoneno, client_email, res_date, checkout_date, res_id FROM units Natural JOIN reservation Natural Join client where prov_id=${provId} and res_status="Under Review"`, (err, row) => {
     pendingReq = row;
   });
@@ -113,6 +116,7 @@ app.get('/dashboard', (req, res) => {
     if (req.session.username) {
       res.render('dashboard', {
         user: username,
+        profilePic: provPic,
         pendingReq: pendingReq,
         accepted: accepted,
         book: book
@@ -143,6 +147,7 @@ app.get('/listings', (req, res) => {
     con.query(`select units.trans_id, prov_id, condo_name, unit_description, unit_capacity, unit_address, no_of_beds, price_per_night, vacancy, post_status, upic_id, picture from units left join unit_pics on units.trans_id = unit_pics.trans_id group by trans_id having prov_id = ?`, [provId], (err, results) => {
       res.render('listings', {
         user: username,
+        profilePic: provPic,
         card: results
       });
     });
@@ -156,7 +161,8 @@ app.get('/listings', (req, res) => {
 app.get('/new-entry', (req, res) => {
   if (req.session.username) {
     res.render('newEntry', {
-      user: username
+      user: username,
+      profilePic: provPic
     });
   } else {
     res.render('index', {
@@ -173,7 +179,10 @@ app.post('/new-unit', (req, res) => {
 });
 
 app.get('/unit-image', (req, res) => {
-  res.render('addUnitPic', {user: username});
+  res.render('addUnitPic', {
+    user: username,
+    profilePic: provPic
+  });
 });
 
 app.post('/add-unit-image', (req, res) => {
@@ -182,7 +191,8 @@ app.post('/add-unit-image', (req, res) => {
       res.redirect(302, '/new-entry');
     } else {
       res.render('addUnitPic', {
-        user: username
+        user: username,
+        profilePic: provPic
       });
       con.query('INSERT INTO unit_pics (trans_id, picture) VALUES (?, ?)', [req.body.uId, req.file.filename], (err, results) => {
         console.log('insert success!');

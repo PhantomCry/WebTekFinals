@@ -12,41 +12,38 @@
 </head>
 
 <body>
-  <nav>
-    <div class="nav-wrapper">
-      <div class="row">
-        <div class="col s3 input-field">
-          <input type="text" id="search">
-          <label for="search">Search...</label>
-        </div>
-        <div class="col s3 center">
-          <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li>
-              <a href="/">Home</a>
-            </li>
-            <li>
-              <a href="/listings">Listings</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col s3 right">
-          <div class="profile">
-            <div class="dropdown-trigger flex" data-target="dropdown">
-              <span>
-                <%= user%>
-              </span>
-              <img src="https://orig00.deviantart.net/6a12/f/2014/195/4/4/kurisu_makise_by_animeprofileavatars-d7qqa8s.jpg" class="profile-pic">
-            </div>
-          </div>
-          <ul id="dropdown" class="dropdown-content">
-            <li>
-              <a href="/logout">Logout</a>
-            </li>
-          </ul>
+<nav>
+<div class="nav-wrapper">
+  <div class="row">
+    <div class="col s3 center">
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li>
+          <a href="/">Home</a>
+        </li>
+        <li>
+          <a href="/listings">Listings</a>
+        </li>
+      </ul>
+    </div>
+    <div class="col s3 right">
+      <div class="profile">
+        <div class="dropdown-trigger flex" data-target="dropdown">
+          <span>
+            <%= user%>
+          </span>
+          <%var pic; if (profilePic === null) {pic = profilePic;} else {pic='https://orig00.deviantart.net/6a12/f/2014/195/4/4/kurisu_makise_by_animeprofileavatars-d7qqa8s.jpg';}%>
+          <img src="<%= pic%>" alt="<%= user%>" class="profile-pic">
         </div>
       </div>
+      <ul id="dropdown" class="dropdown-content">
+        <li>
+          <a href="/logout">Logout</a>
+        </li>
+      </ul>
     </div>
-  </nav>
+  </div>
+</div>
+</nav>
   <div class="row">
     <div class="card col s10 m10 offset-m1">
       <div class="row">

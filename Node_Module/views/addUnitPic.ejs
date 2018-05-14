@@ -17,10 +17,6 @@
   <nav>
     <div class="nav-wrapper">
       <div class="row">
-        <div class="col s3 input-field">
-          <input type="text" id="search">
-          <label for="search">Search...</label>
-        </div>
         <div class="col s3 center">
           <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li>
@@ -37,7 +33,7 @@
               <span>
                 <%= user%>
               </span>
-              <img src="https://orig00.deviantart.net/6a12/f/2014/195/4/4/kurisu_makise_by_animeprofileavatars-d7qqa8s.jpg" class="profile-pic">
+              <img src="<%= profilePic%>" alt="<%= user%>" class="profile-pic">
             </div>
           </div>
           <ul id="dropdown" class="dropdown-content">
