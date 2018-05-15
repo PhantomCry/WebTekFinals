@@ -7,6 +7,32 @@ const multer = require('multer');
 const path = require('path');
 const tc = require('./text-color');
 
+const app = express();
+
+const host = '192.168.1.6';
+const port = 3000;
+const db = 'transient';
+
+let pendingReq;
+let accepted;
+let book;
+
+const con = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: '',
+  database: db
+});
+con.connect(err => {
+  if (err) {
+    console.log(tc.text('error', 'database connection error!'));
+    throw err;
+  } else {
+    console.log(tc.text('suc', `Connected to ${db} database!`));
+  }
+});
+
+
 const storage = multer.diskStorage({
   destination: 'views/static/uploads/',
   filename: (req, file, cb) => {
@@ -28,33 +54,6 @@ const upload = multer({
   }
 }).single('dormImg');
 
-const app = express();
-
-const host = '192.168.1.6';
-const port = 3000;
-const db = 'transient';
-
-let prov_pic;
-let password;
-let pendingReq;
-let accepted;
-let book;
-
-const con = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: '',
-  database: db
-});
-con.connect(err => {
-  if (err) {
-    console.log(tc.text('error', 'database connection error!'));
-    throw err;
-  } else {
-    console.log(tc.text('suc', `Connected to ${db} database!`));
-  }
-});
-
 app.set('view engine', 'ejs');
 
 app.use('/static', express.static(__dirname + '/views/static'));
@@ -69,7 +68,7 @@ app.use(session({
 app.get('/', (req, res) => {
   if (req.session.username) {
     res.redirect('/dashboard', {
-      user: req.session.username,
+      user: req.session.username.replace(/\b\w/g, l => l.toUpperCase()),
       profilePic: req.session.profPic
     }, 302);
   } else {
@@ -113,7 +112,7 @@ app.get('/dashboard', (req, res) => {
 
     if (req.session.username) {
       res.render('dashboard', {
-        user: req.session.username,
+        user: req.session.username.replace(/\b\w/g, l => l.toUpperCase()),
         profilePic: req.session.profPic,
         pendingReq: pendingReq,
         accepted: accepted,
@@ -128,6 +127,7 @@ app.get('/dashboard', (req, res) => {
 });
 
 app.get('/logout', (req, res) => {
+  let username = req.session.username;
   req.session.destroy(err => {
     if (err) {
       res.negotiate(err);
@@ -144,7 +144,7 @@ app.get('/listings', (req, res) => {
   if (req.session.username) {
     con.query(`select units.trans_id, prov_id, condo_name, unit_description, unit_capacity, unit_address, no_of_beds, price_per_night, vacancy, post_status, upic_id, picture from units left join unit_pics on units.trans_id = unit_pics.trans_id group by trans_id having prov_id = ?`, [req.session.provId], (err, results) => {
       res.render('listings', {
-        user: req.session.username,
+        user: req.session.username.replace(/\b\w/g, l => l.toUpperCase()),
         profilePic: req.session.profPic,
         card: results
       });
@@ -159,7 +159,7 @@ app.get('/listings', (req, res) => {
 app.get('/new-entry', (req, res) => {
   if (req.session.username) {
     res.render('newEntry', {
-      user: req.session.username,
+      user: req.session.username.replace(/\b\w/g, l => l.toUpperCase()),
       profilePic: req.session.profPic
     });
   } else {
@@ -171,14 +171,13 @@ app.get('/new-entry', (req, res) => {
 
 app.post('/new-unit', (req, res) => {
   con.query(`INSERT INTO units (prov_id, condo_name, unit_description, unit_capacity, unit_address, no_of_beds, price_per_night) VALUES (?, ?, ?, ?, ?, ?, ?)`, [req.session.provId, req.body.unitName, req.body.desc, req.body.unitCap, req.body.unitAdd, req.body.bedNo, req.body.price], (err, results) => {
-    console.log('Insert Success');
     res.redirect(302, '/unit-image');
   });
 });
 
 app.get('/unit-image', (req, res) => {
   res.render('addUnitPic', {
-    user: req.session.username,
+    user: req.session.username.replace(/\b\w/g, l => l.toUpperCase()),
     profilePic: req.session.profPic
   });
 });
@@ -189,11 +188,11 @@ app.post('/add-unit-image', (req, res) => {
       res.redirect(302, '/new-entry');
     } else {
       res.render('addUnitPic', {
-        user: req.session.username,
+        user: req.session.username.replace(/\b\w/g, l => l.toUpperCase()),
         profilePic: req.session.profPic
       });
       con.query('INSERT INTO unit_pics (trans_id, picture) VALUES (?, ?)', [req.body.uId, req.file.filename], (err, results) => {
-        console.log('insert success!');
+        console.log(`Inserted ${req.file.filename}`);
       });
     }
   });
