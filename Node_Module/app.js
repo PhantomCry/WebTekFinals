@@ -172,7 +172,7 @@ app.get('/new-entry', (req, res) => {
 });
 
 app.post('/new-unit', (req, res) => {
-  con.query(`INSERT INTO units (prov_id, condo_name, unit_description, unit_capacity, unit_address, no_of_beds, price_per_night) VALUES (${provId}, '${req.body.unitName}', '${req.body.desc}', ${req.body.unitCap}, '${req.body.unitAdd}', ${req.body.bedNo}, ${req.body.price})`, (err, results) => {
+  con.query(`INSERT INTO units (prov_id, condo_name, unit_description, unit_capacity, unit_address, no_of_beds, price_per_night) VALUES (?, ?, ?, ?, ?, ?, ?)`, [provId, req.body.unitName, req.body.desc, req.body.unitCap, req.body.unitAdd, req.body.bedNo, req.body.price], (err, results) => {
     console.log('Insert Success');
     res.redirect(302, '/unit-image');
   });
@@ -202,7 +202,7 @@ app.post('/add-unit-image', (req, res) => {
 });
 
 app.post('/accept', (req, res) => {
-  con.query(`UPDATE reservation SET res_status="Accepted" WHERE res_id=${req.body.resId}`, (err, row) => {
+  con.query(`UPDATE reservation SET res_status="Accepted" WHERE res_id=?`, [req.body.resId], (err, row) => {
     if (err) {
       console.log(err);
     }
@@ -211,7 +211,7 @@ app.post('/accept', (req, res) => {
 });
 
 app.post('/cancel', (req, res) => {
-  con.query(`UPDATE reservation SET res_status="Under Review" WHERE res_id=${req.body.resId}`, (err, row) => {
+  con.query(`UPDATE reservation SET res_status="Under Review" WHERE res_id=?`, [req.body.resId], (err, row) => {
     if (err) {
       console.log(err);
     }
@@ -220,13 +220,19 @@ app.post('/cancel', (req, res) => {
 });
 
 app.post('/book', (req, res) => {
-  con.query(`UPDATE reservation SET res_status="Booked" WHERE res_id=${req.body.resId}`, (err, row) => {
+  con.query(`UPDATE reservation SET res_status="Booked" WHERE res_id=?`, [req.body.resId], (err, row) => {
     if (err) {
       console.log(err);
     }
   });
   res.redirect(302, '/');
 });
+
+// app.port('/deny', (req, res) => {
+//   con.query(``,[], (err, results) => {
+
+//   });
+// });
 
 app.listen(port, host, () => {
   console.log(tc.text('suc', `\nConnected to ${host} on port ${port}!`));
