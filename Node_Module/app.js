@@ -104,13 +104,13 @@ app.post('/dashboard', (req, res) => {
 
 app.get('/dashboard', (req, res) => {
 
-  con.query(`SELECT unit_address, client_id, client_fname, client_lname, no_of_tenents, client_phoneno, client_email, res_date, checkout_date, res_id FROM units Natural JOIN reservation Natural Join client where prov_id=${provId} and res_status="Under Review"`, (err, row) => {
+  con.query(`SELECT unit_address, client_id, client_fname, client_lname, client_phoneno, client_email, res_date, checkout_date, res_id FROM units Natural JOIN reservation Natural Join client where prov_id=? and res_status="Under Review"`, [provId], (err, row) => {
     pendingReq = row;
   });
-  con.query(`SELECT unit_address, client_id, client_fname, client_lname, no_of_tenents, client_phoneno, client_email, res_date, checkout_date, res_id FROM units Natural JOIN reservation Natural Join client where prov_id=${provId} and res_status="Accepted"`, (err, row) => {
+  con.query(`SELECT unit_address, client_id, client_fname, client_lname, client_phoneno, client_email, res_date, checkout_date, res_id FROM units Natural JOIN reservation Natural Join client where prov_id=? and res_status="Accepted"`, [provId], (err, row) => {
     accepted = row;
   });
-  con.query(`SELECT unit_address, client_id, client_fname, client_lname, no_of_tenents, client_phoneno, client_email, res_date, checkout_date, res_id FROM units Natural JOIN reservation Natural Join client where prov_id=${provId} and res_status="Booked"`, (err, row) => {
+  con.query(`SELECT unit_address, client_id, client_fname, client_lname, client_phoneno, client_email, res_date, checkout_date, res_id FROM units Natural JOIN reservation Natural Join client where prov_id=? and res_status="Booked"`, [provId], (err, row) => {
     book = row;
 
     if (req.session.username) {
