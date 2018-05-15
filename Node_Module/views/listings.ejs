@@ -31,7 +31,8 @@
           <span>
             <%= user%>
           </span>
-          <img src="<%= profilePic%>" alt="<%= user%>" class="profile-pic">
+          <%var pic; if (profilePic === null) {pic = profilePic;} else {pic='static/images/userIcon.png';}%>
+          <img src="<%= pic%>" alt="<%= user%>" class="profile-pic">
         </div>
       </div>
       <ul id="dropdown" class="dropdown-content">
@@ -73,7 +74,7 @@
                 <p>Unit Address:
                   <u><%= card[i].unit_address%></u>
                 </p>
-                <p>Price Per Night :
+                <p>Price Per Night:
                   <u><%= card[i].price_per_night%></u>
                 </p>
                 <p>Status:

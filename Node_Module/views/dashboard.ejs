@@ -33,7 +33,8 @@
           <span>
             <%= user%>
           </span>
-          <img src="<%= profilePic%>" alt="<%= user%>" class="profile-pic">
+          <%var pic; if (profilePic === null) {pic = profilePic;} else {pic='static/images/userIcon.png';}%>
+          <img src="<%= pic%>" alt="<%= user%>" class="profile-pic">
         </div>
       </div>
       <ul id="dropdown" class="dropdown-content">

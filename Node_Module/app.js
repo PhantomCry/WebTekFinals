@@ -30,7 +30,7 @@ const upload = multer({
 
 const app = express();
 
-const host = 'localhost';
+const host = '192.168.1.6';
 const port = 3000;
 const db = 'transient';
 
@@ -43,7 +43,7 @@ let book;
 let provId;
 
 const con = mysql.createConnection({
-  host: host,
+  host: 'localhost',
   user: 'root',
   password: '',
   database: db
