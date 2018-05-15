@@ -228,11 +228,11 @@ app.post('/book', (req, res) => {
   res.redirect(302, '/');
 });
 
-// app.port('/deny', (req, res) => {
-//   con.query(``,[], (err, results) => {
-
-//   });
-// });
+app.post('/deny', (req, res) => {
+  con.query(`DELETE FROM reservation WHERE res_id=?`, [req.body.resId], (err, results) => {
+    res.redirect(302, '/dashboard');
+  });
+});
 
 app.listen(port, host, () => {
   console.log(tc.text('suc', `\nConnected to ${host} on port ${port}!`));

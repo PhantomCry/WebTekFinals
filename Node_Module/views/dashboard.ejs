@@ -65,8 +65,8 @@
             <th>Name</th>
             <th>Contact</th>
             <th>Email</th>
-            <th>Reservation Date</th>
-            <th>Checkout Date</th>
+            <th>Check-In Date</th>
+            <th>Check-Out Date</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -101,8 +101,8 @@
                   <form method="post" action="accept" class="btn-group">
                     <button type="submit" class="btn" name="resId" value="<%= pendingReq[i].res_id%>">Accept</button>
                   </form>
-                  <form method="post" action="book" class="btn-group">
-                    <button type="submit" class="btn red" name="resId" value="<%= pendingReq[i].res_id%>">Deny</button>
+                  <form method="post" action="deny" class="btn-group">
+                    <button type="submit" class="btn red delete" name="resId" value="<%= pendingReq[i].res_id%>">Deny</button>
                   </form>
                 </div>
               </td>
@@ -145,9 +145,6 @@
                   <%= accepted[i].client_lname%>
               </td>
               <td>
-                <%= accepted[i].no_of_tenents%>
-              </td>
-              <td>
                 <%= accepted[i].client_phoneno%>
               </td>
               <td>
@@ -161,8 +158,8 @@
               </td>
               <td>
                 <div>
-                  <form method="post" action="cancel" class="btn-group">
-                    <button type="submit" class="btn" name="resId" value="<%= accepted[i].res_id%>">Cancel</button>
+                  <form method="post" action="deny" class="btn-group">
+                    <button type="submit" class="btn red delete" name="resId" value="<%= accepted[i].res_id%>">Delete</button>
                   </form>
                   <form method="post" action="book" class="btn-group">
                     <button type="submit" class="btn purple" name="resId" value="<%= accepted[i].res_id%>">Book</button>
@@ -186,11 +183,9 @@
             <th>Unit Address</th>
             <th>Client ID</th>
             <th>Name</th>
-            <th>Accomodation</th>
             <th>Contact</th>
             <th>Email</th>
             <th>Check-In Date</th>
-            <th>Check-Out Date</th>
           </tr>
         </thead>
 
@@ -208,9 +203,6 @@
                   <%= book[i].client_lname%>
               </td>
               <td>
-                <%= book[i].no_of_tenents%>
-              </td>
-              <td>
                 <%= book[i].client_phoneno%>
               </td>
               <td>
@@ -218,15 +210,6 @@
               </td>
               <td>
                 <%= book[i].res_date%>
-              </td>
-              <td>
-                <%= book[i].checkout_date%>
-              </td>
-              <td>
-                <div class="btn-group">
-                  <button class="btn">Accept</button>
-                  <button class="btn red">Deny</button>
-                </div>
               </td>
             </tr>
             <% } %>
@@ -246,6 +229,10 @@
 
         location.reload(true);
       }
+
+      $('.delete').on('click', function() {
+        return confirm('Are you sure you want to delete this?');
+      });
     });
   </script>
 </body>
