@@ -1,6 +1,7 @@
 .profile {
   display: flex;
   float: right;
+  cursor: pointer;
 }
 
 .profile > * {

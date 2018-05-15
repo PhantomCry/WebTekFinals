@@ -14,11 +14,9 @@
 </head>
 
 <body>
-<nav>
-<div class="nav-wrapper">
-  <div class="row">
-    <div class="col s3 center">
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
+  <nav>
+    <div class="nav-wrapper">
+      <ul>
         <li>
           <a href="/">Home</a>
         </li>
@@ -26,27 +24,22 @@
           <a href="/listings">Listings</a>
         </li>
       </ul>
-    </div>
-    <div class="col s3 right">
-      <div class="profile">
+      <div class="brand-logo right profile">
         <div class="dropdown-trigger flex" data-target="dropdown">
           <span>
             <%= user%>
           </span>
           <%var pic; if (profilePic === null) {pic = profilePic;} else {pic='static/images/userIcon.png';}%>
-          <img src="<%= pic%>" alt="<%= user%>" class="profile-pic">
+            <img src="<%= pic%>" alt="<%= user%>" class="profile-pic">
         </div>
+        <ul id="dropdown" class="dropdown-content">
+          <li>
+            <a href="/logout">Logout</a>
+          </li>
+        </ul>
       </div>
-      <ul id="dropdown" class="dropdown-content">
-        <li>
-          <a href="/logout">Logout</a>
-        </li>
-      </ul>
     </div>
-  </div>
-</div>
-</nav>
-
+  </nav>
 
   <div class="row">
     <div class="card col s10 m10 offset-m1">
@@ -159,7 +152,7 @@
               <td>
                 <div>
                   <form method="post" action="deny" class="btn-group">
-                    <button type="submit" class="btn red delete" name="resId" value="<%= accepted[i].res_id%>">Delete</button>
+                    <button type="submit" class="btn red delete" name="resId" value="<%= accepted[i].res_id%>">Cancel</button>
                   </form>
                   <form method="post" action="book" class="btn-group">
                     <button type="submit" class="btn purple" name="resId" value="<%= accepted[i].res_id%>">Book</button>
@@ -176,7 +169,7 @@
         </pr>
       </div>
       <table class="centered striped responsive">
-        <h5>Booked Requests</h5>
+        <h5>Successful Resevations</h5>
         <hr>
         <thead>
           <tr>
@@ -222,15 +215,15 @@
   <script src="static/js/materialize.min.js"></script>
   <script src="static/js/init.js"></script>
   <script>
-    $(function() {
+    $(function () {
       if (document.URL.indexOf('#') == -1) {
-        url = document.URL+'#';
+        url = document.URL + '#';
         location = '#';
 
         location.reload(true);
       }
 
-      $('.delete').on('click', function() {
+      $('.delete').on('click', function () {
         return confirm(`Are you sure you want to delete unit #${this.value}?`);
       });
     });
