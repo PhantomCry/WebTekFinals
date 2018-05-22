@@ -96,29 +96,19 @@ if($status == "Declined"){
 ?>
 <html>
     <head>
+        <title>Admin</title>
         <link rel="stylesheet" href="./styles/style1.css">
     </head>
     <body>
-        <header id="nav-1">
-            <span class="title"><a href="adminMod.php">ADMIN</a></span>
-        <nav id="nav-2">
-            <form action="client.php" id="form1">
-                <button id="sub1">MANAGE CLIENT</button>
-            </form>
-            <form action="provider.php" id="form2">
-                <button id="sub2">MANAGE PROVIDERS</button>
-            </form>
-            <form action="units.php" id="form3">
-                <button id="sub3">MANAGE UNITS</button>
-            </form>
-        </nav>
-        </header>
-
-        <div class="dividor"></div>
-        <div class="dividor"></div>
-        
-        <div id="result"></div>
-
+        <h1><a href="adminMod.php">ADMIN</a></h1>
+        <div id="sidebar" class="visible">
+            <ul>
+                <li><a href="adminMod.php">Home</a></li>
+                <li><a href="client.php">Manage Clients</a></li>
+                <li><a href="provider.php">Manage Providers</a></li>
+                <li><a href="units.php">Manage Units</a></li>
+            </ul>
+        </div>
         
         <script type=text/javascript src="jquery-3.3.1.min.js"></script>
         <script type=text/javascript src="my_script.js"></script>

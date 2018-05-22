@@ -73,3 +73,24 @@ $con=mysqli_connect("localhost","root","","transient");
 echo '</div>';
     echo '</div>';
 ?>
+<html>
+    <head>
+        <title>Admin</title>
+        <link rel="stylesheet" href="./styles/style1.css">
+        <link rel="stylesheet" href="./styles/style3.css">
+    </head>
+    <body>
+        <h1><a href="adminMod.php">ADMIN</a></h1>
+        <div id="sidebar" class="visible">
+            <ul>
+                <li><a href="adminMod.php">Home</a></li>
+                <li><a href="client.php">Manage Clients</a></li>
+                <li><a href="provider.php">Manage Providers</a></li>
+                <li><a href="units.php">Manage Units</a></li>
+            </ul>
+        </div>
+        
+        <script type=text/javascript src="jquery-3.3.1.min.js"></script>
+        <script type=text/javascript src="my_script.js"></script>
+    </body>
+</html>
