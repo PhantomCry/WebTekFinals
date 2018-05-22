@@ -9,7 +9,7 @@ const tc = require('./text-color');
 
 const app = express();
 
-const host = '192.168.1.6';
+const host = 'localhost';
 const port = 3000;
 const db = 'transient';
 
@@ -18,8 +18,8 @@ let accepted;
 let book;
 
 const con = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
+  host: '192.168.1.9',
+  user: 'root1',
   password: '',
   database: db
 });
@@ -83,17 +83,27 @@ app.post('/dashboard', (req, res) => {
   password = req.body.password;
 
   con.query(`SELECT * FROM provider WHERE prov_username=? AND prov_pswd=?`, [username, password], (err, results) => {
-    if (results.length) {
-      req.session.username = username;
-      req.session.password = password;
-      req.session.provId = results[0].prov_id;
-      req.session.profPic = results[0].prov_pic;
-      console.log(tc.text('info', `${results[0].prov_username} logged in!`));
-
-      res.redirect(302, '/dashboard');
+    if (results[0].rep_status == 'Active') {
+      if (results.length) {
+        req.session.username = username;
+        req.session.password = password;
+        req.session.provId = results[0].prov_id;
+        req.session.profPic = results[0].prov_pic;
+        console.log(tc.text('info', `${results[0].prov_username} logged in!`));
+  
+        res.redirect(302, '/dashboard');
+      } else {
+        res.render('index', {
+          message: 'Wrong username or password!'
+        });
+      }
+    } else if (results[0].rep_status == 'Banned') {
+      res.render('index', {
+        message: 'You\'re account has been disabled. Please contact admin at angege@gmail.com'
+      });
     } else {
       res.render('index', {
-        message: 'Wrong username or password!'
+        message: 'You\'re account is still under review.'
       });
     }
   });
