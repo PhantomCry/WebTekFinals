@@ -1,0 +1,20 @@
+Service Provider:
+	Registration:
+		- The administrator must approve the registration form of an applicant before the applicant will be able to use it.
+		- The admin must also send a notification about the applicant's denied or approved form.
+		- A new interface must be made to attend to these applicant registration forms.
+
+	- When an account has been deactivated, upon logging in, the user must be notified about his/her deactivated account.
+	- Non-existing account users must receive a notification of their non-existing account.
+	- Dates can be filtered and total amounts must be automatically computed and approved. *Generate report*
+	- Prices of the room may be altered, with additional user interface as support.
+	- Vacancy of a room may also be changed with a supporting user interface.
+
+Admin:
+	- Admins can filter out the transactions then recompute the total amounts of each successful client. (Di ko na sure iba dito sa may admin)
+
+Client:
+	- Vacancy filter
+	- Reservation status may be viewed and may also be cancelled (upon cancellation, admins wll be notified and can remove the reservation.
+	- Notifications can be sent to the client regarding his/her reservation.
+	- Budget checker.

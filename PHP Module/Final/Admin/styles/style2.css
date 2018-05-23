@@ -1,0 +1,45 @@
+body{
+    margin: 0 auto;
+    background-image: url("../img/background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+h1{
+    color: white;
+}
+
+.container{
+    margin: 0 auto;
+    margin-top: 150px;
+    width: 500px;
+    height: 400px;
+    text-align: center;
+    background-color: #152739;
+    border-radius: 80px;
+}
+
+.container img{
+    width: 120px;
+    height: 120px;
+    margin-top: -60px;
+    margin-bottom: 30px;
+}
+
+input{
+    height: 50px;
+    width: 300px;
+    font-size: 18px;
+    margin-bottom: 20px;
+    background-color: #fff;
+}
+
+.btn{
+    padding: 15px 25px;
+    color: #fff;
+    background-color: #244668;
+    border: none;
+    border-radius: 4px;
+}
