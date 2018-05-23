@@ -85,27 +85,30 @@ app.post('/dashboard', (req, res) => {
   password = req.body.password;
 
   con.query(`SELECT * FROM provider WHERE prov_username=? AND prov_pswd=?`, [username, password], (err, results) => {
-    if (results[0].rep_status == 'Active') {
-      if (results.length) {
+
+    if (results.length) {
+
+      if (results[0].rep_status == 'Active') {
+        
         req.session.username = username;
         req.session.password = password;
         req.session.provId = results[0].prov_id;
         req.session.profPic = results[0].prov_pic;
         console.log(tc.text('info', `${results[0].prov_username} logged in!`));
-  
+
         res.redirect(302, '/dashboard');
+      } else if (results[0].rep_status == 'Banned') {
+        res.render('index', {
+          message: 'You\'re account has been disabled. Please contact admin at angege@gmail.com'
+        });
       } else {
         res.render('index', {
-          message: 'Wrong username or password!'
+          message: 'You\'re account is still under review.'
         });
       }
-    } else if (results[0].rep_status == 'Banned') {
-      res.render('index', {
-        message: 'You\'re account has been disabled. Please contact admin at angege@gmail.com'
-      });
     } else {
       res.render('index', {
-        message: 'You\'re account is still under review.'
+        message: 'Wrong username or password!'
       });
     }
   });
@@ -249,9 +252,12 @@ app.post('/new-unit', (req, res) => {
 });
 
 app.get('/unit-image', (req, res) => {
-  res.render('addUnitPic', {
-    user: req.session.username.replace(/\b\w/g, l => l.toUpperCase()),
-    profilePic: req.session.profPic
+  con.query('SELECT units.trans_id, prov_id FROM units NATURAL JOIN unit_pics GROUP BY trans_id HAVING prov_id = ?', [req.session.provId], (err, rows) => {
+    res.render('addUnitPic', {
+      user: req.session.username.replace(/\b\w/g, l => l.toUpperCase()),
+      profilePic: req.session.profPic,
+      units: rows
+    });
   });
 });
 
@@ -262,13 +268,14 @@ app.post('/add-unit-image', (req, res) => {
     } else {
       res.render('addUnitPic', {
         user: req.session.username.replace(/\b\w/g, l => l.toUpperCase()),
-        profilePic: req.session.profPic
+        profilePic: req.session.profPic,
+        units: rows.trans_id
       });
       con.query('INSERT INTO unit_pics (trans_id, picture) VALUES (?, ?)', [req.body.uId, req.file.filename], (err, results) => {
         console.log(`Inserted ${req.file.filename}`);
       });
     }
-  });
+  }); 
 });
 
 app.post('/accept', (req, res) => {
