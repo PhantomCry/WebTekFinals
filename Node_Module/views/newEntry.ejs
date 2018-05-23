@@ -5,106 +5,88 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Paggiyanan</title>
+  <title>Logged in as
+    <%= user%>
+  </title>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="static/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection">
   <link href="static/css/components.css" type="text/css" rel="stylesheet" media="screen,projection">
 </head>
 
 <body>
-  <nav>
-    <div class="nav-wrapper">
-      <div class="row">
-        <div class="col s3 input-field">
-          <input type="text" id="search">
-          <label for="search">Search...</label>
-        </div>
-        <div class="col s3 center">
-          <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li>
-              <a href="/">Home</a>
-            </li>
-            <li>
-              <a href="/listings">Listings</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col s3 right">
-          <div class="profile">
-            <div class="dropdown-trigger flex" data-target="dropdown">
-              <span>
-                <%= user%>
-              </span>
-              <img src="https://orig00.deviantart.net/6a12/f/2014/195/4/4/kurisu_makise_by_animeprofileavatars-d7qqa8s.jpg" class="profile-pic">
-            </div>
-          </div>
-          <ul id="dropdown" class="dropdown-content">
-            <li>
-              <a href="/logout">Logout</a>
-            </li>
-          </ul>
-        </div>
-      </div>
+<nav>
+<div class="nav-wrapper">
+  <ul>
+    <li>
+      <a href="/">Home</a>
+    </li>
+    <li>
+      <a href="/listings">Listings</a>
+    </li>
+    <li>
+      <a href="/reports">Reports</a>
+    </li>
+  </ul>
+  <div class="brand-logo right profile">
+    <div class="dropdown-trigger flex" data-target="dropdown">
+      <span>
+        <%= user%>
+      </span>
+      <%var pic; if (profilePic === null) {pic = profilePic;} else {pic='static/images/userIcon.png';}%>
+        <img src="<%= pic%>" alt="<%= user%>" class="profile-pic">
     </div>
-  </nav>
+    <ul id="dropdown" class="dropdown-content">
+      <li>
+        <a href="/logout">Logout</a>
+      </li>
+    </ul>
+  </div>
+</div>
+</nav>
   <div class="row">
     <div class="card col s10 m10 offset-m1">
       <div class="row">
-        <form class="col s12">
+        <form action="new-unit" method="post" autocomplete="off" class="col s12">
           <div class=row>
-            <div class="col s3">
-              <div class="row">
-                <div class="col s12 m12">
-                  <div class="card">
-                    <div class="card-image">
-                      <img src="/static/images/userIcon.png">
-                    </div>
-                    <center>
-                      <div class="card-action">
-                        <p>Upload profile image</p>
-                        <div class="row section">
-                          <div class="col s12 m8 l9">
-                            <input type="file" id="input-file-now" class="dropify" data-default-file="">
-                          </div>
-                        </div>
-                      </div>
-                    </center>
-                  </div>
-                </div>
-              </div>
+            <div class="input-field col s6">
+              <i class="material-icons prefix">home</i>
+              <input type="text" name="unitName" id="unitName" required>
+              <label for="unitName">Unit Name</label>
             </div>
-            <div class="col s9">
-              <div class="input-field col s6">
-                <i class="material-icons prefix">home</i>
-                <input id="icon_prefix" type="text" class="validate">
-                <label for="icon_prefix">Unit Address</label>
-              </div>
-              <div class="input-field col s6">
-                <i class="material-icons prefix">money</i>
-                <input id="icon_prefix" type="text" class="validate">
-                <label for="icon_prefix">Unit Price</label>
-              </div>
-              <div class="input-field col s12">
-                <textarea id="textarea1" class="materialize-textarea"></textarea>
-                <label for="textarea1">Description</label>
-              </div>
-              <div class="col s12">
-                <p>
-                  <br>
-                  <br>
-                </p>
-              </div>
-              <div class="right">
-                <a class="waves-effect waves-light btn">save</a>
-                <a class="waves-effect waves-light btn">cancel</a>
-              </div>
+            <div class="input-field col s6">
+              <i class="material-icons prefix">home</i>
+              <input type="text" name="unitAdd" id="unitAdd" required>
+              <label for="unitAdd">Unit Address</label>
+            </div>
+            <div class="input-field col s6">
+              <i class="material-icons prefix">accessibility</i>
+              <input type="number" name="unitCap" id="unitCap" required>
+              <label for="unitCap">Unit Capacity</label>
+            </div>
+            <div class="input-field col s6">
+              <i class="material-icons prefix">money</i>
+              <input type="number" name="price" id="price" required>
+              <label for="price">Unit Price</label>
+            </div>
+            <div class="input-field col s6">
+              <i class="material-icons prefix">airline_seat_flat</i>
+              <input type="number" name="bedNo" id="bedNo" required>
+              <label for="bedNo">Bed Number</label>
+            </div>
+            <div class="input-field col s6">
+              <textarea id="desc" class="materialize-textarea" name="desc" required></textarea>
+              <label for="desc">Unit Description</label>
+            </div>
+            <div class="col s12 divider"></div>
+            <div class="right mt-2 mr-2">
+              <button type="submit" class="waves-effect waves-light btn">save</button>
+              <a href="unit-image" class="waves-effect waves-light btn">Add unit image</a>
             </div>
           </div>
         </form>
       </div>
     </div>
   </div>
-
 
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="static/js/materialize.min.js"></script>

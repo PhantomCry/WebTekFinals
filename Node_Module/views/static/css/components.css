@@ -1,6 +1,7 @@
 .profile {
   display: flex;
   float: right;
+  cursor: pointer;
 }
 
 .profile > * {
@@ -29,4 +30,25 @@
 
 .flex {
   display: flex
+}
+
+.btn-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.justify-contents-center {
+  justify-content: center
+}
+
+.mt-1 {
+  margin-top: 1rem;
+}
+
+.mt-2 {
+  margin-top: 2rem;
+}
+
+.mr-2 {
+  margin-right: 2rem;
 }

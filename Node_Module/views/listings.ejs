@@ -5,48 +5,44 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Paggiyanan</title>
+  <title>Logged in as
+    <%= user%>
+  </title>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="static/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection">
   <link href="static/css/components.css" type="text/css" rel="stylesheet" media="screen,projection">
 </head>
 
 <body>
-  <nav>
-    <div class="nav-wrapper">
-      <div class="row">
-        <div class="col s3 input-field">
-          <input type="text" id="search">
-          <label for="search">Search...</label>
-        </div>
-        <div class="col s3 center">
-          <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li>
-              <a href="/">Home</a>
-            </li>
-            <li>
-              <a href="/listings">Listings</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col s3 right">
-          <div class="profile">
-            <div class="dropdown-trigger flex" data-target="dropdown">
-              <span>
-                <%= user%>
-              </span>
-              <img src="https://orig00.deviantart.net/6a12/f/2014/195/4/4/kurisu_makise_by_animeprofileavatars-d7qqa8s.jpg" class="profile-pic">
-            </div>
-          </div>
-          <ul id="dropdown" class="dropdown-content">
-            <li>
-              <a href="/logout">Logout</a>
-            </li>
-          </ul>
-        </div>
-      </div>
+<nav>
+<div class="nav-wrapper">
+  <ul>
+    <li>
+      <a href="/">Home</a>
+    </li>
+    <li>
+      <a href="/listings">Listings</a>
+    </li>
+    <li>
+      <a href="/reports">Reports</a>
+    </li>
+  </ul>
+  <div class="brand-logo right profile">
+    <div class="dropdown-trigger flex" data-target="dropdown">
+      <span>
+        <%= user%>
+      </span>
+      <%var pic; if (profilePic === null) {pic = profilePic;} else {pic='static/images/userIcon.png';}%>
+        <img src="<%= pic%>" alt="<%= user%>" class="profile-pic">
     </div>
-  </nav>
+    <ul id="dropdown" class="dropdown-content">
+      <li>
+        <a href="/logout">Logout</a>
+      </li>
+    </ul>
+  </div>
+</div>
+</nav>
   <div class="row">
     <div class="card col s12 m8 offset-m2">
       <div class="row">
@@ -63,76 +59,52 @@
             </div>
           </div>
         </div>
-        <div class="col s6 m6">
-          <div class="card">
-            <div class="card-image">
-              <img src="static/images/client.jpg">
+        <% var c; %>
+          <% for(var i = 0; i < card.length; i++) {%>
+            <div class="col s6 m6">
+              <div class="card">
+                <div class="card-image">
+                  <img src="static/uploads/<%= card[i].picture%>" alt="<%= card[i].picture%>">
+                </div>
+                <div class="card-content">
+                  <p>Unit ID:
+                    <strong>
+                      <%= card[i].trans_id%>
+                    </strong>
+                  </p>
+                  <p>Unit Address:
+                    <u>
+                      <%= card[i].unit_address%>
+                    </u>
+                  </p>
+                  <p>Price Per Night:
+                    <u>
+                      <%= card[i].price_per_night%>
+                    </u>
+                  </p>
+                  <p>Status:
+                    <u>
+                      <%= card[i].post_status%>
+                    </u>
+                  </p>
+                  <p>Vacancy:
+                    <u>
+                      <%= card[i].vacancy%>
+                    </u>
+                  </p>
+                  <p>Unit Capacity:
+                    <u>
+                      <%= card[i].unit_capacity%>
+                    </u>
+                  </p>
+                  <p>Description:</p>
+                  <p>
+                    <%= card[i].unit_description%>
+                  </p>
+                </div>
+              </div>
             </div>
-            <div class="card-content">
-              <p>Unit Address:
-                <u>Legarda Rd. Baguio City</u>
-              </p>
-              <br>
-              <p>Price Per Night :
-                <u>1500</u>
-              </p>
-              <br>
-              <p>Status:
-                <u>Waiting for approvement from admin</u>
-              </p>
-              <br>
-              <p>Vacancy:
-                <u>vacant</u>
-              </p>
-              <br>
-              <p>Unit Capacity:
-                <u>5</u>
-              </p>
-              <br>
-              <p>Description:</p>
-              <br>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                consequat
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col s6 m6">
-          <div class="card">
-            <div class="card-image">
-              <img src="static/images/client.jpg">
-            </div>
-            <div class="card-content">
-              <p>Unit Address:
-                <u>Legarda Rd. Baguio City</u>
-              </p>
-              <br>
-              <p>Price Per Night :
-                <u>1500</u>
-              </p>
-              <br>
-              <p>Status:
-                <u>Waiting for approvement from admin</u>
-              </p>
-              <br>
-              <p>Vacancy:
-                <u>vacant</u>
-              </p>
-              <br>
-              <p>Unit Capacity:
-                <u>5</u>
-              </p>
-              <br>
-              <p>Description:</p>
-              <br>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                consequat
-              </p>
-            </div>
-          </div>
-        </div>
+            <% } %>
       </div>
     </div>
   </div>

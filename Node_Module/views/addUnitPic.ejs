@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Logged in as
+    <%= user%>
+  </title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="static/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection">
+  <link href="static/css/components.css" type="text/css" rel="stylesheet" media="screen,projection">
+</head>
+
+<body>
+  <nav>
+    <div class="nav-wrapper">
+      <ul>
+        <li>
+          <a href="/">Home</a>
+        </li>
+        <li>
+          <a href="/listings">Listings</a>
+        </li>
+      </ul>
+      <div class="brand-logo right profile">
+        <div class="dropdown-trigger flex" data-target="dropdown">
+          <span>
+            <%= user%>
+          </span>
+          <%var pic; if (profilePic === null) {pic = profilePic;} else {pic='static/images/userIcon.png';}%>
+            <img src="<%= pic%>" alt="<%= user%>" class="profile-pic">
+        </div>
+        <ul id="dropdown" class="dropdown-content">
+          <li>
+            <a href="/logout">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h1>Apply a Unit Image</h1>
+    <div class="flex justify-contents-center">
+      <img src="#" alt="" id="imgD">
+    </div>
+    <form action="add-unit-image" method="post" enctype="multipart/form-data">
+      <div class="file-field input-field">
+        <div class="btn waves-effect">
+          <span>Upload Unit IMG</span>
+          <input type="file" name="dormImg" onchange="displayImg(this);">
+        </div>
+        <div class="file-path-wrapper">
+          <input class="file-path" type="text" readonly>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s1">
+          <input type="number" name="uId" id="uId">
+          <label for="uId">Unit ID</label>
+        </div>
+      </div>
+      <button type="submit" class="btn blue waves-effect">Submit</button>
+    </form>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="static/js/materialize.min.js"></script>
+  <script src="static/js/init.js"></script>
+  <script>
+    $(function () {
+      function displayImg(input) {
+        if (input.files && input.files[0]) {
+          var reader = new FileReader();
+          $(reader).on('load', function (e) {
+            $('#imgD').attr('src', e.target.result).animate({
+              height: '300px',
+              width: 'auto'
+            }, 300);
+          });
+          reader.readAsDataURL(input.files[0]);
+        }
+      }
+
+      window.displayImg = displayImg;
+    });
+  </script>
+</body>
+
+</html>
