@@ -1,0 +1,12 @@
+#months {
+  display: flex;
+}
+
+#months > p {
+  margin-left: 40px;
+  text-transform: uppercase;
+}
+
+#months * {
+  color: black;
+}

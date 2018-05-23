@@ -14,32 +14,35 @@
 </head>
 
 <body>
-  <nav>
-    <div class="nav-wrapper">
-      <ul>
-        <li>
-          <a href="/">Home</a>
-        </li>
-        <li>
-          <a href="/listings">Listings</a>
-        </li>
-      </ul>
-      <div class="brand-logo right profile">
-        <div class="dropdown-trigger flex" data-target="dropdown">
-          <span>
-            <%= user%>
-          </span>
-          <%var pic; if (profilePic === null) {pic = profilePic;} else {pic='static/images/userIcon.png';}%>
-            <img src="<%= pic%>" alt="<%= user%>" class="profile-pic">
-        </div>
-        <ul id="dropdown" class="dropdown-content">
-          <li>
-            <a href="/logout">Logout</a>
-          </li>
-        </ul>
-      </div>
+<nav>
+<div class="nav-wrapper">
+  <ul>
+    <li>
+      <a href="/">Home</a>
+    </li>
+    <li>
+      <a href="/listings">Listings</a>
+    </li>
+    <li>
+      <a href="/reports">Reports</a>
+    </li>
+  </ul>
+  <div class="brand-logo right profile">
+    <div class="dropdown-trigger flex" data-target="dropdown">
+      <span>
+        <%= user%>
+      </span>
+      <%var pic; if (profilePic === null) {pic = profilePic;} else {pic='static/images/userIcon.png';}%>
+        <img src="<%= pic%>" alt="<%= user%>" class="profile-pic">
     </div>
-  </nav>
+    <ul id="dropdown" class="dropdown-content">
+      <li>
+        <a href="/logout">Logout</a>
+      </li>
+    </ul>
+  </div>
+</div>
+</nav>
   <div class="row">
     <div class="card col s12 m8 offset-m2">
       <div class="row">

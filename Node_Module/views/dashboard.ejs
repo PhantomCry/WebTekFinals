@@ -23,6 +23,9 @@
         <li>
           <a href="/listings">Listings</a>
         </li>
+        <li>
+          <a href="/reports">Reports</a>
+        </li>
       </ul>
       <div class="brand-logo right profile">
         <div class="dropdown-trigger flex" data-target="dropdown">
@@ -169,7 +172,7 @@
         </pr>
       </div>
       <table class="centered striped responsive">
-        <h5>Successful Resevations</h5>
+        <h5>Booked Reservations</h5>
         <hr>
         <thead>
           <tr>
@@ -178,7 +181,8 @@
             <th>Name</th>
             <th>Contact</th>
             <th>Email</th>
-            <th>Check-In Date</th>
+            <th>Check-in Date</th>
+            <th>Action</th>
           </tr>
         </thead>
 
@@ -203,6 +207,11 @@
               </td>
               <td>
                 <%= book[i].res_date%>
+              </td>
+              <td>
+                <form method="post" action="success" class="btn-group">
+                  <button type="submit" class="btn green" name="resId" value="<%= book[i].res_id%>">Success</button>
+                </form>
               </td>
             </tr>
             <% } %>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Logged in as
+    <%= user%>
+  </title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="static/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection">
+  <link href="static/css/components.css" type="text/css" rel="stylesheet" media="screen,projection">
+  <link rel="stylesheet" href="static/css/reports.css">
+</head>
+
+<body>
+
+<nav>
+<div class="nav-wrapper">
+  <ul>
+    <li>
+      <a href="/">Home</a>
+    </li>
+    <li>
+      <a href="/listings">Listings</a>
+    </li>
+    <li>
+      <a href="/reports">Reports</a>
+    </li>
+  </ul>
+  <div class="brand-logo right profile">
+    <div class="dropdown-trigger flex" data-target="dropdown">
+      <span>
+        <%= user%>
+      </span>
+      <%var pic; if (profilePic === null) {pic = profilePic;} else {pic='static/images/userIcon.png';}%>
+        <img src="<%= pic%>" alt="<%= user%>" class="profile-pic">
+    </div>
+    <ul id="dropdown" class="dropdown-content">
+      <li>
+        <a href="/logout">Logout</a>
+      </li>
+    </ul>
+  </div>
+</div>
+</nav>
+
+  <div class="container">
+    <h4>Successful Transactions</h4>
+    <table>
+      <thead>
+        <tr>
+          <th>Unit Address</th>
+          <th>Client ID</th>
+          <th>Client Name</th>
+          <th>Contact</th>
+          <th>Email</th>
+          <th>Check-out Date</th>
+          <th>Transient Date</th>
+          <th>Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for (var i = 0; i < success.length; i++) { %>
+          <tr>
+            <td><%= success[0].unit_address%></td>
+            <td><%= success[0].client_id%></td>
+            <td><%= success[0].clientName%></td>
+            <td><%= success[0].client_phoneno%></td>
+            <td><%= success[0].client_email%></td>
+            <td><%= success[0].checkout_date%></td>
+            <td><%= success[0].trans_date%></td>
+            <td><%= success[0].amount%></td>
+          </tr>
+        <% } %>
+      </tbody>
+    </table>
+
+    <div id="months">
+      <p>
+        <label>
+          <input name="months" value="jan" type="radio">
+          <span>jan</span>
+        </label>
+      </p>
+      <p>
+        <label>
+          <input name="months" value="feb" type="radio">
+          <span>feb</span>
+        </label>
+      </p>
+      <p>
+        <label>
+          <input name="months" value="mar" type="radio">
+          <span>mar</span>
+        </label>
+      </p>
+      <p>
+        <label>
+          <input name="months" value="apr" type="radio">
+          <span>apr</span>
+        </label>
+      </p>
+      <p>
+        <label>
+          <input name="months" value="may" type="radio">
+          <span>may</span>
+        </label>
+      </p>
+      <p>
+        <label>
+          <input name="months" value="jun" type="radio">
+          <span>jun</span>
+        </label>
+      </p>
+      <p>
+        <label>
+          <input name="months" value="jul" type="radio">
+          <span>jul</span>
+        </label>
+      </p>
+      <p>
+        <label>
+          <input name="months" value="aug" type="radio">
+          <span>aug</span>
+        </label>
+      </p>
+      <p>
+        <label>
+          <input name="months" value="sep" type="radio">
+          <span>sep</span>
+        </label>
+      </p>
+      <p>
+        <label>
+          <input name="months" value="oct" type="radio">
+          <span>oct</span>
+        </label>
+      </p>
+      <p>
+        <label>
+          <input name="months" value="nov" type="radio">
+          <span>nov</span>
+        </label>
+      </p>
+      <p>
+        <label>
+          <input name="months" value="dev" type="radio">
+          <span>dev</span>
+        </label>
+      </p>
+    </div>
+    
+    <div class="row">
+      <div class="col s6 center">
+        <h4>Earnings for May</h4>
+        <h3>PHP 3000</h3>
+      </div>
+      <div class="col s6 center">
+        <h4>Share of Admins (10%)</h4>
+        <h3>PHP 3000</h3>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="static/js/materialize.min.js"></script>
+  <script src="static/js/init.js"></script>
+</body>
+
+</html>

@@ -13,6 +13,7 @@ const host = 'localhost';
 const port = 3000;
 const db = 'transient';
 
+let date = new Date().toISOString().split('T')[0];
 let pendingReq;
 let accepted;
 let book;
@@ -111,7 +112,7 @@ app.post('/dashboard', (req, res) => {
 
 app.get('/dashboard', (req, res) => {
 
-  con.query(`SELECT unit_address, client_id, client_fname, client_lname, client_phoneno, client_email, res_date, checkout_date, res_id FROM units Natural JOIN reservation Natural Join client where prov_id=? and res_status="Under Review"`, [req.session.provId], (err, row) => {
+  con.query(`SELECT unit_address, client_id, client_fname, client_lname, client_phoneno, client_email, res_date, checkout_date, res_id FROM units Natural JOIN reservation Natural Join client where prov_id=? and res_status="Pending"`, [req.session.provId], (err, row) => {
     pendingReq = row;
   });
   con.query(`SELECT unit_address, client_id, client_fname, client_lname, client_phoneno, client_email, res_date, checkout_date, res_id FROM units Natural JOIN reservation Natural Join client where prov_id=? and res_status="Accepted"`, [req.session.provId], (err, row) => {
@@ -179,6 +180,46 @@ app.get('/new-entry', (req, res) => {
   }
 });
 
+app.get('/reports', (req, res) => {
+  let sucQ = `SELECT 
+                unit_address,
+                client_id,
+                CONCAT(client_fname, ' ', client_fname) AS 'clientName',
+                client_phoneno,
+                client_email,
+                checkout_date,
+                trans_date,
+                DATEDIFF(checkout_date, res_date) * price_per_night AS 'amount'
+              FROM
+                succ_trans
+                    NATURAL JOIN
+                reservation
+                    NATURAL JOIN
+                units
+                    NATURAL JOIN
+                client
+              WHERE
+                prov_id = ? 
+                    AND res_status = 'Successful'`;
+  con.query(sucQ, [req.session.provId], (err, results) => {
+    if (!err) {
+      if (req.session.username) {
+        res.render('reports', {
+          user: req.session.username.replace(/\b\w/g, l => l.toUpperCase()),
+          profilePic: req.session.profPic,
+          success: results
+        });
+      } else {
+        res.render('index', {
+          message: 'You are not logged in!'
+        });
+      }
+    } else {
+      console.log('sucQ failed');
+    }
+  });
+});
+
 app.post('/new-unit', (req, res) => {
   con.query(`INSERT INTO units (prov_id, condo_name, unit_description, unit_capacity, unit_address, no_of_beds, price_per_night) VALUES (?, ?, ?, ?, ?, ?, ?)`, [req.session.provId, req.body.unitName, req.body.desc, req.body.unitCap, req.body.unitAdd, req.body.bedNo, req.body.price], (err, results) => {
     res.redirect(302, '/unit-image');
@@ -218,7 +259,7 @@ app.post('/accept', (req, res) => {
 });
 
 app.post('/cancel', (req, res) => {
-  con.query(`UPDATE reservation SET res_status="Under Review" WHERE res_id=?`, [req.body.resId], (err, row) => {
+  con.query(`UPDATE reservation SET res_status="Cancelled" WHERE res_id=?`, [req.body.resId], (err, row) => {
     if (err) {
       console.log(err);
     }
@@ -235,8 +276,38 @@ app.post('/book', (req, res) => {
   res.redirect(302, '/');
 });
 
+app.post('/success', (req, res) => {
+  con.query('UPDATE reservation SET res_status="Successful" WHERE res_id=?', [req.body.resId], (err, row) => {
+    if (!err) {
+      let sucQ = `SELECT 
+                      DATEDIFF(checkout_date, res_date) * price_per_night AS amount
+                  FROM
+                      reservation
+                          NATURAL JOIN
+                      units
+                  WHERE
+                      prov_id = ? AND res_id = ?`;
+      con.query(sucQ, [req.session.provId, req.body.resId], (err, result) => {
+        if (!err) {
+          con.query('INSERT INTO succ_trans (trans_date, amount, res_id, share, prov_id) VALUES (?, ?, ?, ?, ?)', [date, result[0].amount, req.body.resId, (result[0].amount * 0.1), req.session.provId], (err, row) => {
+            if (!err) {
+              console.log('query success');
+              res.redirect(302, '/');
+            } else {
+              console.log(err);
+            }
+          });
+        }
+      });
+      console.log('success!');
+    } else {
+      console.log('success failed');
+    }
+  });
+});
+
 app.post('/deny', (req, res) => {
-  con.query(`DELETE FROM reservation WHERE res_id=?`, [req.body.resId], (err, results) => {
+  con.query(`UPDATE reservation SET res_status="Denied" WHERE res_id=?`, [req.body.resId], (err, results) => {
     res.redirect(302, '/dashboard');
   });
 });
