@@ -77,89 +77,26 @@
       </tbody>
     </table>
 
-    <div id="months">
-      <p>
-        <label>
-          <input name="months" value="jan" type="radio">
-          <span>jan</span>
-        </label>
-      </p>
-      <p>
-        <label>
-          <input name="months" value="feb" type="radio">
-          <span>feb</span>
-        </label>
-      </p>
-      <p>
-        <label>
-          <input name="months" value="mar" type="radio">
-          <span>mar</span>
-        </label>
-      </p>
-      <p>
-        <label>
-          <input name="months" value="apr" type="radio">
-          <span>apr</span>
-        </label>
-      </p>
-      <p>
-        <label>
-          <input name="months" value="may" type="radio">
-          <span>may</span>
-        </label>
-      </p>
-      <p>
-        <label>
-          <input name="months" value="jun" type="radio">
-          <span>jun</span>
-        </label>
-      </p>
-      <p>
-        <label>
-          <input name="months" value="jul" type="radio">
-          <span>jul</span>
-        </label>
-      </p>
-      <p>
-        <label>
-          <input name="months" value="aug" type="radio">
-          <span>aug</span>
-        </label>
-      </p>
-      <p>
-        <label>
-          <input name="months" value="sep" type="radio">
-          <span>sep</span>
-        </label>
-      </p>
-      <p>
-        <label>
-          <input name="months" value="oct" type="radio">
-          <span>oct</span>
-        </label>
-      </p>
-      <p>
-        <label>
-          <input name="months" value="nov" type="radio">
-          <span>nov</span>
-        </label>
-      </p>
-      <p>
-        <label>
-          <input name="months" value="dev" type="radio">
-          <span>dev</span>
-        </label>
-      </p>
-    </div>
+    <form action="monthly-report" method="post" class="row">
+      <div class="input-field col s6">
+        <input type="text" name="sDate" id="sDate" class="datepicker">
+        <label for="sDate">Start Date</label>
+      </div>
+      <div class="input-field col s6">
+        <input type="text" name="eDate" id="eDate" class="datepicker">
+        <label for="sDate">End Date</label>
+      </div>
+      <button class="btn blue waves-effect" type="submit">get earnings report</button>
+    </form>
     
     <div class="row">
       <div class="col s6 center">
-        <h4>Earnings for May</h4>
-        <h3>PHP 3000</h3>
+        <h4>Earnings from <%= report.from%> to <%= report.to%></h4>
+        <h3>PHP <%= report.amount%></h3>
       </div>
       <div class="col s6 center">
         <h4>Share of Admins (10%)</h4>
-        <h3>PHP 3000</h3>
+        <h3>PHP <%= report.amount * 0.1%></h3>
       </div>
     </div>
   </div>
