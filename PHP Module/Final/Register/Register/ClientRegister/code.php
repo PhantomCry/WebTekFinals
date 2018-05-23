@@ -15,8 +15,10 @@
             $qry = "INSERT INTO client (client_username, client_pswd, client_fname, client_lname, client_email, client_phoneno) VALUES ('$username', '$pass', '$fname',  '$lname', '$email', '$num')";
         
         if(mysqli_query($con, $qry)){
+            header("Refresh:0");
             echo 'Your registrations has been forwarded to the Admin for evaluation. We will send an email if your account has been approved or not';
         } else {
+            header("Refresh:0");
             echo 'Something went wrong please try again';
         }    
         }

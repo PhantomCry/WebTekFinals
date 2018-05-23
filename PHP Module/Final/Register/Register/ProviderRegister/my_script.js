@@ -5,6 +5,8 @@ $("#sub").click( function(){
     $.post($("#myForm").attr("action"), data, function(info){
         $("#result").html(info);
     } );
+    
+     $("#myForm")[0].reset();
 });
 
 $("#myForm").submit( function(){
