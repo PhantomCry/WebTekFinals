@@ -17,6 +17,7 @@ let date = new Date().toISOString().split('T')[0];
 let pendingReq;
 let accepted;
 let book;
+let success;
 
 const con = mysql.createConnection({
   host: '192.168.1.9',
@@ -84,27 +85,30 @@ app.post('/dashboard', (req, res) => {
   password = req.body.password;
 
   con.query(`SELECT * FROM provider WHERE prov_username=? AND prov_pswd=?`, [username, password], (err, results) => {
-    if (results[0].rep_status == 'Active') {
-      if (results.length) {
+
+    if (results.length) {
+
+      if (results[0].rep_status == 'Active') {
+        
         req.session.username = username;
         req.session.password = password;
         req.session.provId = results[0].prov_id;
         req.session.profPic = results[0].prov_pic;
         console.log(tc.text('info', `${results[0].prov_username} logged in!`));
-  
+
         res.redirect(302, '/dashboard');
+      } else if (results[0].rep_status == 'Banned') {
+        res.render('index', {
+          message: 'You\'re account has been disabled. Please contact admin at angege@gmail.com'
+        });
       } else {
         res.render('index', {
-          message: 'Wrong username or password!'
+          message: 'You\'re account is still under review.'
         });
       }
-    } else if (results[0].rep_status == 'Banned') {
-      res.render('index', {
-        message: 'You\'re account has been disabled. Please contact admin at angege@gmail.com'
-      });
     } else {
       res.render('index', {
-        message: 'You\'re account is still under review.'
+        message: 'Wrong username or password!'
       });
     }
   });
@@ -202,12 +206,18 @@ app.get('/reports', (req, res) => {
                 prov_id = ? 
                     AND res_status = 'Successful'`;
   con.query(sucQ, [req.session.provId], (err, results) => {
+    success = results;
     if (!err) {
       if (req.session.username) {
         res.render('reports', {
           user: req.session.username.replace(/\b\w/g, l => l.toUpperCase()),
           profilePic: req.session.profPic,
-          success: results
+          success: success,
+          report: {
+            earnings: '',
+            from: '',
+            to: ''
+          }
         });
       } else {
         res.render('index', {
@@ -220,6 +230,21 @@ app.get('/reports', (req, res) => {
   });
 });
 
+app.post('/monthly-report', (req, res) => {
+  con.query('SELECT  trans_date, amount, SUM(amount) as "earnings" FROM succ_trans WHERE trans_date >= ? && trans_date <= ?', [req.body.sDate, req.body.eDate], (err, results) => {
+    res.render('reports', {
+      user: req.session.username.replace(/\b\w/g, l => l.toUpperCase()),
+      profilePic: req.session.profPic,
+      success: success,
+      report: {
+        amount: results[0].earnings,
+        from: req.body.eDate,
+        to: req.body.eDate
+      }
+    });
+  });
+});
+
 app.post('/new-unit', (req, res) => {
   con.query(`INSERT INTO units (prov_id, condo_name, unit_description, unit_capacity, unit_address, no_of_beds, price_per_night) VALUES (?, ?, ?, ?, ?, ?, ?)`, [req.session.provId, req.body.unitName, req.body.desc, req.body.unitCap, req.body.unitAdd, req.body.bedNo, req.body.price], (err, results) => {
     res.redirect(302, '/unit-image');
@@ -227,9 +252,12 @@ app.post('/new-unit', (req, res) => {
 });
 
 app.get('/unit-image', (req, res) => {
-  res.render('addUnitPic', {
-    user: req.session.username.replace(/\b\w/g, l => l.toUpperCase()),
-    profilePic: req.session.profPic
+  con.query('SELECT units.trans_id, prov_id FROM units NATURAL JOIN unit_pics GROUP BY trans_id HAVING prov_id = ?', [req.session.provId], (err, rows) => {
+    res.render('addUnitPic', {
+      user: req.session.username.replace(/\b\w/g, l => l.toUpperCase()),
+      profilePic: req.session.profPic,
+      units: rows
+    });
   });
 });
 
@@ -240,13 +268,14 @@ app.post('/add-unit-image', (req, res) => {
     } else {
       res.render('addUnitPic', {
         user: req.session.username.replace(/\b\w/g, l => l.toUpperCase()),
-        profilePic: req.session.profPic
+        profilePic: req.session.profPic,
+        units: rows.trans_id
       });
       con.query('INSERT INTO unit_pics (trans_id, picture) VALUES (?, ?)', [req.body.uId, req.file.filename], (err, results) => {
         console.log(`Inserted ${req.file.filename}`);
       });
     }
-  });
+  }); 
 });
 
 app.post('/accept', (req, res) => {
@@ -269,7 +298,12 @@ app.post('/cancel', (req, res) => {
 
 app.post('/book', (req, res) => {
   con.query(`UPDATE reservation SET res_status="Booked" WHERE res_id=?`, [req.body.resId], (err, row) => {
-    if (err) {
+    if (!err) {
+      con.query('select * from units where trans_id = (select trans_id from units natural join reservation where res_id=?)', [req.body.resId], (err, results) => {
+        con.query('update units set vacancy="occupied" where trans_id = ?', [results[0].trans_id], (err, trans) => {
+          console.log('updated vacancy');
+        });
+      });
       console.log(err);
     }
   });
@@ -291,6 +325,11 @@ app.post('/success', (req, res) => {
         if (!err) {
           con.query('INSERT INTO succ_trans (trans_date, amount, res_id, share, prov_id) VALUES (?, ?, ?, ?, ?)', [date, result[0].amount, req.body.resId, (result[0].amount * 0.1), req.session.provId], (err, row) => {
             if (!err) {
+              con.query('select * from units where trans_id = (select trans_id from units natural join reservation where res_id=?)', [req.body.resId], (err, results) => {
+                con.query('update units set vacancy="vacant" where trans_id = ?', [results[0].trans_id], (err, trans) => {
+                  console.log('updated vacancy');
+                });
+              });
               console.log('query success');
               res.redirect(302, '/');
             } else {
