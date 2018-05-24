@@ -1,5 +1,5 @@
 <?php
-        include 'codes.php';
+        include 'db.php';
         if(isset($_POST['AdUsername'])){
             $user = $_POST['AdUsername'];
             $pswd = $_POST['AdPassword'];
@@ -16,7 +16,7 @@
 ?>
 <html>
     <head>
-        <title>Admin</title>
+        <title>TransientAdmin</title>
         <link rel="stylesheet" type="text/css" href="./styles/style2.css">
     </head>
     <body>

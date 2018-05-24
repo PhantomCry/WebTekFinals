@@ -1,0 +1,129 @@
+8962ed9 	 Bernabe Casey 	 12:25 PM May 23 Wednesday 	 Fixed the registration
+59365ab 	 Bernabe Casey 	 12:16 PM May 23 Wednesday 	 Merge branch 'master' of https://github.com/PhantomCry/WebTekFinals
+ce15f2e 	 Bernabe Casey 	 12:15 PM May 23 Wednesday 	 Finalizing the PHP Admin Module's backend and integrating it to the Front End Ash created
+6d8119a 	 Marcus 	 11:18 AM May 23 Wednesday 	 Added Reports with the help of Rizalde
+0bd91ce 	 Marcus 	 05:13 AM May 23 Wednesday 	 Added register and message
+2e0cbb8 	 Ashley 	 01:42 AM May 23 Wednesday 	 Added sidebar for the navigation of the admin
+bd3ccef 	 Ashley 	 11:57 PM May 22 Tuesday 	 Placed the back-end functionalities that Casey Bernabe have provided
+1f0ac7b 	 Ashley 	 11:41 PM May 22 Tuesday 	 Edited the register and login page for the PHP module
+ba7b097 	 Marcus 	 05:35 AM May 16 Wednesday 	 Modified capitalize user
+3c88b92 	 Marcus 	 05:14 AM May 16 Wednesday 	 Saved prov id to session, Cursor to profile
+9507518 	 Marcus 	 04:15 AM May 16 Wednesday 	 Modified confirm message
+5a144e2 	 Marcus 	 04:11 AM May 16 Wednesday 	 Changed Title
+ac9aa5a 	 Marcus 	 04:06 AM May 16 Wednesday 	 Added confirmation
+080aa9b 	 Marcus 	 03:24 AM May 16 Wednesday 	 Merge branch 'master' of https://github.com/PhantomCry/WebTekFinals
+b002cae 	 Marcus 	 03:24 AM May 16 Wednesday 	 Added deny
+86799ea 	 Rizalde 	 03:18 AM May 16 Wednesday 	 Modified the columns of Dashboard.ejs
+778c242 	 Marcus 	 03:03 AM May 16 Wednesday 	 Edited table
+d804f62 	 Marcus 	 02:53 AM May 16 Wednesday 	 Edited placeholder
+d014ee2 	 Marcus 	 07:12 AM May 15 Tuesday 	 Added profile picture from db
+4cb95a0 	 Marcus 	 06:24 AM May 15 Tuesday 	 Added listings
+1a81dd6 	 Marcus 	 02:07 AM May 15 Tuesday 	 Added dummy contents on reserve table
+de763af 	 Marcus 	 02:07 AM May 15 Tuesday 	 Migrated to new DB
+a8fffc3 	 Ashley 	 01:27 AM May 14 Monday 	 Added UI for the Client & Provider Registration for PHP
+53f2290 	 Marcus 	 04:48 PM May 13 Sunday 	 Fixed error on login
+7a5b7c7 	 Marcus 	 07:33 AM May 12 Saturday 	 Fixed update on click
+a6a3530 	 Marcus 	 07:01 AM May 12 Saturday 	 Added filter on listings
+3e4fbff 	 Marcus 	 06:49 AM May 12 Saturday 	 Added listings
+228ea5b 	 Marcus 	 06:10 AM May 12 Saturday 	 Added upload image
+eff33dc 	 Marcus 	 01:59 AM May 12 Saturday 	 Added file upload
+25b9640 	 Marcus 	 12:10 AM May 12 Saturday 	 Added booked
+be78faf 	 Marcus 	 11:33 PM May 11 Friday 	 Added accept deny
+5f7e332 	 Marcus 	 09:36 PM May 11 Friday 	 Merge branch 'master' of https://github.com/PhantomCry/WebTekFinals
+a26526f 	 Marcus 	 09:33 PM May 11 Friday 	 Added loops to display
+0a57961 	 Bernabe Casey 	 08:53 PM May 11 Friday 	 Learned about the self-contained export in mysql
+c6a0493 	 earljethro 	 08:01 PM May 11 Friday 	 Applied the unit table in populating the houses
+4af7967 	 earljethro 	 08:01 PM May 11 Friday 	 Merge branch 'master' of https://github.com/PhantomCry/WebTekFinals
+00f02cd 	 earljethro 	 07:55 PM May 11 Friday 	 Applied the unit table in populating the houses
+09fc3ab 	 Marcus 	 07:48 PM May 11 Friday 	 Modified post to get
+4fd3a9f 	 Marcus 	 07:36 PM May 11 Friday 	 Fixed callback on wrong input
+558e46a 	 Marcus 	 04:06 PM May 11 Friday 	 Fixed callbacks
+421dca0 	 earljethro 	 04:02 PM May 11 Friday 	 Made some changes with Homes.java
+d54140d 	 Rizalde 	 12:47 PM May 11 Friday 	 Fixed cant set header on wrong password
+a036fb9 	 Marcus 	 04:11 AM May 11 Friday 	 Changed html to ejs
+44ca9ab 	 2166538 	 02:23 AM May 11 Friday 	 added UI for admin
+fa9def2 	 Janxiene Maniti 	 01:56 AM May 11 Friday 	 Added initial UI for units
+81e24d0 	 Rizalde 	 11:34 PM May 10 Thursday 	 Modified database contents; removed unit_type column
+1f3cf29 	 Rizalde 	 10:26 PM May 10 Thursday 	 Added self-contained database
+8b9559d 	 2167856 	 09:40 PM May 10 Thursday 	 Added login and session handling
+b723712 	 2166538 	 11:46 AM May 10 Thursday 	 Update signup.html
+d23a1b1 	 2166538 	 11:43 AM May 10 Thursday 	 Add files via upload
+e7182cb 	 2166538 	 11:36 AM May 10 Thursday 	 Update signupSP.html
+38c5149 	 2166538 	 11:29 AM May 10 Thursday 	 edited links
+21728c9 	 2166538 	 10:46 AM May 10 Thursday 	 updated signupClient.html
+924db0a 	 Bernabe Casey 	 04:37 AM May 09 Wednesday 	 Updated the database, Created a working admin prototype
+6f99e4b 	 Bernabe Casey 	 01:12 AM May 09 Wednesday 	 Merge branch 'master' of https://github.com/PhantomCry/WebTekFinals
+365f3c4 	 Bernabe Casey 	 01:11 AM May 09 Wednesday 	 Updated the database and created a copy of it with dummy contents
+0fa620e 	 2166538 	 11:50 PM May 08 Tuesday 	 added signup page and signup for service provider
+b9444c8 	 2166538 	 11:49 PM May 08 Tuesday 	 added more features
+a9e4261 	 Bernabe Casey 	 11:28 PM May 08 Tuesday 	 Updated the database
+1370282 	 Bernabe Casey 	 10:19 PM May 08 Tuesday 	 Added the database to be used for the whole system
+4a218b7 	 Marcus 	 05:47 PM May 08 Tuesday 	 Modified some parts to redirect
+c8d1d70 	 2166538 	 02:14 PM May 08 Tuesday 	 added UI for client signup
+6e7f9dc 	 Ray Servidad 	 02:07 PM May 08 Tuesday 	 we did the AJAX, in your face! HAHAHAHAHA
+b38edbe 	 Marcus 	 03:03 PM May 06 Sunday 	 Added log message on user logout
+be0a337 	 Marcus 	 02:56 PM May 06 Sunday 	 Added express-session
+9253230 	 Marcus 	 02:53 PM May 06 Sunday 	 Added callback for dashboard attempt
+be0bd95 	 Marcus 	 02:48 PM May 06 Sunday 	 Merge branch 'master' of https://github.com/PhantomCry/WebTekFinals
+5913b37 	 Marcus 	 02:47 PM May 06 Sunday 	 Added sessions
+4533112 	 Ashley 	 02:29 PM May 06 Sunday 	 Merge branch 'master' of https://github.com/PhantomCry/WebTekFinals
+b6e1b7f 	 Ashley 	 02:28 PM May 06 Sunday 	 Added Mock Ups v1 for PHP
+d1b1939 	 Marcus 	 01:54 PM May 06 Sunday 	 Merge branch 'master' of https://github.com/PhantomCry/WebTekFinals
+c19f8b6 	 2166538 	 01:53 PM May 06 Sunday 	 added reservation
+133f54d 	 Marcus 	 01:53 PM May 06 Sunday 	 Added logout redirect
+bd407ea 	 Marcus 	 01:45 PM May 06 Sunday 	 Added vscode workspace settings
+9bcdb6d 	 Ray Servidad 	 05:20 AM May 06 Sunday 	 Revised some link refs
+5b85b97 	 Ray Servidad 	 05:12 AM May 06 Sunday 	 Added UI for the Servlets and inital doGet methods
+dc6f2a0 	 Ray Servidad 	 01:55 AM May 06 Sunday 	 Added sample db
+3f54637 	 Ray Servidad 	 12:16 AM May 06 Sunday 	 Merge branch 'master' of https://github.com/PhantomCry/WebTekFinals
+1357726 	 Ray Servidad 	 12:16 AM May 06 Sunday 	 Added sample ui for home (client serving)
+27007ba 	 2167856 	 12:10 AM May 06 Sunday 	 Added login feature in java servlets
+329f285 	 Marcus 	 11:58 PM May 05 Saturday 	 Added php ajax registration
+51e5db2 	 Marcus 	 08:53 PM May 04 Friday 	 Fixed info is not a function error
+240cf08 	 Marcus 	 08:50 PM May 04 Friday 	 Added text coloring
+a10bbde 	 Marcus 	 08:26 PM May 04 Friday 	 Separated style of dashboard
+ed9c561 	 Marcus 	 08:03 PM May 04 Friday 	 Added callback on wrong input
+00ad7ff 	 Marcus 	 07:35 PM May 04 Friday 	 Added error handling on database
+284cc6a 	 Marcus 	 07:03 PM May 04 Friday 	 Modification to express
+e23a65a 	 2166538 	 02:28 PM May 04 Friday 	 added home page
+dbdeb4c 	 Rizalde 	 02:21 PM May 04 Friday 	 Merge branch 'master' of https://github.com/PhantomCry/WebTekFinals
+fe9c667 	 Rizalde 	 02:20 PM May 04 Friday 	 Added instructions on how to change the domain name of the Node Module
+e44fed1 	 ervszz 	 02:06 PM May 04 Friday 	 Added Logout functionality in dashboard.html
+bbdc9e1 	 Ray Servidad 	 10:29 AM May 03 Thursday 	 Enhanced Database With the hlep of Casey and Jek
+5cfc94e 	 Marcus 	 09:23 AM May 01 Tuesday 	 Modified render html function
+34bfc2c 	 Marcus 	 08:55 AM May 01 Tuesday 	 Added verification
+c2b19aa 	 Marcus 	 08:37 AM May 01 Tuesday 	 Added color on listing section
+a5eabd4 	 Marcus 	 08:24 AM May 01 Tuesday 	 title and username with jquery
+fbf64e6 	 Marcus 	 06:24 PM Apr 29 Sunday 	 Fixed username append
+33aa58a 	 Marcus 	 05:42 PM Apr 27 Friday 	 Added colored text
+f7db0cc 	 Marcus 	 04:42 PM Apr 27 Friday 	 Added added default request
+942eaf0 	 Marviuz 	 02:29 PM Apr 27 Friday 	 Fixed css problem
+431cc30 	 Rizalde 	 01:46 PM Apr 27 Friday 	 Added node routes for dashboard
+f994e95 	 Marcus 	 12:47 AM Apr 27 Friday 	 Added username and password validation
+777ac33 	 Marcus 	 12:46 AM Apr 27 Friday 	 Added .gitignore
+4851618 	 Marcus 	 11:41 PM Apr 26 Thursday 	 Added get input from html
+191a01a 	 Marcus 	 11:41 PM Apr 26 Thursday 	 Added query string link
+a41ecf4 	 Marcus 	 11:40 PM Apr 26 Thursday 	 Added names on input
+f9191af 	 Marcus 	 11:19 PM Apr 24 Tuesday 	 Updated README
+ca14570 	 Marcus 	 11:10 PM Apr 24 Tuesday 	 Added post handling
+fba8e2f 	 Marcus 	 11:10 PM Apr 24 Tuesday 	 Added post handling
+946796d 	 Marcus 	 10:46 PM Apr 24 Tuesday 	 Modified to switch statement
+25be1eb 	 Marcus 	 10:35 PM Apr 24 Tuesday 	 Added hash function
+366ecdc 	 Marcus 	 10:34 PM Apr 24 Tuesday 	 Added routing tutorial
+b868643 	 Marcus 	 10:18 PM Apr 24 Tuesday 	 Added message on filtered data
+0f14163 	 Marcus 	 10:06 PM Apr 24 Tuesday 	 Added hash function
+f5c6799 	 Ray Servidad 	 01:43 PM Apr 24 Tuesday 	 Transfered the files in the correct folder
+a4c908d 	 Marcus 	 12:41 AM Apr 23 Monday 	 Added multiple file service and login page
+49940b7 	 Marcus 	 09:36 PM Apr 20 Friday 	 Deleted spaced folder
+9316aec 	 Marcus 	 09:20 PM Apr 20 Friday 	 Updated readme links
+522dfa3 	 Marcus 	 08:58 PM Apr 20 Friday 	 Added server mock and mock database
+a12f737 	 Marcus 	 08:11 PM Apr 20 Friday 	 Added MySQL for node
+f5547b4 	 benzservidad 	 02:26 PM Apr 20 Friday 	 Initial Database
+330966b 	 Marcus 	 01:53 PM Apr 20 Friday 	 Added basic node code
+9205db0 	 Rizalde 	 01:48 PM Apr 20 Friday 	 Added initial project structure
+e7eda5b 	 Marcus 	 11:27 PM Apr 18 Wednesday 	 Relocated files to Tests branch
+3e14422 	 Marcus 	 11:25 PM Apr 18 Wednesday 	 Added transform scale on text boxes
+e43c246 	 Marcus 	 11:12 PM Apr 18 Wednesday 	 Added initial login layout
+78ed299 	 Rizalde Jr. Velasco 	 02:26 PM Apr 17 Tuesday 	 Updated Plans
+2513d53 	 Rizalde Jr. Velasco 	 02:19 PM Apr 17 Tuesday 	 Edited Readme
+2c95f40 	 Rizalde Jr. Velasco 	 02:18 PM Apr 17 Tuesday 	 Added Initial Plans for the Project

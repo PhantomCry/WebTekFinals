@@ -2,7 +2,7 @@
     include_once('db.php');
     echo '<h1>MANAGE PROVIDERS</h1>';
     echo '<div class="box">';
-    echo '<h2>ACTIVE PROVIDERS</h2>';
+    echo '<h2>NEW PROVIDERS</h2>';
     echo '<table>';
     echo '<tr>';
     echo '<th>Provider ID</th>';
@@ -14,8 +14,8 @@
     echo '<th>Representative\'s Email</th>';
     echo '<th>Representative\'s Phone Number</th>';
     echo '<th>Status</th>';
-    echo '<th>ACCEPT PROVIDER</th>';
-    echo '<th>DECLINE PROVIDER</th>';
+    echo '<th>CHOOSE TO APPROVE PROVIDER ACCOUNTS</th>';
+    echo '<th>CHOOSE TO DENY PROVIDER ACCOUNT</th>';
     echo '<tr/>';
     $qry = 'SELECT * from provider where rep_status = "under review" ';
                     $result = mysqli_query($con,$qry);
@@ -34,13 +34,13 @@
                         <td>
                         <form action="#" method="post">
                         <input class="radh" type="radio" name="AcceptAProvider" value="'.$row[0].'" checked>
-                        <button type="submit" class="btn">ACCEPT PROVIDER</button>
+                        <button type="submit" class="btn">APPROVE PROVIDER ACCOUNTS</button>
                         </form>
                         </td>
                         <td>
                         <form action="#" method="post">
                         <input class="radh" type="radio" name="DeclineAProvider" value="'.$row[0].'" checked>
-                        <button type="submit" class="btn">DECLINE PROVIDER</button>
+                        <button type="submit" class="btn">DENY PROVIDER ACCOUNTS</button>
                         </form>
                         </td>
                         </tr>';

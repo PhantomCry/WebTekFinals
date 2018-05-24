@@ -2,7 +2,7 @@
     include_once('db.php');
     echo '<h1>MANAGE UNITS</h1>';
     echo '<div class="box2">';
-    echo '<h2>ACCEPTED UNITS</h2>';
+    echo '<h2>NEW UNITS</h2>';
     echo '<table>';
     echo '<tr>';
     echo '<th>Unit ID</th>';
@@ -14,8 +14,8 @@
     echo '<th>Description</th>';
     echo '<th>Representative\'s Phone Number</th>';
     echo '<th>Representative\'s Email</th>';
-    echo '<th>ACCEPT UNIT</th>';
-    echo '<th>DECLINE UNIT</th>';
+    echo '<th>APPROVE UNIT POST</th>';
+    echo '<th>DENY UNIT POST</th>';
     echo '<tr/>';
 
                 $qry='select * from units natural join provider where post_status = "under review";';
@@ -35,14 +35,14 @@
 							<td>
                         <form action="#" method="post">
                         <input class="radh" type="radio" name="AcceptAUnit" value="'.$row['trans_id'].'" checked>
-                        <button type="submit" class="btn">ACCEPT UNIT</button>
+                        <button type="submit" class="btn">APPROVE UNIT POST</button>
                         </form>
                         </td>
                         
                         <td>
                         <form action="#" method="post">
                         <input class="radh" type="radio" name="DeclineAUnit" value="'.$row['trans_id'].'" checked>
-                        <button type="submit" class="btn">DECLINE UNIT</button>
+                        <button type="submit" class="btn">DENY UNIT POST</button>
                         </form>
                         </td>
                         </tr>';     

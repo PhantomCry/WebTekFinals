@@ -4,7 +4,7 @@ include_once('isset.php');
 ?>
 <html>
     <head>
-        <title>Admin</title>
+        <title>TransientAdmin</title>
         <link rel="stylesheet" href="./styles/style1.css">
     </head>
     <body>
